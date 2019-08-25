@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator\Operation;
 
+
 use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Step\Controller\StepPlusController;
+use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\NumberToken;
-use Model\Math\Step\Controller\StepPlusController;
-use Model\Math\Step\StepFactory;
 
 class AddNumbers
 {

@@ -1,6 +1,9 @@
 <?php
 
-namespace Model\Math\Step\Controller;
+declare(strict_types=1);
+
+namespace Mathematicator\Step\Controller;
+
 
 use Nette\Utils\ArrayHash;
 

@@ -1,6 +1,9 @@
 <?php
 
-namespace App\VikiTron\Model\Number;
+declare(strict_types=1);
+
+namespace Mathematicator;
+
 
 use Nette\Application\LinkGenerator;
 use Nette\Caching\Cache;

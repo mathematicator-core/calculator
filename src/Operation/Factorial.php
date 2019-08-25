@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\MathErrorException;
 use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Tokens;
-use Model\Math\Step\StepFactory;
 
 class Factorial
 {

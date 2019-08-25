@@ -1,9 +1,12 @@
 <?php
 
-namespace Model\Math\Step;
+declare(strict_types=1);
+
+namespace Mathematicator\Step;
+
 
 use Mathematicator\Engine\TerminateException;
-use Model\Math\Step\Controller\IStepController;
+use Mathematicator\Step\Controller\IStepController;
 use Nette\DI\Container;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Json;

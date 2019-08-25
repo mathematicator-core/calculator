@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator;
+
 
 use Mathematicator\Tokenizer\Token\IToken;
 use Nette\SmartObject;

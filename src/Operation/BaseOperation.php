@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator\Operation;
+
 
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\Tokenizer\Token\FactorialToken;

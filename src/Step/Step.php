@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator;
 
-use Nette\SmartObject;
 
+use Nette\SmartObject;
 
 class Step
 {

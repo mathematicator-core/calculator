@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator;
 
 
 use Mathematicator\Calculator\Operation\BaseOperation;
 use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\MathFunction\FunctionManager;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
@@ -16,7 +19,6 @@ use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
-use Model\Math\MathFunction\FunctionManager;
 
 class TokensCalculator
 {

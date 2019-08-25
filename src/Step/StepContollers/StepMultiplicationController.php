@@ -1,11 +1,13 @@
 <?php
 
-namespace Model\Math\Step\Controller;
+declare(strict_types=1);
+
+namespace Mathematicator\Step\Controller;
 
 
-use App\VikiTron\Model\Number\NumberHelper;
 use Mathematicator\Calculator\Step;
-use Model\Math\Step\StepFactory;
+use Mathematicator\NumberHelper;
+use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 

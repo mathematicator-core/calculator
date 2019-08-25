@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Mathematicator\Calculator\Operation;
+
 
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;

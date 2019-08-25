@@ -1,6 +1,9 @@
 <?php
 
-namespace Model\Math\Step;
+declare(strict_types=1);
+
+namespace Mathematicator\Step;
+
 
 use Mathematicator\Calculator\Step;
 use Nette\Application\LinkGenerator;

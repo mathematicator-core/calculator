@@ -1,9 +1,11 @@
 <?php
 
-namespace Math\Steps\Model;
+declare(strict_types=1);
+
+namespace Mathematicator\Step;
+
 
 use Mathematicator\Calculator\Step;
-use Model\Math\Step\StepFactory;
 use Nette\Utils\Strings;
 
 class RomanIntSteps

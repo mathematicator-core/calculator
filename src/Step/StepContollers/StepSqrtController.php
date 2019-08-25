@@ -1,9 +1,12 @@
 <?php
 
-namespace Model\Math\Step\Controller;
+declare(strict_types=1);
+
+namespace Mathematicator\Step\Controller;
+
 
 use Mathematicator\Calculator\Step;
-use Model\Math\Step\StepFactory;
+use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 
 class StepSqrtController implements IStepController
