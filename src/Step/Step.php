@@ -13,7 +13,7 @@ class Step
 	use SmartObject;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $title;
 
@@ -23,12 +23,12 @@ class Step
 	private $htmlTitle = false;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $latex;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $description;
 
@@ -38,14 +38,14 @@ class Step
 	private $htmlDescription = false;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $ajaxEndpoint;
 
 	/**
-	 * @param null|string $title
-	 * @param null|string $latex
-	 * @param null|string $description
+	 * @param string|null $title
+	 * @param string|null $latex
+	 * @param string|null $description
 	 */
 	public function __construct(?string $title, ?string $latex, ?string $description)
 	{
@@ -63,7 +63,7 @@ class Step
 	}
 
 	/**
-	 * @param null|string $title
+	 * @param string|null $title
 	 * @param bool $html
 	 */
 	public function setTitle(string $title = null, bool $html = false): void
@@ -81,7 +81,7 @@ class Step
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getLatex(): ?string
 	{
@@ -89,15 +89,15 @@ class Step
 	}
 
 	/**
-	 * @param null|string $latex
+	 * @param string|null $latex
 	 */
-	public function setLatex(string $latex = null): void
+	public function setLatex(?string $latex = null): void
 	{
-		$this->latex = $latex;
+		$this->latex = $latex ? : null;
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getDescription(): ?string
 	{
@@ -108,7 +108,7 @@ class Step
 	 * @param string|null $description
 	 * @param bool $html
 	 */
-	public function setDescription(string $description = null, bool $html = false): void
+	public function setDescription(?string $description = null, bool $html = false): void
 	{
 		$this->description = $description;
 		$this->htmlDescription = $html;
@@ -123,7 +123,7 @@ class Step
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getAjaxEndpoint(): ?string
 	{
@@ -131,7 +131,7 @@ class Step
 	}
 
 	/**
-	 * @param null|string $ajaxEndpoint
+	 * @param string|null $ajaxEndpoint
 	 */
 	public function setAjaxEndpoint(string $ajaxEndpoint = null): void
 	{

@@ -143,7 +143,7 @@ class RomanIntSteps
 				$return += $x;
 			}
 
-			$step->setLatex($return);
+			$step->setLatex((string) $return);
 			$steps[] = $step;
 			$lastPosition = $i;
 		}
@@ -193,7 +193,7 @@ class RomanIntSteps
 		$return = '';
 		$iterator = 0;
 		foreach (self::$romanNumber as $key => $val) {
-			$repeat = floor($int / $val);
+			$repeat = (int) floor($int / $val);
 			if ($repeat > 0) {
 				$return .= '\\' . ($val >= 5000
 						? 'overline'

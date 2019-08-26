@@ -306,8 +306,6 @@ class TokensCalculator
 
 	private function orderByType(TokenIterator $iterator): TokenIterator
 	{
-		bdump($iterator);
-
 		return $iterator;
 	}
 
