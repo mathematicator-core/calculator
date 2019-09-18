@@ -111,7 +111,7 @@ class StepPlusController implements IStepController
 	private function numberToLatex(array $number): string
 	{
 		if ($number[1] === '1') {
-			return $number[0];
+			return (string) $number[0];
 		}
 
 		return '\frac{' . $number[0] . '}{' . $number[1] . '}';
