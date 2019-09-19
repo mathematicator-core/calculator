@@ -10,9 +10,9 @@ use Nette\SmartObject;
 
 /**
  * @property NumberToken $number
- * @property null|string $title
- * @property null|string $description
- * @property null|string $ajaxEndpoint
+ * @property string|null $title
+ * @property string|null $description
+ * @property string|null $ajaxEndpoint
  */
 class NumberOperationResult
 {
@@ -25,17 +25,17 @@ class NumberOperationResult
 	private $number;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $title;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $description;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $ajaxEndpoint;
 
@@ -61,7 +61,7 @@ class NumberOperationResult
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getDescription(): ?string
 	{
@@ -77,7 +77,7 @@ class NumberOperationResult
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getTitle(): ?string
 	{
@@ -93,7 +93,7 @@ class NumberOperationResult
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getAjaxEndpoint(): ?string
 	{
