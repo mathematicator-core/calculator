@@ -213,7 +213,7 @@ class RomanIntSteps
 				$step->setDescription(
 					'<p>' . ($iterator === 0
 						? 'V prvním kroku najdeme nejvyšší číslo, které se vejde do hodnoty \(' . $int . '\), to je:'
-						: 'Najdeme další nejvyšší čáslo, které se vejde do zbytku \(' . $int . '\), to je:'
+						: 'Najdeme další nejvyšší číslo, které se vejde do zbytku \(' . $int . '\), to je:'
 					) . '</p>'
 					. '<div class="my-3 text-center">\(' . $repeat . '\cdot \textrm{' . $key . '}'
 					. '\ \rightarrow\ ' . $repeat . '\cdot ' . $val
