@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\UndefinedOperationException;
+use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
@@ -65,25 +66,26 @@ class BaseOperation
 	 * @param NumberToken $left
 	 * @param NumberToken $right
 	 * @param string $operation
+	 * @param Query $query
 	 * @return NumberOperationResult|null
 	 */
-	public function process(NumberToken $left, NumberToken $right, string $operation): ?NumberOperationResult
+	public function process(NumberToken $left, NumberToken $right, string $operation, Query $query): ?NumberOperationResult
 	{
 		switch ($operation) {
 			case '+':
-				return $this->addNumbers->process($left, $right);
+				return $this->addNumbers->process($left, $right, $query);
 
 			case '-':
-				return $this->subtractNumbers->process($left, $right);
+				return $this->subtractNumbers->process($left, $right, $query);
 
 			case '*':
-				return $this->multiplicationNumber->process($left, $right);
+				return $this->multiplicationNumber->process($left, $right, $query);
 
 			case '/':
-				return $this->divisionNumbers->process($left, $right);
+				return $this->divisionNumbers->process($left, $right, $query);
 
 			case '^':
-				return $this->powNumbers->process($left, $right);
+				return $this->powNumbers->process($left, $right, $query);
 
 			default:
 				return null;

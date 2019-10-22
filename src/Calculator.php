@@ -7,6 +7,7 @@ namespace Mathematicator\Calculator;
 
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\QueryNormalizer;
+use Mathematicator\Search\Query;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
@@ -59,11 +60,12 @@ class Calculator
 
 	/**
 	 * @param IToken[] $tokens
+	 * @param Query $query
 	 * @param int $basicTtl
 	 * @return CalculatorResult
 	 * @throws MathematicatorException
 	 */
-	public function calculate(array $tokens, int $basicTtl = 3): CalculatorResult
+	public function calculate(array $tokens, Query $query, int $basicTtl = 3): CalculatorResult
 	{
 		$result = new CalculatorResult($tokens);
 
@@ -91,7 +93,7 @@ class Calculator
 			}
 
 			$stepLatexLast = $this->tokensSerialize($tokens);
-			$process = $this->tokensCalculator->process($tokens);
+			$process = $this->tokensCalculator->process($tokens, $query);
 			$tokens = $process->getResult();
 
 			$stepLatexCurrent = $this->tokenizer->tokensToLatex($tokens);
@@ -128,14 +130,15 @@ class Calculator
 	 * @return CalculatorResult
 	 * @throws MathematicatorException
 	 */
-	public function calculateString(string $query): CalculatorResult
+	public function calculateString(Query $query): CalculatorResult
 	{
 		return $this->calculate(
 			$this->tokenizer->tokensToObject(
 				$this->tokenizer->tokenize(
-					$this->queryNormalizer->normalize($query)
+					$this->queryNormalizer->normalize($query->getQuery())
 				)
-			)
+			),
+			$query
 		);
 	}
 

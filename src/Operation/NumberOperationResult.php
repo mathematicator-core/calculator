@@ -54,10 +54,13 @@ class NumberOperationResult
 
 	/**
 	 * @param NumberToken $number
+	 * @return NumberOperationResult
 	 */
-	public function setNumber(NumberToken $number): void
+	public function setNumber(NumberToken $number): self
 	{
 		$this->number = $number;
+
+		return $this;
 	}
 
 	/**
@@ -70,10 +73,13 @@ class NumberOperationResult
 
 	/**
 	 * @param string $description
+	 * @return NumberOperationResult
 	 */
-	public function setDescription(string $description): void
+	public function setDescription(string $description): self
 	{
 		$this->description = $description;
+
+		return $this;
 	}
 
 	/**
@@ -86,10 +92,13 @@ class NumberOperationResult
 
 	/**
 	 * @param string|null $title
+	 * @return NumberOperationResult
 	 */
-	public function setTitle(string $title = null): void
+	public function setTitle(string $title = null): self
 	{
 		$this->title = $title;
+
+		return $this;
 	}
 
 	/**
@@ -102,10 +111,13 @@ class NumberOperationResult
 
 	/**
 	 * @param string|null $ajaxEndpoint
+	 * @return NumberOperationResult
 	 */
-	public function setAjaxEndpoint(string $ajaxEndpoint = null): void
+	public function setAjaxEndpoint(string $ajaxEndpoint = null): self
 	{
 		$this->ajaxEndpoint = $ajaxEndpoint;
+
+		return $this;
 	}
 
 	/**
@@ -118,10 +130,13 @@ class NumberOperationResult
 
 	/**
 	 * @param int $iteratorStep
+	 * @return NumberOperationResult
 	 */
-	public function setIteratorStep(int $iteratorStep): void
+	public function setIteratorStep(int $iteratorStep): self
 	{
 		$this->iteratorStep = $iteratorStep;
+
+		return $this;
 	}
 
 }

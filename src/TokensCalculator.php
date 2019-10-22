@@ -9,6 +9,7 @@ use Mathematicator\Calculator\Operation\BaseOperation;
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\MathFunction\FunctionManager;
 use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
@@ -55,22 +56,24 @@ class TokensCalculator
 	}
 
 	/**
-	 * @param array $tokens
+	 * @param IToken[] $tokens
+	 * @param Query $query
 	 * @return TokensCalculatorResult
 	 * @throws MathematicatorException
 	 */
-	public function process(array $tokens): TokensCalculatorResult
+	public function process(array $tokens, Query $query): TokensCalculatorResult
 	{
-		return $this->iterator($tokens);
+		return $this->iterator($tokens, $query);
 	}
 
 	/**
 	 * @param IToken[] $tokens
+	 * @param Query $query
 	 * @param int $ttl
 	 * @return TokensCalculatorResult
 	 * @throws MathematicatorException
 	 */
-	private function iterator(array $tokens, int $ttl = 1024): TokensCalculatorResult
+	private function iterator(array $tokens, Query $query, int $ttl = 1024): TokensCalculatorResult
 	{
 		if ($ttl <= 0) {
 			throw new MathematicatorException('Can not solve, because Calculator is in infinity recursion.');
@@ -88,7 +91,7 @@ class TokensCalculator
 				$result[] = $token;
 			} else {
 				if ($token instanceof NumberToken || $token instanceof VariableToken || $token instanceof InfinityToken) {
-					$newEntity = $this->solveNumberToken($iterator);
+					$newEntity = $this->solveNumberToken($iterator, $query);
 					if ($newEntity !== null) {
 						if ($newEntity instanceof InfinityToken) {
 							$result[] = $newEntity;
@@ -139,7 +142,7 @@ class TokensCalculator
 							$result[] = $token->getTokens()[0];
 						}
 					} else {
-						$_result = $this->iterator($token->getTokens(), $ttl - 1);
+						$_result = $this->iterator($token->getTokens(), $query, $ttl - 1);
 						$_resultResult = $_result->getResult();
 						$resultEntity->setStepTitle($_result->getStepTitle());
 						$resultEntity->setStepDescription($_result->getStepDescription());
@@ -186,9 +189,10 @@ class TokensCalculator
 
 	/**
 	 * @param TokenIterator $iterator
+	 * @param Query $query
 	 * @return Operation\NumberOperationResult|InfinityToken|VariableToken|null
 	 */
-	private function solveNumberToken(TokenIterator $iterator)
+	private function solveNumberToken(TokenIterator $iterator, Query $query)
 	{
 		$leftNumber = $iterator->getToken();
 		$rightNumber = $iterator->getNextToken(2);
@@ -203,7 +207,7 @@ class TokensCalculator
 			$number = $leftNumber instanceof NumberToken ? $leftNumber : $rightNumber;
 
 			if ($variable !== null && $number !== null) {
-				$newVariable = $this->baseOperation->process(new NumberToken($variable->getTimes()), $number, '*');
+				$newVariable = $this->baseOperation->process(new NumberToken($variable->getTimes()), $number, '*', $query);
 
 				if ($newVariable === null) {
 					return null;
@@ -228,7 +232,8 @@ class TokensCalculator
 			$newVariable = $this->baseOperation->process(
 				new NumberToken($leftNumber->getTimes()),
 				new NumberToken($rightNumber->getTimes()),
-				$operator->getToken()
+				$operator->getToken(),
+				$query
 			);
 
 			if ($newVariable === null) {
@@ -270,7 +275,7 @@ class TokensCalculator
 					|| !$nextOperator instanceof OperatorToken
 				)
 			) {
-				return $this->baseOperation->process($leftNumber, $rightNumber, $operator->getToken());
+				return $this->baseOperation->process($leftNumber, $rightNumber, $operator->getToken(), $query);
 			}
 		}
 
