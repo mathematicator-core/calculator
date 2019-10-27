@@ -10,10 +10,10 @@ use Nette\SmartObject;
 
 /**
  * @property BaseToken[] $result
- * @property string $stepTitle
- * @property string $stepDescription
+ * @property string|null $stepTitle
+ * @property string|null $stepDescription
  * @property bool $wasModified
- * @property null|string $ajaxEndpoint
+ * @property string|null $ajaxEndpoint
  */
 class TokensCalculatorResult
 {
@@ -26,12 +26,12 @@ class TokensCalculatorResult
 	private $result;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $stepTitle;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $stepDescription;
 
@@ -41,7 +41,7 @@ class TokensCalculatorResult
 	private $wasModified = false;
 
 	/**
-	 * @var null|string
+	 * @var string|null
 	 */
 	private $ajaxEndpoint;
 
@@ -55,10 +55,13 @@ class TokensCalculatorResult
 
 	/**
 	 * @param BaseToken[] $result
+	 * @return TokensCalculatorResult
 	 */
-	public function setResult(array $result): void
+	public function setResult(array $result): self
 	{
 		$this->result = $result;
+
+		return $this;
 	}
 
 	/**
@@ -70,15 +73,18 @@ class TokensCalculatorResult
 	}
 
 	/**
-	 * @param null|string $stepTitle
+	 * @param string|null $stepTitle
+	 * @return TokensCalculatorResult
 	 */
-	public function setStepTitle(string $stepTitle = null): void
+	public function setStepTitle(string $stepTitle = null): self
 	{
 		$this->stepTitle = $stepTitle;
+
+		return $this;
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getStepDescription(): ?string
 	{
@@ -87,10 +93,13 @@ class TokensCalculatorResult
 
 	/**
 	 * @param string|null $stepDescription
+	 * @return TokensCalculatorResult
 	 */
-	public function setStepDescription(string $stepDescription = null): void
+	public function setStepDescription(string $stepDescription = null): self
 	{
 		$this->stepDescription = $stepDescription;
+
+		return $this;
 	}
 
 	/**
@@ -103,14 +112,17 @@ class TokensCalculatorResult
 
 	/**
 	 * @param bool $wasModified
+	 * @return TokensCalculatorResult
 	 */
-	public function setWasModified(bool $wasModified): void
+	public function setWasModified(bool $wasModified): self
 	{
 		$this->wasModified = $wasModified;
+
+		return $this;
 	}
 
 	/**
-	 * @return null|string
+	 * @return string|null
 	 */
 	public function getAjaxEndpoint(): ?string
 	{
@@ -119,10 +131,13 @@ class TokensCalculatorResult
 
 	/**
 	 * @param string|null $ajaxEndpoint
+	 * @return TokensCalculatorResult
 	 */
-	public function setAjaxEndpoint(string $ajaxEndpoint = null): void
+	public function setAjaxEndpoint(string $ajaxEndpoint = null): self
 	{
 		$this->ajaxEndpoint = $ajaxEndpoint;
+
+		return $this;
 	}
 
 }
