@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\MathErrorException;
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
+use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Tokens;
 
@@ -68,6 +71,7 @@ class BaseOperation
 	 * @param string $operation
 	 * @param Query $query
 	 * @return NumberOperationResult|null
+	 * @throws MathematicatorException
 	 */
 	public function process(NumberToken $left, NumberToken $right, string $operation, Query $query): ?NumberOperationResult
 	{
@@ -145,10 +149,11 @@ class BaseOperation
 	}
 
 	/**
-	 * @param FactorialToken $token
+	 * @param IToken|FactorialToken $token
 	 * @return NumberOperationResult
+	 * @throws MathErrorException
 	 */
-	public function processFactorial(FactorialToken $token): NumberOperationResult
+	public function processFactorial(IToken $token): NumberOperationResult
 	{
 		return $this->factorial->process($token);
 	}
@@ -156,18 +161,16 @@ class BaseOperation
 	/**
 	 * @param NumberToken $token
 	 * @return NumberOperationResult
+	 * @throws MathErrorException
 	 */
 	public function processNumberToFactorial(NumberToken $token): NumberOperationResult
 	{
-		$factorialToken = new FactorialToken($token->getNumber());
-		$factorialToken->setToken($token->getNumber()->getHumanString());
-		$factorialToken->setPosition($token->getPosition());
-		$factorialToken->setType(Tokens::M_FACTORIAL);
-
-		$return = $this->processFactorial($factorialToken);
-		$return->setIteratorStep(1);
-
-		return $return;
+		return $this->processFactorial(
+			(new FactorialToken($token->getNumber()))
+				->setToken($token->getNumber()->getHumanString())
+				->setPosition($token->getPosition())
+				->setType(Tokens::M_FACTORIAL)
+		)->setIteratorStep(1);
 	}
 
 }
