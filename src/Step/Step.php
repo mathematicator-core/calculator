@@ -47,7 +47,7 @@ class Step
 	 * @param string|null $latex
 	 * @param string|null $description
 	 */
-	public function __construct(?string $title, ?string $latex, ?string $description)
+	public function __construct(?string $title, ?string $latex, ?string $description = null)
 	{
 		$this->title = $title;
 		$this->latex = $latex;
