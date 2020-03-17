@@ -167,6 +167,16 @@ class RomanIntSteps
 
 		$steps = [];
 
+		if ($int < 0) {
+			$step = $this->stepFactory->create();
+			$step->setTitle('Pravidlo pro záporná čísla');
+			$step->setDescription('Pouze kladná čísla lze převádět na Římská čísla. Výpočet byl proto zastaven.');
+
+			$steps[] = $step;
+
+			return $steps;
+		}
+
 		$step = $this->stepFactory->create();
 		$step->setTitle('Převodní tabulka');
 		$step->setDescription(
