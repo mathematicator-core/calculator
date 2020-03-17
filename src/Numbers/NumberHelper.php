@@ -74,7 +74,9 @@ class NumberHelper
 	public static function intToRoman(string $haystack): string
 	{
 		$return = '';
-		$int = (int) $haystack;
+		if (($int = (int) $haystack) <= 0) {
+			return '\text{Nemá řešení}';
+		}
 		foreach (self::$romanNumber as $key => $val) {
 			if (($repeat = (int) floor($int / $val)) > 0) {
 				$return .= '\\' . ($val >= 5000
@@ -202,14 +204,12 @@ class NumberHelper
 			return [$n];
 		}
 
-		$cache = $this->cache->load($n);
-
-		if ($cache !== null) {
+		if (($cache = $this->cache->load($n)) !== null) {
 			return $cache;
 		}
 
 		$num = 0;
-		$sqrtN = bcsqrt($n);
+		$sqrtN = bcsqrt(ltrim($n, '-'));
 
 		for ($i = 2; $i <= $sqrtN; $i++) {
 			if ($n % $i === 0) {
@@ -218,8 +218,10 @@ class NumberHelper
 			}
 		}
 
-		$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)));
-		$this->cache->save($n, $return);
+		$this->cache->save(
+			$n,
+			$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)))
+		);
 
 		return $return;
 	}
