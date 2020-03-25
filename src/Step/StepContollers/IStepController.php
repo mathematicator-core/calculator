@@ -9,7 +9,5 @@ use Nette\Utils\ArrayHash;
 
 interface IStepController
 {
-
 	public function actionDefault(ArrayHash $data): array;
-
 }

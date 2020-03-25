@@ -7,40 +7,28 @@ namespace Mathematicator\Calculator;
 
 use Nette\SmartObject;
 
-class Step
+final class Step
 {
-
 	use SmartObject;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $title;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $htmlTitle = false;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $latex;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $description;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $htmlDescription = false;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $ajaxEndpoint;
+
 
 	/**
 	 * @param string|null $title
@@ -54,6 +42,7 @@ class Step
 		$this->description = $description;
 	}
 
+
 	/**
 	 * @return null|string
 	 */
@@ -61,6 +50,7 @@ class Step
 	{
 		return $this->title;
 	}
+
 
 	/**
 	 * @param string|null $title
@@ -72,6 +62,7 @@ class Step
 		$this->htmlTitle = $html;
 	}
 
+
 	/**
 	 * @return bool
 	 */
@@ -79,6 +70,7 @@ class Step
 	{
 		return $this->htmlTitle;
 	}
+
 
 	/**
 	 * @return string|null
@@ -88,13 +80,15 @@ class Step
 		return $this->latex;
 	}
 
+
 	/**
 	 * @param string|null $latex
 	 */
 	public function setLatex(?string $latex = null): void
 	{
-		$this->latex = $latex ? : null;
+		$this->latex = $latex ?: null;
 	}
+
 
 	/**
 	 * @return string|null
@@ -103,6 +97,7 @@ class Step
 	{
 		return $this->description;
 	}
+
 
 	/**
 	 * @param string|null $description
@@ -114,6 +109,7 @@ class Step
 		$this->htmlDescription = $html;
 	}
 
+
 	/**
 	 * @return bool
 	 */
@@ -121,6 +117,7 @@ class Step
 	{
 		return $this->htmlDescription;
 	}
+
 
 	/**
 	 * @return string|null
@@ -130,6 +127,7 @@ class Step
 		return $this->ajaxEndpoint;
 	}
 
+
 	/**
 	 * @param string|null $ajaxEndpoint
 	 */
@@ -137,5 +135,4 @@ class Step
 	{
 		$this->ajaxEndpoint = $ajaxEndpoint;
 	}
-
 }

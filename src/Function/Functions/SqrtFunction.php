@@ -14,10 +14,9 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class SqrtFunction implements IFunction
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -26,6 +25,7 @@ class SqrtFunction implements IFunction
 	{
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param NumberToken|IToken $token
@@ -60,6 +60,7 @@ class SqrtFunction implements IFunction
 		return $result;
 	}
 
+
 	/**
 	 * @param IToken $token
 	 * @return bool
@@ -68,5 +69,4 @@ class SqrtFunction implements IFunction
 	{
 		return $token instanceof NumberToken;
 	}
-
 }

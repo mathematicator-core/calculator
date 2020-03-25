@@ -18,44 +18,26 @@ use Mathematicator\Tokenizer\Tokens;
 class BaseOperation
 {
 
-	/**
-	 * @var AddNumbers
-	 */
+	/** @var AddNumbers */
 	private $addNumbers;
 
-	/**
-	 * @var SubtractNumbers
-	 */
+	/** @var SubtractNumbers */
 	private $subtractNumbers;
 
-	/**
-	 * @var MultiplicationNumber
-	 */
+	/** @var MultiplicationNumber */
 	private $multiplicationNumber;
 
-	/**
-	 * @var DivisionNumbers
-	 */
+	/** @var DivisionNumbers */
 	private $divisionNumbers;
 
-	/**
-	 * @var PowNumber
-	 */
+	/** @var PowNumber */
 	private $powNumbers;
 
-	/**
-	 * @var Factorial
-	 */
+	/** @var Factorial */
 	private $factorial;
 
-	public function __construct(
-		AddNumbers $addNumbers,
-		SubtractNumbers $subtractNumbers,
-		MultiplicationNumber $multiplicationNumber,
-		DivisionNumbers $divisionNumbers,
-		PowNumber $powNumber,
-		Factorial $factorial
-	)
+
+	public function __construct(AddNumbers $addNumbers, SubtractNumbers $subtractNumbers, MultiplicationNumber $multiplicationNumber, DivisionNumbers $divisionNumbers, PowNumber $powNumber, Factorial $factorial)
 	{
 		$this->addNumbers = $addNumbers;
 		$this->subtractNumbers = $subtractNumbers;
@@ -64,6 +46,7 @@ class BaseOperation
 		$this->powNumbers = $powNumber;
 		$this->factorial = $factorial;
 	}
+
 
 	/**
 	 * @param NumberToken $left
@@ -95,6 +78,7 @@ class BaseOperation
 				return null;
 		}
 	}
+
 
 	/**
 	 * @param NumberToken|InfinityToken $left
@@ -148,6 +132,7 @@ class BaseOperation
 		}
 	}
 
+
 	/**
 	 * @param IToken|FactorialToken $token
 	 * @return NumberOperationResult
@@ -157,6 +142,7 @@ class BaseOperation
 	{
 		return $this->factorial->process($token);
 	}
+
 
 	/**
 	 * @param NumberToken $token
@@ -172,5 +158,4 @@ class BaseOperation
 				->setType(Tokens::M_FACTORIAL)
 		)->setIteratorStep(1);
 	}
-
 }

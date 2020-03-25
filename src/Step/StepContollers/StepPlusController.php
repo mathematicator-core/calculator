@@ -14,20 +14,15 @@ use Nette\Utils\Validators;
 class StepPlusController implements IStepController
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** var StepFactory  */
 	private $stepFactory;
 
-	/**
-	 * @var Number
-	 */
+	/** @var Number */
 	private $number;
 
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	private $tolerance = 0;
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -38,6 +33,7 @@ class StepPlusController implements IStepController
 		$this->stepFactory = $stepFactory;
 		$this->number = $number;
 	}
+
 
 	/**
 	 * @param ArrayHash $data
@@ -91,6 +87,7 @@ class StepPlusController implements IStepController
 		return $steps;
 	}
 
+
 	/**
 	 * @param string $number
 	 * @return string[]
@@ -104,6 +101,7 @@ class StepPlusController implements IStepController
 		return explode('/', $number);
 	}
 
+
 	/**
 	 * @param int[] $number
 	 * @return string
@@ -116,5 +114,4 @@ class StepPlusController implements IStepController
 
 		return '\frac{' . $number[0] . '}{' . $number[1] . '}';
 	}
-
 }

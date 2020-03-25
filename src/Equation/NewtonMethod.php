@@ -10,15 +10,12 @@ use Mathematicator\Engine\MathematicatorException;
 class NewtonMethod
 {
 
-	/**
-	 * @var int
-	 */
+	/** @var int */
 	private $steps = 0;
 
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	private $intervalBuffer = [];
+
 
 	/**
 	 * @param float $intervalLeft
@@ -37,6 +34,7 @@ class NewtonMethod
 
 		return $results;
 	}
+
 
 	private function iterator(float $intervalLeft, float $intervalRight)
 	{
@@ -82,6 +80,7 @@ class NewtonMethod
 		}
 	}
 
+
 	/**
 	 * @param float $x
 	 * @return float
@@ -92,6 +91,7 @@ class NewtonMethod
 //		return 2 * pow($x, 3) - 5 * $x + 2853;
 	}
 
+
 	/**
 	 * @param float $x
 	 * @return bool
@@ -100,6 +100,7 @@ class NewtonMethod
 	{
 		return $x >= 0;
 	}
+
 
 	/**
 	 * @param float $x
@@ -110,6 +111,7 @@ class NewtonMethod
 	{
 		return abs($x - $y) < 0.00001;
 	}
+
 
 	private function renderInterval(array $items)
 	{
@@ -131,5 +133,4 @@ class NewtonMethod
 			. $this->renderInterval($otherItems)
 			. '</div>';
 	}
-
 }

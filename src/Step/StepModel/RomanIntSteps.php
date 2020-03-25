@@ -8,12 +8,10 @@ namespace Mathematicator\Step;
 use Mathematicator\Calculator\Step;
 use Nette\Utils\Strings;
 
-class RomanIntSteps
+final class RomanIntSteps
 {
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	private static $romanNumber = [
 		'm' => 1000000,
 		'd' => 500000,
@@ -36,9 +34,7 @@ class RomanIntSteps
 		'I' => 1,
 	];
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	private static $translateTable = [
 		'I' => 1,
 		'V' => 5,
@@ -49,9 +45,7 @@ class RomanIntSteps
 		'M' => 1000,
 	];
 
-	/**
-	 * @var int[]
-	 */
+	/** @var string[] */
 	private static $translateTableCzechHelp = [
 		'I' => 'Ivan',
 		'V' => 'Vedl',
@@ -80,6 +74,7 @@ class RomanIntSteps
 	 */
 	private $stepFactory;
 
+
 	/**
 	 * @param StepFactory $stepFactory
 	 */
@@ -87,6 +82,7 @@ class RomanIntSteps
 	{
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param string $roman
@@ -156,6 +152,7 @@ class RomanIntSteps
 
 		return $steps;
 	}
+
 
 	/**
 	 * @param string|int $int
@@ -256,6 +253,7 @@ class RomanIntSteps
 		return $steps;
 	}
 
+
 	/**
 	 * @param int $lastPosition
 	 * @param int $currentPosition
@@ -276,6 +274,7 @@ class RomanIntSteps
 
 		return '<span style="color:black">' . $return . '</span> | ';
 	}
+
 
 	/**
 	 * @param string|null $roman
@@ -304,5 +303,4 @@ class RomanIntSteps
 			. $return
 			. '</table>';
 	}
-
 }

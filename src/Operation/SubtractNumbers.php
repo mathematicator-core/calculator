@@ -12,15 +12,15 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class SubtractNumbers
 {
 
-	/**
-	 * @var NumberFactory
-	 */
+	/** @var NumberFactory */
 	private $numberFactory;
+
 
 	public function __construct(NumberFactory $numberFactory)
 	{
 		$this->numberFactory = $numberFactory;
 	}
+
 
 	/**
 	 * @param NumberToken $left
@@ -58,5 +58,4 @@ class SubtractNumbers
 				. ' - ' . $right->getNumber()->getHumanString()
 			);
 	}
-
 }

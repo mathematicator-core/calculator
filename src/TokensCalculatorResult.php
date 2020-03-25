@@ -17,33 +17,23 @@ use Nette\SmartObject;
  */
 class TokensCalculatorResult
 {
-
 	use SmartObject;
 
-	/**
-	 * @var BaseToken[]
-	 */
+	/** @var BaseToken[] */
 	private $result;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $stepTitle;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $stepDescription;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $wasModified = false;
 
-	/**
-	 * @var string|null
-	 */
+	/** @var string|null */
 	private $ajaxEndpoint;
+
 
 	/**
 	 * @return BaseToken[]
@@ -52,6 +42,7 @@ class TokensCalculatorResult
 	{
 		return $this->result;
 	}
+
 
 	/**
 	 * @param BaseToken[] $result
@@ -64,6 +55,7 @@ class TokensCalculatorResult
 		return $this;
 	}
 
+
 	/**
 	 * @return null|string
 	 */
@@ -71,6 +63,7 @@ class TokensCalculatorResult
 	{
 		return $this->stepTitle;
 	}
+
 
 	/**
 	 * @param string|null $stepTitle
@@ -83,6 +76,7 @@ class TokensCalculatorResult
 		return $this;
 	}
 
+
 	/**
 	 * @return string|null
 	 */
@@ -90,6 +84,7 @@ class TokensCalculatorResult
 	{
 		return $this->stepDescription;
 	}
+
 
 	/**
 	 * @param string|null $stepDescription
@@ -102,6 +97,7 @@ class TokensCalculatorResult
 		return $this;
 	}
 
+
 	/**
 	 * @return bool
 	 */
@@ -109,6 +105,7 @@ class TokensCalculatorResult
 	{
 		return $this->wasModified;
 	}
+
 
 	/**
 	 * @param bool $wasModified
@@ -121,6 +118,7 @@ class TokensCalculatorResult
 		return $this;
 	}
 
+
 	/**
 	 * @return string|null
 	 */
@@ -128,6 +126,7 @@ class TokensCalculatorResult
 	{
 		return $this->ajaxEndpoint;
 	}
+
 
 	/**
 	 * @param string|null $ajaxEndpoint
@@ -139,5 +138,4 @@ class TokensCalculatorResult
 
 		return $this;
 	}
-
 }

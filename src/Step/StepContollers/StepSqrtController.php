@@ -12,15 +12,12 @@ use Nette\Utils\ArrayHash;
 class StepSqrtController implements IStepController
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
 
-	/**
-	 * @var Step[]
-	 */
+	/** @var Step[] */
 	private $steps = [];
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -29,6 +26,7 @@ class StepSqrtController implements IStepController
 	{
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param ArrayHash $data
@@ -59,6 +57,7 @@ class StepSqrtController implements IStepController
 		return $this->steps;
 	}
 
+
 	private function solveAsInteger(int $n, int $result): void
 	{
 		$table = '';
@@ -84,6 +83,7 @@ class StepSqrtController implements IStepController
 
 		$this->steps[] = $step;
 	}
+
 
 	private function solveAsCells(float $n): void
 	{
@@ -139,6 +139,7 @@ class StepSqrtController implements IStepController
 		$this->steps[] = $step;
 	}
 
+
 	/**
 	 * @param string $n
 	 * @return string[] $cells
@@ -180,5 +181,4 @@ class StepSqrtController implements IStepController
 
 		return $cells;
 	}
-
 }

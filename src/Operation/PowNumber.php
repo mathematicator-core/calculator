@@ -16,21 +16,19 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class PowNumber
 {
 
-	/**
-	 * @var NumberFactory
-	 */
+	/** @var NumberFactory */
 	private $numberFactory;
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
+
 
 	public function __construct(NumberFactory $numberFactory, StepFactory $stepFactory)
 	{
 		$this->numberFactory = $numberFactory;
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param NumberToken $left
@@ -91,6 +89,7 @@ class PowNumber
 			);
 	}
 
+
 	/**
 	 * @param SmartNumber $left
 	 * @param SmartNumber $right
@@ -111,5 +110,4 @@ class PowNumber
 
 		return '\({' . $left->getHumanString() . '}^{' . $right->getHumanString() . '}\ =\ ' . $result->getString() . '\)';
 	}
-
 }

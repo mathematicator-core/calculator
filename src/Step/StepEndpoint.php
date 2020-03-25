@@ -11,23 +11,18 @@ use Nette\DI\Container;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Json;
 
-class StepEndpoint
+final class StepEndpoint
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
 
-	/**
-	 * @var Container
-	 */
+	/** @var Container */
 	private $serviceFactory;
 
-	/**
-	 * @var IStepController
-	 */
+	/** @var IStepController */
 	private $callback;
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -38,6 +33,7 @@ class StepEndpoint
 		$this->stepFactory = $stepFactory;
 		$this->serviceFactory = $container;
 	}
+
 
 	/**
 	 * @param string $type
@@ -74,5 +70,4 @@ class StepEndpoint
 
 		return $return;
 	}
-
 }

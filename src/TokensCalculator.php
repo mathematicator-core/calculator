@@ -26,36 +26,28 @@ use Mathematicator\Tokenizer\Tokens;
 class TokensCalculator
 {
 
-	/**
-	 * @var BaseOperation
-	 */
+	/** @var BaseOperation */
 	private $baseOperation;
 
-	/**
-	 * @var Number
-	 */
+	/** @var Number */
 	private $numberFactory;
 
-	/**
-	 * @var FunctionManager
-	 */
+	/** @var FunctionManager */
 	private $functionManager;
+
 
 	/**
 	 * @param BaseOperation $baseOperation
 	 * @param NumberFactory $numberFactory
 	 * @param FunctionManager $functionManager
 	 */
-	public function __construct(
-		BaseOperation $baseOperation,
-		NumberFactory $numberFactory,
-		FunctionManager $functionManager
-	)
+	public function __construct(BaseOperation $baseOperation, NumberFactory $numberFactory, FunctionManager $functionManager)
 	{
 		$this->baseOperation = $baseOperation;
 		$this->numberFactory = $numberFactory;
 		$this->functionManager = $functionManager;
 	}
+
 
 	/**
 	 * @param IToken[] $tokens
@@ -67,6 +59,7 @@ class TokensCalculator
 	{
 		return $this->iterator($tokens, $query);
 	}
+
 
 	/**
 	 * @param IToken[] $tokens
@@ -189,6 +182,7 @@ class TokensCalculator
 		return $resultEntity->setResult($result);
 	}
 
+
 	/**
 	 * @param TokenIterator $iterator
 	 * @param Query $query
@@ -290,6 +284,7 @@ class TokensCalculator
 		return null;
 	}
 
+
 	/**
 	 * @param TokenIterator $iterator
 	 * @param IToken|OperatorToken|null $operator
@@ -314,6 +309,7 @@ class TokensCalculator
 		return null;
 	}
 
+
 	/**
 	 * @param TokenIterator $iterator
 	 * @return TokenIterator
@@ -322,5 +318,4 @@ class TokensCalculator
 	{
 		return $iterator;
 	}
-
 }

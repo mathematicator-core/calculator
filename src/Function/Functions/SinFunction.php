@@ -15,11 +15,9 @@ use Mathematicator\Tokenizer\Token\PiToken;
 class SinFunction implements IFunction
 {
 
-
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -28,6 +26,7 @@ class SinFunction implements IFunction
 	{
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param NumberToken|IToken $token
@@ -61,6 +60,7 @@ class SinFunction implements IFunction
 		return $result;
 	}
 
+
 	/**
 	 * @param IToken $token
 	 * @return bool
@@ -69,5 +69,4 @@ class SinFunction implements IFunction
 	{
 		return $token instanceof NumberToken || $token instanceof InfinityToken;
 	}
-
 }

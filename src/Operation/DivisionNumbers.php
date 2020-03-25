@@ -11,18 +11,18 @@ use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Nette\Utils\Validators;
 
-class DivisionNumbers
+final class DivisionNumbers
 {
 
-	/**
-	 * @var NumberFactory
-	 */
+	/** @var NumberFactory */
 	private $numberFactory;
+
 
 	public function __construct(NumberFactory $numberFactory)
 	{
 		$this->numberFactory = $numberFactory;
 	}
+
 
 	/**
 	 * @param NumberToken $left
@@ -65,6 +65,7 @@ class DivisionNumbers
 			);
 	}
 
+
 	/**
 	 * @param SmartNumber $left
 	 * @param SmartNumber $right
@@ -87,5 +88,4 @@ class DivisionNumbers
 
 		return $return;
 	}
-
 }

@@ -14,15 +14,12 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class AddNumbers
 {
 
-	/**
-	 * @var NumberFactory
-	 */
+	/** @var NumberFactory */
 	private $numberFactory;
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
+
 
 	/**
 	 * @param NumberFactory $numberFactory
@@ -33,6 +30,7 @@ class AddNumbers
 		$this->numberFactory = $numberFactory;
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param NumberToken $left
@@ -80,5 +78,4 @@ class AddNumbers
 				])
 			);
 	}
-
 }

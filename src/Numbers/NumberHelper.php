@@ -14,9 +14,7 @@ use Nette\Utils\Validators;
 class NumberHelper
 {
 
-	/**
-	 * @var int[]
-	 */
+	/** @var int[] */
 	private static $romanNumber = [
 		'm' => 1000000,
 		'd' => 500000,
@@ -39,15 +37,12 @@ class NumberHelper
 		'I' => 1,
 	];
 
-	/**
-	 * @var LinkGenerator
-	 */
+	/** @var LinkGenerator */
 	private $linkGenerator;
 
-	/**
-	 * @var Cache
-	 */
+	/** @var Cache */
 	private $cache;
+
 
 	/**
 	 * @param LinkGenerator $linkGenerator
@@ -59,6 +54,7 @@ class NumberHelper
 		$this->cache = new Cache($IStorage, 'number-helper');
 	}
 
+
 	/**
 	 * @return string
 	 */
@@ -66,6 +62,7 @@ class NumberHelper
 	{
 		return 'π';
 	}
+
 
 	/**
 	 * @param string $haystack
@@ -92,6 +89,7 @@ class NumberHelper
 		return $return;
 	}
 
+
 	/**
 	 * @param string $roman
 	 * @return int
@@ -114,6 +112,7 @@ class NumberHelper
 		return $return;
 	}
 
+
 	/**
 	 * @param int $len
 	 * @return string
@@ -134,6 +133,7 @@ class NumberHelper
 		return '3' . ($len > 0 ? '.' . preg_replace('/(\d{8})/', '$1 ', Strings::substring($pi, 0, $len)) : '');
 	}
 
+
 	/**
 	 * @param string $number
 	 * @return bool
@@ -142,6 +142,7 @@ class NumberHelper
 	{
 		return (bool) preg_match('/[IVXLCDMivxlcdm]{2,}/', $number);
 	}
+
 
 	/**
 	 * @param float $n
@@ -171,6 +172,7 @@ class NumberHelper
 		return [$h1, $k1];
 	}
 
+
 	/**
 	 * @param string $n
 	 * @return string[]
@@ -193,6 +195,7 @@ class NumberHelper
 
 		return $a;
 	}
+
 
 	/**
 	 * @param string $n
@@ -225,6 +228,7 @@ class NumberHelper
 
 		return $return;
 	}
+
 
 	/**
 	 * @param string $x
@@ -292,5 +296,4 @@ class NumberHelper
 		return '<div style="width:' . (max([$lenX, $lenY, $lenResult]) * 10) . 'px">'
 			. '<div style="font-family:monospace;font-size:12pt;text-align:right">' . $return . '</div></div>';
 	}
-
 }

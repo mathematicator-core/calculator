@@ -11,13 +11,12 @@ use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Tokens;
 
-class Factorial
+final class Factorial
 {
 
-	/**
-	 * @var NumberFactory
-	 */
+	/** @var NumberFactory */
 	private $numberFactory;
+
 
 	/**
 	 * @param NumberFactory $numberFactory
@@ -26,6 +25,7 @@ class Factorial
 	{
 		$this->numberFactory = $numberFactory;
 	}
+
 
 	/**
 	 * @param FactorialToken $token
@@ -58,6 +58,7 @@ class Factorial
 		return $return;
 	}
 
+
 	/**
 	 * @param string $num
 	 * @return string
@@ -79,6 +80,7 @@ class Factorial
 
 		return $result;
 	}
+
 
 	/**
 	 * @param int $n
@@ -113,5 +115,4 @@ class Factorial
 
 		return '\(' . $n . '!\ =\ ' . $return . '\)';
 	}
-
 }

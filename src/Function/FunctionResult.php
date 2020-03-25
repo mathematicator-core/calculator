@@ -16,23 +16,17 @@ use Nette\SmartObject;
  */
 class FunctionResult
 {
-
 	use SmartObject;
 
-	/**
-	 * @var IToken|IToken[]
-	 */
+	/** @var IToken|IToken[] */
 	private $input;
 
-	/**
-	 * @var IToken|IToken[]
-	 */
+	/** @var IToken|IToken[] */
 	private $output;
 
-	/**
-	 * @var Step
-	 */
+	/** @var Step */
 	private $step = [];
+
 
 	/**
 	 * @return IToken|IToken[]
@@ -42,13 +36,18 @@ class FunctionResult
 		return $this->input;
 	}
 
+
 	/**
 	 * @param IToken|IToken[] $input
+	 * @return FunctionResult
 	 */
-	public function setInput($input)
+	public function setInput($input): self
 	{
 		$this->input = $input;
+
+		return $this;
 	}
+
 
 	/**
 	 * @return IToken|IToken[]
@@ -58,28 +57,36 @@ class FunctionResult
 		return $this->output;
 	}
 
-	/**
-	 * @param IToken|IToken[] $output
-	 */
-	public function setOutput($output)
-	{
-		$this->output = $output;
-	}
 
 	/**
-	 * @return null|Step
+	 * @param IToken|IToken[] $output
+	 * @return FunctionResult
 	 */
-	public function getStep()
+	public function setOutput($output): self
+	{
+		$this->output = $output;
+
+		return $this;
+	}
+
+
+	/**
+	 * @return Step|null
+	 */
+	public function getStep(): ?Step
 	{
 		return $this->step;
 	}
 
+
 	/**
 	 * @param Step $steps
+	 * @return FunctionResult
 	 */
-	public function setStep(Step $steps)
+	public function setStep(Step $steps): self
 	{
 		$this->step = $steps;
-	}
 
+		return $this;
+	}
 }

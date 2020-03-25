@@ -13,20 +13,18 @@ use Nette\Utils\Html;
 class StepSqrtHelper implements IStepController
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
 
-	/**
-	 * @var Step[]
-	 */
+	/** @var Step[] */
 	private $steps = [];
+
 
 	public function __construct(StepFactory $stepFactory)
 	{
 		$this->stepFactory = $stepFactory;
 	}
+
 
 	/**
 	 * @param ArrayHash $data
@@ -34,8 +32,6 @@ class StepSqrtHelper implements IStepController
 	 */
 	public function actionDefault(ArrayHash $data): array
 	{
-		bdump($data, 'Data SQRT Helper');
-
 		if ($data->offsetExists('numberSet')) {
 			$step = $this->stepFactory->create();
 			$step->setDescription('N - Přirozená čísla: 1, 2, 3, 100, 105, 1006, ...');
@@ -48,6 +44,7 @@ class StepSqrtHelper implements IStepController
 
 		return $this->steps;
 	}
+
 
 	private function taskWhatBaseOfPower(int $n): void
 	{
@@ -98,5 +95,4 @@ class StepSqrtHelper implements IStepController
 
 		$this->steps[] = $step;
 	}
-
 }

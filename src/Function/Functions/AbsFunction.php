@@ -27,6 +27,7 @@ class AbsFunction implements IFunction
 		return $result;
 	}
 
+
 	/**
 	 * @param IToken $token
 	 * @return bool
@@ -35,5 +36,4 @@ class AbsFunction implements IFunction
 	{
 		return $token instanceof NumberToken;
 	}
-
 }

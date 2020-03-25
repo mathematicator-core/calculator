@@ -9,18 +9,18 @@ use Mathematicator\Calculator\Step;
 use Nette\Application\LinkGenerator;
 use Nette\Utils\Json;
 
-class StepFactory
+final class StepFactory
 {
 
-	/**
-	 * @var LinkGenerator
-	 */
+	/** @var LinkGenerator */
 	private $linkGenerator;
+
 
 	public function __construct(LinkGenerator $linkGenerator)
 	{
 		$this->linkGenerator = $linkGenerator;
 	}
+
 
 	/**
 	 * @param string|null $title
@@ -32,6 +32,7 @@ class StepFactory
 	{
 		return new Step($title, $latex, $description);
 	}
+
 
 	/**
 	 * @param string $type
@@ -45,5 +46,4 @@ class StepFactory
 			'data' => Json::encode($data),
 		]);
 	}
-
 }

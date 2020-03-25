@@ -19,25 +19,18 @@ use Mathematicator\Tokenizer\Tokenizer;
 class Calculator
 {
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
 
-	/**
-	 * @var Tokenizer
-	 */
+	/** @var Tokenizer */
 	private $tokenizer;
 
-	/**
-	 * @var TokensCalculator
-	 */
+	/** @var TokensCalculator */
 	private $tokensCalculator;
 
-	/**
-	 * @var QueryNormalizer
-	 */
+	/** @var QueryNormalizer */
 	private $queryNormalizer;
+
 
 	/**
 	 * @param StepFactory $stepFactory
@@ -45,18 +38,14 @@ class Calculator
 	 * @param TokensCalculator $tokensCalculator
 	 * @param QueryNormalizer $queryNormalizer
 	 */
-	public function __construct(
-		StepFactory $stepFactory,
-		Tokenizer $tokenizer,
-		TokensCalculator $tokensCalculator,
-		QueryNormalizer $queryNormalizer
-	)
+	public function __construct(StepFactory $stepFactory, Tokenizer $tokenizer, TokensCalculator $tokensCalculator, QueryNormalizer $queryNormalizer)
 	{
 		$this->stepFactory = $stepFactory;
 		$this->tokenizer = $tokenizer;
 		$this->tokensCalculator = $tokensCalculator;
 		$this->queryNormalizer = $queryNormalizer;
 	}
+
 
 	/**
 	 * @param IToken[] $tokens
@@ -123,6 +112,7 @@ class Calculator
 		return $result;
 	}
 
+
 	/**
 	 * Human input and token output.
 	 *
@@ -142,6 +132,7 @@ class Calculator
 		);
 	}
 
+
 	/**
 	 * @param string $query
 	 * @return IToken[]
@@ -153,6 +144,7 @@ class Calculator
 
 		return $this->tokenizer->tokensToObject($tokens);
 	}
+
 
 	/**
 	 * @param IToken[] $tokens
@@ -178,5 +170,4 @@ class Calculator
 
 		return '[' . $tokensToSerialize . ']';
 	}
-
 }
