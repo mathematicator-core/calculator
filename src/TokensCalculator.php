@@ -218,7 +218,9 @@ final class TokensCalculator
 			) && $operator instanceof OperatorToken && $operator->getToken() === '*'
 			&& ($nextOperator instanceof OperatorToken && $nextOperator->getToken() === '^') === false
 		) {
+			/** @var VariableToken|null $variable */
 			$variable = $leftNumber instanceof VariableToken ? $leftNumber : $rightNumber;
+			/** @var NumberToken|null $number */
 			$number = $leftNumber instanceof NumberToken ? $leftNumber : $rightNumber;
 
 			if ($variable !== null && $number !== null) {

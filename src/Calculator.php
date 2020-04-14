@@ -14,6 +14,7 @@ use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
+use Nette\Tokenizer\Exception;
 
 class Calculator
 {
@@ -115,31 +116,41 @@ class Calculator
 	/**
 	 * Human input and token output.
 	 *
-	 * @param string $query
+	 * @param Query $query
 	 * @return CalculatorResult
 	 * @throws MathematicatorException
 	 */
 	public function calculateString(Query $query): CalculatorResult
 	{
+		try {
+			$tokens = $this->tokenizer->tokenize(
+				$this->queryNormalizer->normalize($query->getQuery())
+			);
+		} catch (Exception $e) {
+			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);
+		}
+
 		return $this->calculate(
-			$this->tokenizer->tokensToObject(
-				$this->tokenizer->tokenize(
-					$this->queryNormalizer->normalize($query->getQuery())
-				)
-			),
+			$this->tokenizer->tokensToObject($tokens),
 			$query
 		);
 	}
 
 
 	/**
-	 * @param string $query
+	 * @param Query $query
 	 * @return IToken[]
+	 * @throws MathematicatorException
 	 */
-	public function getTokensByString(string $query): array
+	public function getTokensByString(Query $query): array
 	{
-		$query = $this->queryNormalizer->normalize($query);
-		$tokens = $this->tokenizer->tokenize($query);
+		try {
+			$tokens = $this->tokenizer->tokenize(
+				$this->queryNormalizer->normalize($query->getQuery())
+			);
+		} catch (Exception $e) {
+			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);
+		}
 
 		return $this->tokenizer->tokensToObject($tokens);
 	}

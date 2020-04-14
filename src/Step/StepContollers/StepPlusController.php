@@ -7,7 +7,6 @@ namespace Mathematicator\Step\Controller;
 
 use Mathematicator\Calculator\Step;
 use Mathematicator\NumberHelper;
-use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
@@ -18,7 +17,7 @@ final class StepPlusController implements IStepController
 	/** @var StepFactory */
 	private $stepFactory;
 
-	/** @var SmartNumber */
+	/** @var NumberHelper */
 	private $number;
 
 	/** @var int */
@@ -104,12 +103,12 @@ final class StepPlusController implements IStepController
 
 
 	/**
-	 * @param int[] $number
+	 * @param string[] $number
 	 * @return string
 	 */
 	private function numberToLatex(array $number): string
 	{
-		if ($number[1] === '1') {
+		if (($number[1] ?? null) === '1') {
 			return (string) $number[0];
 		}
 

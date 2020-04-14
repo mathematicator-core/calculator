@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Calculator\Query;
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\MathErrorException;
 use Mathematicator\Engine\UndefinedOperationException;
@@ -139,6 +140,8 @@ class BaseOperation
 	 */
 	public function processFactorial(IToken $token): NumberOperationResult
 	{
+		assert($token instanceof FactorialToken);
+
 		return $this->factorial->process($token);
 	}
 

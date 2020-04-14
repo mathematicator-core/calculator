@@ -11,4 +11,9 @@ interface Query
 	 * @return int
 	 */
 	public function getDecimals(): int;
+
+	/**
+	 * @return string
+	 */
+	public function getQuery(): string;
 }

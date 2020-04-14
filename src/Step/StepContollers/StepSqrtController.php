@@ -87,8 +87,7 @@ final class StepSqrtController implements IStepController
 
 	private function solveAsCells(float $n): void
 	{
-		$cells = $this->makeCells($n);
-		bdump($cells);
+		$cells = $this->makeCells((string) $n);
 
 		$step = $this->stepFactory->create();
 		$step->setTitle('Rozdělení do buněk');
@@ -105,34 +104,10 @@ final class StepSqrtController implements IStepController
 				'whatBaseOfPower' => $cells[0],
 			])
 		);
-		$step->setLatex((string) $squareRooted = floor(sqrt($cells[0])));
+		$step->setLatex((string) $squareRooted = floor(sqrt((float) $cells[0])));
 		$this->steps[] = $step;
 
 		$step = $this->stepFactory->create();
-		/*$subtractionDiv = Html::el('div');
-		$subtractionDiv->create('style')
-			->setHtml('
-			#sqrt-subtraction-table {
-				text-align: right;
-				width: auto;
-			}
-
-			#sqrt-subtraction-table tr td {
-				border: transparent;
-			}
-			');
-		$subtractionDiv->create('span', 'Toto číslo odečteme od čísla z buňky.');
-		$subtractionTable = $subtractionDiv->create('table', [
-			'id' => 'sqrt-subtraction-table'
-		]);
-		$subtractionTable->create('tr')
-			->create('td')
-			->setHtml("\({$cells[0]}\)");
-		$subtractionTable->create('tr')
-			->create('td')
-			->setHtml('\(-' . $squareRooted ** 2 . '\)');
-		$subtractionTable->create('tr')
-			->create('td')*/
 		$step->setDescription('Druhou mocninu odečteme od čísla z první buňky.');
 		$step->setLatex($cells[0] . ' - ' . ($squareRooted ** 2) . ' = ' . ($cells[0] - ($squareRooted ** 2)));
 

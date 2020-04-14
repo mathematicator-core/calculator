@@ -99,13 +99,6 @@ final class Factorial
 				$return .= ($return ? '\ \cdot\ ' : '') . $i;
 			}
 		} else {
-			for ($i = $n; $i >= 1; $i--) {
-				$return .= ($return ? '\ \cdot\ ' : '') . $i;
-				if ($n - $i + 1 >= 3) {
-					break;
-				}
-			}
-
 			$return .= '\ \cdot\ \cdots';
 
 			for ($i = 3; $i >= 1; $i--) {

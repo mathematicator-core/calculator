@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator;
 
 
 use Mathematicator\Tokenizer\Token\BaseToken;
+use Mathematicator\Tokenizer\Token\IToken;
 use Nette\SmartObject;
 
 /**
@@ -45,12 +46,20 @@ class TokensCalculatorResult
 
 
 	/**
-	 * @param BaseToken[] $result
+	 * @param IToken[] $result
 	 * @return TokensCalculatorResult
 	 */
 	public function setResult(array $result): self
 	{
-		$this->result = $result;
+		$return = [];
+		foreach ($result as $item) {
+			if (!$item instanceof BaseToken) {
+				throw new \RuntimeException('Result item should be instance of "' . BaseToken::class . '".');
+			}
+			$return[] = $item;
+		}
+
+		$this->result = $return;
 
 		return $this;
 	}

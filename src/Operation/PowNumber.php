@@ -34,7 +34,7 @@ class PowNumber
 	 * @param NumberToken $left
 	 * @param NumberToken $right
 	 * @param Query $query
-	 * @return NumberOperationResult|string|null
+	 * @return NumberOperationResult
 	 * @throws UndefinedOperationException
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
@@ -61,13 +61,13 @@ class PowNumber
 			}
 
 			$result = pow(
-					bcpow($leftFraction[0], $rightFraction[0], $query->getDecimals()),
-					bcdiv('1', $rightFraction[1], $query->getDecimals())
+					(float) bcpow($leftFraction[0], $rightFraction[0], $query->getDecimals()),
+					(float) bcdiv('1', $rightFraction[1], $query->getDecimals())
 				)
 				. '/'
 				. pow(
-					bcpow($leftFraction[1], $rightFraction[0], $query->getDecimals()),
-					bcdiv('1', $rightFraction[1], $query->getDecimals())
+					(float) bcpow($leftFraction[1], $rightFraction[0], $query->getDecimals()),
+					(float) bcdiv('1', $rightFraction[1], $query->getDecimals())
 				);
 		}
 
