@@ -52,7 +52,6 @@ class AddNumbers
 					$query->getDecimals()
 				) . '/' .
 				bcmul($leftFraction[1], $rightFraction[1], $query->getDecimals());
-
 		}
 
 		$newNumber = new NumberToken($this->numberFactory->create($result));

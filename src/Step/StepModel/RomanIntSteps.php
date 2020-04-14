@@ -56,9 +56,7 @@ final class RomanIntSteps
 		'M' => 'Města',
 	];
 
-	/**
-	 * @var string[]
-	 */
+	/** @var string[] */
 	private static $translateTableInverse = [
 		1 => 'I',
 		5 => 'V',
@@ -69,9 +67,7 @@ final class RomanIntSteps
 		1000 => 'M',
 	];
 
-	/**
-	 * @var StepFactory
-	 */
+	/** @var StepFactory */
 	private $stepFactory;
 
 

@@ -13,7 +13,7 @@ class NewtonMethod
 	/** @var int */
 	private $steps = 0;
 
-	/** @var array */
+	/** @var float[] */
 	private $intervalBuffer = [];
 
 
@@ -21,14 +21,11 @@ class NewtonMethod
 	 * @param float $intervalLeft
 	 * @param float $intervalRight
 	 * @return float[]
-	 * @throws \Exception
+	 * @throws MathematicatorException
 	 */
-	public function run(float $intervalLeft, float $intervalRight)
+	public function run(float $intervalLeft, float $intervalRight): array
 	{
 		$results = $this->iterator($intervalLeft, $intervalRight);
-
-		dump(['steps' => $this->steps]);
-		dump($this->intervalBuffer);
 
 		echo $this->renderInterval($this->intervalBuffer);
 
@@ -36,7 +33,13 @@ class NewtonMethod
 	}
 
 
-	private function iterator(float $intervalLeft, float $intervalRight)
+	/**
+	 * @param float $intervalLeft
+	 * @param float $intervalRight
+	 * @return float[]
+	 * @throws MathematicatorException
+	 */
+	private function iterator(float $intervalLeft, float $intervalRight): array
 	{
 		$this->steps++;
 		$this->intervalBuffer[] = [$intervalLeft, $intervalRight];
@@ -51,33 +54,28 @@ class NewtonMethod
 		$isIntervalRightPositive = $this->isPositive($valueRight);
 
 		if ($isIntervalLeftPositive === $isIntervalAveragePositive && $isIntervalAveragePositive === $isIntervalRightPositive) {
-			throw new MathematicatorException('Rovnice nemá řešení.');
+			throw new MathematicatorException('The equation has no solution.');
 		}
 
 		$exploreLeft = $isIntervalLeftPositive !== $isIntervalAveragePositive;
 		$exploreRight = $isIntervalAveragePositive !== $isIntervalRightPositive;
 
 		if ($exploreLeft && !$exploreRight) {
-//			dump(['RUN' => 'LEFT', 'L' => $exploreLeft, 'R' => $exploreRight, 'from' => $valueLeft, 'to' => $valueCenter]);
-			if ($this->isInTolerance($valueLeft, $valueCenter)) {
-				return [$intervalAverage];
-			} else {
-				return $this->iterator($intervalLeft, $intervalAverage);
-			}
-		} elseif (!$exploreLeft && $exploreRight) {
-//			dump(['RUN' => 'RIGHT', 'L' => $exploreLeft, 'R' => $exploreRight, 'from' => $valueCenter, 'to' => $valueRight]);
-			if ($this->isInTolerance($valueCenter, $valueRight)) {
-				return [$intervalAverage];
-			} else {
-				return $this->iterator($intervalAverage, $intervalRight);
-			}
-		} else {
-//			dump(['RUN' => 'CENTER', 'L' => $exploreLeft, 'R' => $exploreRight, 'from' => $valueLeft, 'to' => $valueRight]);
-			return [
-				$this->iterator($intervalLeft, $intervalAverage),
-				$this->iterator($intervalAverage, $intervalRight),
-			];
+			return $this->isInTolerance($valueLeft, $valueCenter)
+				? [$intervalAverage]
+				: $this->iterator($intervalLeft, $intervalAverage);
 		}
+
+		if (!$exploreLeft && $exploreRight) {
+			return $this->isInTolerance($valueCenter, $valueRight)
+				? [$intervalAverage]
+				: $this->iterator($intervalAverage, $intervalRight);
+		}
+
+		return [
+			$this->iterator($intervalLeft, $intervalAverage),
+			$this->iterator($intervalAverage, $intervalRight),
+		];
 	}
 
 
@@ -85,10 +83,9 @@ class NewtonMethod
 	 * @param float $x
 	 * @return float
 	 */
-	private function calculator(float $x)
+	private function calculator(float $x): float
 	{
 		return ($x - 10) * ($x - 5) * $x * ($x + 5) * ($x + 10);
-//		return 2 * pow($x, 3) - 5 * $x + 2853;
 	}
 
 
@@ -96,7 +93,7 @@ class NewtonMethod
 	 * @param float $x
 	 * @return bool
 	 */
-	private function isPositive(float $x)
+	private function isPositive(float $x): bool
 	{
 		return $x >= 0;
 	}
@@ -107,19 +104,23 @@ class NewtonMethod
 	 * @param float $y
 	 * @return bool
 	 */
-	private function isInTolerance(float $x, float $y)
+	private function isInTolerance(float $x, float $y): bool
 	{
 		return abs($x - $y) < 0.00001;
 	}
 
 
-	private function renderInterval(array $items)
+	/**
+	 * @param float[] $items
+	 * @return string
+	 */
+	private function renderInterval(array $items): string
 	{
 		if ($items === []) {
 			return '';
 		}
-		$item = $items[0];
 
+		$firstItem = $items[0];
 		$otherItems = [];
 		$iterator = 0;
 		foreach ($items as $i) {
@@ -129,7 +130,7 @@ class NewtonMethod
 			$iterator++;
 		}
 
-		return '<div style="border:1px solid #aaa;width:' . abs($item[0] * 10) . 'px">' . $item[0] . '<br>'
+		return '<div style="border:1px solid #aaa;width:' . abs($firstItem[0] * 10) . 'px">' . $firstItem[0] . '<br>'
 			. $this->renderInterval($otherItems)
 			. '</div>';
 	}
