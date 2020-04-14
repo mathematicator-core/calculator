@@ -12,7 +12,7 @@ use Nette\SmartObject;
 /**
  * @property IToken|IToken[] $input
  * @property IToken|IToken[] $output
- * @property Step $step
+ * @property Step|null $step
  */
 class FunctionResult
 {
@@ -24,8 +24,8 @@ class FunctionResult
 	/** @var IToken|IToken[] */
 	private $output;
 
-	/** @var Step */
-	private $step = [];
+	/** @var Step|null */
+	private $step;
 
 
 	/**

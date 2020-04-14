@@ -10,7 +10,7 @@ use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;
 
-class StepSqrtHelper implements IStepController
+final class StepSqrtHelper implements IStepController
 {
 
 	/** @var StepFactory */
@@ -91,7 +91,7 @@ class StepSqrtHelper implements IStepController
 				->addHtml((string) $tableDataEl->setText($messageArray[$i]));
 		}
 
-		$step->setDescription($outerDiv);
+		$step->setDescription($outerDiv->render());
 
 		$this->steps[] = $step;
 	}

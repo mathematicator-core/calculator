@@ -17,6 +17,7 @@ class AbsFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
+		assert($token instanceof NumberToken);
 		$result = new FunctionResult();
 
 		$abs = preg_replace('/^-/', '', $token->getNumber()->getInput());

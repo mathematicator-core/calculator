@@ -151,7 +151,7 @@ final class RomanIntSteps
 
 
 	/**
-	 * @param string|int $int
+	 * @param string $int (as integer)
 	 * @return Step[]
 	 */
 	public function getIntToRomanSteps(string $int): array

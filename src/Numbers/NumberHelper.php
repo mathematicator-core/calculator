@@ -147,7 +147,7 @@ class NumberHelper
 	/**
 	 * @param float $n
 	 * @param float $tolerance
-	 * @return array
+	 * @return int[]
 	 */
 	public function floatToFraction(float $n, $tolerance = 1.e-8): array
 	{
@@ -169,7 +169,7 @@ class NumberHelper
 			$b -= $a;
 		} while (abs($n - $h1 / $k1) > $n * $tolerance);
 
-		return [$h1, $k1];
+		return [(int) $h1, (int) $k1];
 	}
 
 
@@ -199,7 +199,7 @@ class NumberHelper
 
 	/**
 	 * @param string $n
-	 * @return int[]
+	 * @return int[]|string[]
 	 */
 	public function pfactor(string $n): array
 	{

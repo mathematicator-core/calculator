@@ -42,7 +42,7 @@ class NewtonMethod
 	private function iterator(float $intervalLeft, float $intervalRight): array
 	{
 		$this->steps++;
-		$this->intervalBuffer[] = [$intervalLeft, $intervalRight];
+		$this->intervalBuffer = [$intervalLeft, $intervalRight];
 		$intervalAverage = ($intervalLeft + $intervalRight) / 2;
 
 		$valueLeft = $this->calculator($intervalLeft);
@@ -73,8 +73,8 @@ class NewtonMethod
 		}
 
 		return [
-			$this->iterator($intervalLeft, $intervalAverage),
-			$this->iterator($intervalAverage, $intervalRight),
+			$this->iterator($intervalLeft, $intervalAverage)[0],
+			$this->iterator($intervalAverage, $intervalRight)[0],
 		];
 	}
 
@@ -130,7 +130,7 @@ class NewtonMethod
 			$iterator++;
 		}
 
-		return '<div style="border:1px solid #aaa;width:' . abs($firstItem[0] * 10) . 'px">' . $firstItem[0] . '<br>'
+		return '<div style="border:1px solid #aaa;width:' . abs($firstItem * 10) . 'px">' . $firstItem . '<br>'
 			. $this->renderInterval($otherItems)
 			. '</div>';
 	}

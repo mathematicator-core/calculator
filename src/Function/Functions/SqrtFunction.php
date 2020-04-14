@@ -34,12 +34,13 @@ class SqrtFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
+		assert($token instanceof NumberToken);
 		$result = new FunctionResult();
 
 		$n = $token->getNumber()->getFloat();
 
 		if ($n < 0) {
-			throw new MathErrorException('Sqrt is smaller than 0, ' . \json_encode($n) . ' given.');
+			throw new MathErrorException('Sqrt is smaller than 0, but number "' . $n . '" given.');
 		}
 
 		$sqrt = bcsqrt($n, 100);

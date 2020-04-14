@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Calculator\Query;
 use Mathematicator\Numbers\NumberFactory;
-use Mathematicator\Search\Query;
 use Mathematicator\Step\Controller\StepMultiplicationController;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\NumberToken;

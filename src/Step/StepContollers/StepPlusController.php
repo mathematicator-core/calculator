@@ -7,17 +7,18 @@ namespace Mathematicator\Step\Controller;
 
 use Mathematicator\Calculator\Step;
 use Mathematicator\NumberHelper;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 
-class StepPlusController implements IStepController
+final class StepPlusController implements IStepController
 {
 
-	/** var StepFactory  */
+	/** @var StepFactory */
 	private $stepFactory;
 
-	/** @var Number */
+	/** @var SmartNumber */
 	private $number;
 
 	/** @var int */

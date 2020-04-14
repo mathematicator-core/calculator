@@ -10,7 +10,6 @@ use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\MathFunction\FunctionManager;
 use Mathematicator\Numbers\NumberFactory;
-use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
@@ -23,13 +22,13 @@ use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
 
-class TokensCalculator
+final class TokensCalculator
 {
 
 	/** @var BaseOperation */
 	private $baseOperation;
 
-	/** @var Number */
+	/** @var NumberFactory */
 	private $numberFactory;
 
 	/** @var FunctionManager */

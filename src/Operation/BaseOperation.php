@@ -8,7 +8,6 @@ namespace Mathematicator\Calculator\Operation;
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\MathErrorException;
 use Mathematicator\Engine\UndefinedOperationException;
-use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\IToken;

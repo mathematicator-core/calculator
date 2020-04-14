@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Calculator\Query;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;
-use Mathematicator\Search\Query;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Nette\Utils\Validators;
 

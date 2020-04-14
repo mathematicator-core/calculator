@@ -36,7 +36,7 @@ final class StepFactory
 
 	/**
 	 * @param string $type
-	 * @param $data
+	 * @param mixed $data
 	 * @return string
 	 */
 	public function getAjaxEndpoint(string $type, $data): string

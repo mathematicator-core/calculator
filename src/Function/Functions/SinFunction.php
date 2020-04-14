@@ -34,6 +34,7 @@ class SinFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
+		assert($token instanceof NumberToken);
 		$result = new FunctionResult();
 
 		$x = $token->getNumber()->getFloat();
@@ -44,8 +45,8 @@ class SinFunction implements IFunction
 			$sin = sin($x);
 		}
 
-		$token->getNumber()->setValue($sin);
-		$token->setToken($sin);
+		$token->getNumber()->setValue((string) $sin);
+		$token->setToken((string) $sin);
 
 		$step = $this->stepFactory->create();
 		$step->setAjaxEndpoint(

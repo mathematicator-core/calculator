@@ -9,7 +9,7 @@ use Mathematicator\Calculator\Step;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 
-class StepSqrtController implements IStepController
+final class StepSqrtController implements IStepController
 {
 
 	/** @var StepFactory */
@@ -41,7 +41,7 @@ class StepSqrtController implements IStepController
 
 		if (abs($sqrt - $sqrtInt) < 0.000001) {
 			if ($sqrtInt <= 100) {
-				$this->solveAsInteger($n, $sqrtInt);
+				$this->solveAsInteger((int) $n, $sqrtInt);
 			} else {
 				$this->steps[] = $this->stepFactory->create(
 					'Řešení',
@@ -105,7 +105,7 @@ class StepSqrtController implements IStepController
 				'whatBaseOfPower' => $cells[0],
 			])
 		);
-		$step->setLatex($squareRooted = floor(sqrt($cells[0])));
+		$step->setLatex((string) $squareRooted = floor(sqrt($cells[0])));
 		$this->steps[] = $step;
 
 		$step = $this->stepFactory->create();

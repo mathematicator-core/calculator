@@ -7,7 +7,6 @@ namespace Mathematicator\Calculator;
 
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\QueryNormalizer;
-use Mathematicator\Search\Query;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;

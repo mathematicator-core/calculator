@@ -10,7 +10,7 @@ use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 
-class StepPowController implements IStepController
+final class StepPowController implements IStepController
 {
 
 	/** @var StepFactory */

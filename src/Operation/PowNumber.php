@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Calculator\Query;
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;
-use Mathematicator\Search\Query;
 use Mathematicator\Step\Controller\StepPowController;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\NumberToken;
