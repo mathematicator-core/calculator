@@ -7,6 +7,7 @@ namespace Mathematicator\Calculator;
 
 use Mathematicator\Calculator\Operation\BaseOperation;
 use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\Query;
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\MathFunction\FunctionManager;
 use Mathematicator\Numbers\NumberFactory;
@@ -21,7 +22,6 @@ use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
-use Mathematicator\Engine\Query;
 
 final class TokensCalculator
 {

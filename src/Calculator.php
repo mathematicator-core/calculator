@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator;
 
 
 use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\Query;
 use Mathematicator\Engine\QueryNormalizer;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
@@ -15,7 +16,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
 use Nette\Tokenizer\Exception;
-use Mathematicator\Engine\Query;
 
 class Calculator
 {
