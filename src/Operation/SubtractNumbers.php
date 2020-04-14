@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
-use Mathematicator\Calculator\Query;
+use Mathematicator\Engine\Query;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Tokenizer\Token\NumberToken;
 

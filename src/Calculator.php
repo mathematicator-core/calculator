@@ -15,6 +15,7 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
 use Nette\Tokenizer\Exception;
+use Mathematicator\Engine\Query;
 
 class Calculator
 {

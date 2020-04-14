@@ -21,6 +21,7 @@ use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
+use Mathematicator\Engine\Query;
 
 final class TokensCalculator
 {
