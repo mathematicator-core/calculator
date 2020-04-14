@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Step\Controller;
 
 
-use Mathematicator\Calculator\Step;
+use Mathematicator\Engine\Step;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;

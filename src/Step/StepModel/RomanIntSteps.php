@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Step;
 
 
-use Mathematicator\Calculator\Step;
+use Mathematicator\Engine\Step;
 use Nette\Utils\Strings;
 
 final class RomanIntSteps
