@@ -1,0 +1,25 @@
+parameters:
+	math:
+		functions:
+			- sin
+			- cos
+			- tan
+			- cotan
+			- log
+			- log\d*
+			- ln
+			- sqrt
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+services:
+	- Mathematicator\Engine\QueryNormalizer
+	- Mathematicator\Numbers\NumberFactory
+	- Mathematicator\NumberRewriter
+	- Mathematicator\Tokenizer\Tokenizer(%math%)
+	- Mathematicator\Tokenizer\TokensToLatex(%math.functions%)
+	- Mathematicator\Tokenizer\TokensToObject
+	router: App\RouterFactory::createRouter
