@@ -1,25 +1,33 @@
 name: Integrity check
 
-on: [push]
+on:
+  pull_request:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.1', '7.2', '7.3', '7.4']
 
+    name: PHP ${{ matrix.php }} tests
     steps:
-    - uses: actions/checkout@master
-    
+    - name: Git clone
+      uses: actions/checkout@master
+
     - name: Install PHP
       uses: shivammathur/setup-php@master
       with:
-        php-version: 7.4
+        php-version: ${{ matrix.php }}
+        coverage: pcov
 
-    - name: Install composer deps
+    - name: Install composer dependencies
       run: |
         composer create-project nette/code-checker temp/code-checker ^3 --no-progress
         composer create-project nette/coding-standard temp/coding-standard ^2 --no-progress
 
-        # Install app deps
+        # Install app dependencies
         composer install --no-interaction --prefer-dist
 
     # Check code checker and coding standards
@@ -30,3 +38,15 @@ jobs:
 
     - name: Check PHPStan rules
       run: composer phpstan
+
+    - name: Run tests
+      run: vendor/bin/tester -s -c tests/php.ini -p php tests --coverage coverage.xml --coverage-src src
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true

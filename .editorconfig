@@ -8,3 +8,7 @@ trim_trailing_whitespace = true
 
 [{*.php, *.json, *.neon}]
 indent_style = tab
+
+[*.yml]
+indent_style = space
+indent_size = 2
