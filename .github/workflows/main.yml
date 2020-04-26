@@ -22,7 +22,7 @@ jobs:
         php-version: ${{ matrix.php }}
         coverage: pcov
 
-    - name: Install composer deps
+    - name: Install composer dependencies
       run: |
         composer create-project nette/code-checker temp/code-checker ^3 --no-progress
         composer create-project nette/coding-standard temp/coding-standard ^2 --no-progress
