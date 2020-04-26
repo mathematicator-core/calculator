@@ -2,6 +2,7 @@ Robust PHP math calculator
 ==========================
 
 ![Integrity check](https://github.com/mathematicator-core/calculator/workflows/Integrity%20check/badge.svg)
+[![codecov](https://codecov.io/gh/mathematicator-core/calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/mathematicator-core/calculator)
 
 Simple to use robust math library for symbolic-work with numbers, operations and patterns.
 
