@@ -17,7 +17,7 @@
 		"mathematicator-core/numbers": "^2.0",
 		"mathematicator-core/engine": "^2.0",
 		"contributte/psr11-container-interface": "^0.4.1",
-		"contributte/psr6-caching": "^0.1.0"
+		"contributte/psr6-caching": "^0.2@dev"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^0.12.18",
