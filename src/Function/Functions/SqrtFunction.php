@@ -44,7 +44,7 @@ class SqrtFunction implements IFunction
 
 		$sqrt = bcsqrt($number->getFloatString(), 100);
 
-		$token->getNumber()->setValue($sqrt);
+		$token->getNumber()->setValue((string) $sqrt);
 		$token->setToken($sqrt);
 
 		$step = $this->stepFactory->create();

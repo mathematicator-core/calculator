@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator;
 
 
+use Contributte\Psr6\CachePool;
+use Contributte\Psr6\ICachePoolFactory;
 use Nette\Application\LinkGenerator;
-use Nette\Caching\Cache;
-use Nette\Caching\IStorage;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 
@@ -40,18 +40,18 @@ class NumberHelper
 	/** @var LinkGenerator */
 	private $linkGenerator;
 
-	/** @var Cache */
-	private $cache;
+	/** @var CachePool */
+	private $cachePool;
 
 
 	/**
 	 * @param LinkGenerator $linkGenerator
-	 * @param IStorage $IStorage
+	 * @param ICachePoolFactory $cachePoolFactory
 	 */
-	public function __construct(LinkGenerator $linkGenerator, IStorage $IStorage)
+	public function __construct(LinkGenerator $linkGenerator, ICachePoolFactory $cachePoolFactory)
 	{
 		$this->linkGenerator = $linkGenerator;
-		$this->cache = new Cache($IStorage, 'number-helper');
+		$this->cachePool = $cachePoolFactory->create('number-helper');
 	}
 
 
@@ -207,8 +207,10 @@ class NumberHelper
 			return [$n];
 		}
 
-		if (($cache = $this->cache->load($n)) !== null) {
-			return $cache;
+		$cacheItem = $this->cachePool->getItem($n);
+
+		if ($cacheItem->isHit()) {
+			return $cacheItem->get();
 		}
 
 		$num = 0;
@@ -221,10 +223,10 @@ class NumberHelper
 			}
 		}
 
-		$this->cache->save(
-			$n,
-			$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)))
-		);
+		$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)));
+
+		$cacheItem->set($return);
+		$this->cachePool->save($cacheItem);
 
 		return $return;
 	}
@@ -235,6 +237,7 @@ class NumberHelper
 	 * @param string $y
 	 * @param bool $renderAnimation
 	 * @return string
+	 * @throws \Nette\Application\UI\InvalidLinkException
 	 */
 	public function getAddStepAsHtml(string $x, string $y, bool $renderAnimation = false): string
 	{

@@ -32,7 +32,7 @@ class CalculatorTest extends TestCase
 	 */
 	public function testCalculateString(string $expected, string $query): void
 	{
-		Assert::same($expected, (string)$this->calculator->calculateString(new Query($query, $query)));
+		Assert::same($expected, (string) $this->calculator->calculateString(new Query($query, $query)));
 	}
 
 	/**
@@ -64,7 +64,5 @@ class CalculatorTest extends TestCase
 	}
 }
 
-if (isset($_SERVER['NETTE_TESTER_RUNNER'])) {
-	$container = Bootstrap::boot();
-	(new CalculatorTest($container))->run();
-}
+$container = Bootstrap::boot();
+(new CalculatorTest($container))->run();
