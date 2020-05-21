@@ -66,7 +66,7 @@ final class StepSqrtHelper implements IStepController
 				border-spacing: 2px;
 				border-color: transparent;
 			}
-			
+
 			.sqrt-table-helper tr td {
 				border: transparent !important;
 			}
