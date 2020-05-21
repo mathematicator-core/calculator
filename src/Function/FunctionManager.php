@@ -7,7 +7,7 @@ namespace Mathematicator\MathFunction;
 
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Tokenizer\Token\IToken;
-use Nette\DI\Container;
+use Psr\Container\ContainerInterface;
 
 class FunctionManager
 {
@@ -25,19 +25,19 @@ class FunctionManager
 		],
 	];
 
-	/** @var Container */
-	private $serviceFactory;
+	/** @var ContainerInterface */
+	private $container;
 
 	/** @var IFunction */
 	private $callback;
 
 
 	/**
-	 * @param Container $container
+	 * @param ContainerInterface $container
 	 */
-	public function __construct(Container $container)
+	public function __construct(ContainerInterface $container)
 	{
-		$this->serviceFactory = $container;
+		$this->container = $container;
 	}
 
 
@@ -70,6 +70,6 @@ class FunctionManager
 	 */
 	private function callCallback(string $callback): void
 	{
-		$this->callback = $this->serviceFactory->getByType($callback);
+		$this->callback = $this->container->get($callback);
 	}
 }
