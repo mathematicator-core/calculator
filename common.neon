@@ -33,3 +33,6 @@ services:
 
 	# Algorithm
 	- Mathematicator\NewtonMethod
+
+extensions:
+	psr11: Contributte\Psr11\DI\Psr11ContainerExtension

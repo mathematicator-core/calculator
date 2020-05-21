@@ -7,8 +7,8 @@ namespace Mathematicator\Step;
 
 use Mathematicator\Engine\TerminateException;
 use Mathematicator\Step\Controller\IStepController;
-use Nette\DI\Container;
 use Nette\Utils\ArrayHash;
+use Psr\Container\ContainerInterface;
 
 final class StepEndpoint
 {
@@ -16,8 +16,8 @@ final class StepEndpoint
 	/** @var StepFactory */
 	private $stepFactory;
 
-	/** @var Container */
-	private $serviceFactory;
+	/** @var ContainerInterface */
+	private $container;
 
 	/** @var IStepController */
 	private $callback;
@@ -25,12 +25,12 @@ final class StepEndpoint
 
 	/**
 	 * @param StepFactory $stepFactory
-	 * @param Container $container
+	 * @param ContainerInterface $container
 	 */
-	public function __construct(StepFactory $stepFactory, Container $container)
+	public function __construct(StepFactory $stepFactory, ContainerInterface $container)
 	{
 		$this->stepFactory = $stepFactory;
-		$this->serviceFactory = $container;
+		$this->container = $container;
 	}
 
 
@@ -41,7 +41,7 @@ final class StepEndpoint
 	 */
 	public function getStep(string $type, string $data): array
 	{
-		$this->callback = $this->serviceFactory->getByType($type);
+		$this->callback = $this->container->get($type);
 
 		try {
 			$data = json_decode($data);
