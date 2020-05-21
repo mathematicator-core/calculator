@@ -35,4 +35,5 @@ services:
 	- Mathematicator\NewtonMethod
 
 extensions:
+	psr6: Contributte\Psr6\DI\Psr6CachingExtension
 	psr11: Contributte\Psr11\DI\Psr11ContainerExtension

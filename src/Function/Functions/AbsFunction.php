@@ -21,7 +21,7 @@ class AbsFunction implements IFunction
 		$result = new FunctionResult();
 
 		$abs = preg_replace('/^-/', '', $token->getNumber()->getInput());
-		$token->getNumber()->setValue($abs);
+		$token->getNumber()->setValue((string) $abs);
 
 		$result->setOutput($token);
 

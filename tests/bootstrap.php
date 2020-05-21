@@ -32,8 +32,6 @@ class Bootstrap
 			->addConfig(__DIR__ . '/../common.neon')
 			->addConfig(__DIR__ . '/config.neon');
 
-		$container = $configurator->createContainer();
-
-		return $container;
+		return $configurator->createContainer();
 	}
 }
