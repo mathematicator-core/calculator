@@ -2,6 +2,7 @@
 	"name": "mathematicator-core/calculator",
 	"description": "Advance PHP math calculator with complex operations.",
 	"homepage": "https://github.com/mathematicator-core/calculator",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Jan Barášek",
@@ -9,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.1",
+		"php": ">=7.2",
 		"nette/application": "^3.0",
 		"nette/utils": "^3.0",
 		"nette/caching": "^3.0",
@@ -31,7 +32,7 @@
 	},
 	"scripts": {
 		"phpstan": [
-			"vendor/bin/phpstan analyse src -c phpstan.neon --level 6 --no-progress"
+			"vendor/bin/phpstan analyse src -c phpstan.neon --level 8 --no-progress"
 		]
 	},
 	"minimum-stability": "stable"
