@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Mathematicator\Calculator\Tests;
 
+
 require __DIR__ . '/../vendor/autoload.php';
 
-use App\FrontModule\Presenters\SearchPresenter;
 use FrontModule\LinkGeneratorMock;
 use Nette\Configurator;
 use Nette\DI\Container;
