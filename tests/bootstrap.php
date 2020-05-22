@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Mathematicator\Calculator\Tests;
 
+// TODO: require __DIR__ . '/../vendor/autoload.php';
 
-require __DIR__ . '/../vendor/autoload.php';
-
-use FrontModule\LinkGeneratorMock;
 use Nette\Configurator;
 use Nette\DI\Container;
 use Tester\Environment;
@@ -24,8 +22,8 @@ class Bootstrap
 		$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 		$configurator->createRobotLoader()
-			->addDirectory(__DIR__ . "/../src")
-			->addDirectory(__DIR__ . "/Mocks")
+			->addDirectory(__DIR__ . '/../src')
+			->addDirectory(__DIR__ . '/Mocks')
 			->register();
 
 		$configurator
