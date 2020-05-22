@@ -13,19 +13,6 @@ use Nette\Utils\Validators;
 final class StepPowController implements IStepController
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
-
-	/**
-	 * @param StepFactory $stepFactory
-	 */
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
-
-
 	/**
 	 * @param ArrayHash $data
 	 * @return Step[]
@@ -44,7 +31,7 @@ final class StepPowController implements IStepController
 
 		$steps = [];
 
-		$step = $this->stepFactory->create(
+		$step = StepFactory::addStep(
 			'Umocňování čísel',
 			'{' . $data['x'] . '}^{' . $data['y'] . '}\ =\ ' . $data['result'],
 			'Řešení je jen přibližné.'
@@ -64,32 +51,32 @@ final class StepPowController implements IStepController
 	{
 		$steps = [];
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Uvažujme');
 		$step->setDescription('\(x^0=a\) pro \(x, a \in \mathbb{R}_{-\{0\}}\)');
 		$steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setDescription('Nula je zajímavé číslo v tom, že jako pro jediné platí:');
 		$step->setLatex('0=-0');
 		$steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setDescription('Díky tomuto faktu je možné tvrdit že:');
 		$step->setLatex('x^0=x^{-0}');
 		$steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Úprava pravé strany');
 		$step->setDescription('\(x^0=\frac{1}{x^0}\) a následně \((x^0)^2=1\)');
 		$steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Použití pravidel o umocňování');
 		$step->setLatex('x^{0\cdot2}=1 \rightarrow x^{0}=1');
 		$steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Řešení');
 		$step->setDescription(
 			'Pokud tedy umocňujeme jakékoliv číslo různé od nuly na nultou, výsledkem bude vždy 1.'
@@ -121,7 +108,7 @@ final class StepPowController implements IStepController
 			$numbers .= ($numbers ? '\ \cdot\ ' : '') . $x;
 		}
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Řešení');
 		$step->setDescription('Umocňování je operace, která vyjadřuje opakované násobení.');
 		$step->setLatex('{' . $x . '}^{' . $y . '}\ =\ ' . $numbers . '\ =\ ' . bcpow($x, $y));

@@ -13,19 +13,6 @@ use Nette\Utils\Validators;
 final class StepMultiplicationController implements IStepController
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
-
-	/**
-	 * @param StepFactory $stepFactory
-	 */
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
-
-
 	/**
 	 * @param ArrayHash $data
 	 * @return Step[]
@@ -37,7 +24,7 @@ final class StepMultiplicationController implements IStepController
 		$x = $this->numberToFraction($data->x);
 		$y = $this->numberToFraction($data->y);
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Násobení čísel');
 		$step->setDescription(
 			'Tuto sekci teprve plánujeme.'

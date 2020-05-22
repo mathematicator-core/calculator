@@ -17,18 +17,13 @@ class MultiplicationNumber
 	/** @var NumberFactory */
 	private $numberFactory;
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 
 	/**
 	 * @param NumberFactory $numberFactory
-	 * @param StepFactory $stepFactory
 	 */
-	public function __construct(NumberFactory $numberFactory, StepFactory $stepFactory)
+	public function __construct(NumberFactory $numberFactory)
 	{
 		$this->numberFactory = $numberFactory;
-		$this->stepFactory = $stepFactory;
 	}
 
 
@@ -60,7 +55,7 @@ class MultiplicationNumber
 				'Násobení čísel ' . $left->getNumber()->getHumanString() . ' * ' . $right->getNumber()->getHumanString()
 			)
 			->setAjaxEndpoint(
-				$this->stepFactory->getAjaxEndpoint(StepMultiplicationController::class, [
+				StepFactory::getAjaxEndpoint(StepMultiplicationController::class, [
 					'x' => $left->getNumber()->getHumanString(),
 					'y' => $right->getNumber()->getHumanString(),
 				])

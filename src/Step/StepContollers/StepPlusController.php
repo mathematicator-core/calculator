@@ -14,9 +14,6 @@ use Nette\Utils\Validators;
 final class StepPlusController implements IStepController
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 	/** @var NumberHelper */
 	private $number;
 
@@ -25,12 +22,10 @@ final class StepPlusController implements IStepController
 
 
 	/**
-	 * @param StepFactory $stepFactory
 	 * @param NumberHelper $number
 	 */
-	public function __construct(StepFactory $stepFactory, NumberHelper $number)
+	public function __construct(NumberHelper $number)
 	{
-		$this->stepFactory = $stepFactory;
 		$this->number = $number;
 	}
 
@@ -47,7 +42,7 @@ final class StepPlusController implements IStepController
 		$y = $this->numberToFraction($data->y);
 
 		if ($x[1] === '1' && $y[1] === '1') {
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setTitle('Sčítání čísel');
 			$step->setDescription(
 				$this->number->getAddStepAsHtml($x[0], $y[0])
@@ -55,13 +50,13 @@ final class StepPlusController implements IStepController
 
 			$steps[] = $step;
 		} else {
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setTitle('Sčítání čísel');
 			$step->setLatex($this->numberToLatex($x) . ' + ' . $this->numberToLatex($y));
 			$steps[] = $step;
 
 			$sp = bcmul($x[1], $y[1], $this->tolerance);
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setTitle('Nalezení společného jmenovatele');
 			$step->setLatex($x[1] . '\ \cdot\ ' . $y[1] . ' = ' . $sp);
 			$steps[] = $step;
@@ -72,7 +67,7 @@ final class StepPlusController implements IStepController
 				$this->tolerance
 			);
 
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setTitle('Převod na jeden zlomek');
 			$step->setLatex(
 				'\frac{' . $x[0] . '}{' . $x[1] . '}' . ' + \frac{' . $y[0] . '}{' . $y[1] . '}'

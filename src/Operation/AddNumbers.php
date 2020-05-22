@@ -17,18 +17,13 @@ class AddNumbers
 	/** @var NumberFactory */
 	private $numberFactory;
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 
 	/**
 	 * @param NumberFactory $numberFactory
-	 * @param StepFactory $stepFactory
 	 */
-	public function __construct(NumberFactory $numberFactory, StepFactory $stepFactory)
+	public function __construct(NumberFactory $numberFactory)
 	{
 		$this->numberFactory = $numberFactory;
-		$this->stepFactory = $stepFactory;
 	}
 
 
@@ -71,7 +66,7 @@ class AddNumbers
 				. (strpos($_right, '-') === 0 ? '(' . $_right . ')' : $_right)
 			)
 			->setAjaxEndpoint(
-				$this->stepFactory->getAjaxEndpoint(StepPlusController::class, [
+				StepFactory::getAjaxEndpoint(StepPlusController::class, [
 					'x' => $left->getNumber()->getHumanString(),
 					'y' => $right->getNumber()->getHumanString(),
 				])

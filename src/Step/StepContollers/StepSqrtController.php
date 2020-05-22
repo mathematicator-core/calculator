@@ -12,20 +12,8 @@ use Nette\Utils\ArrayHash;
 final class StepSqrtController implements IStepController
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 	/** @var Step[] */
 	private $steps = [];
-
-
-	/**
-	 * @param StepFactory $stepFactory
-	 */
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
 
 
 	/**
@@ -43,7 +31,7 @@ final class StepSqrtController implements IStepController
 			if ($sqrtInt <= 100) {
 				$this->solveAsInteger((int) $n, $sqrtInt);
 			} else {
-				$this->steps[] = $this->stepFactory->create(
+				$this->steps[] = StepFactory::addStep(
 					'Řešení',
 					null,
 					'<p>Využijeme vztahu:</p>'
@@ -71,7 +59,7 @@ final class StepSqrtController implements IStepController
 				. '</tr>';
 		}
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Tabulka základních mocnin a odmocnin');
 		$step->setDescription(
 			'<p>Řešení vyhledáme v tabulce základních mocnin a odmocnin, kterou bychom si měli pamatovat.</p>'
@@ -89,14 +77,14 @@ final class StepSqrtController implements IStepController
 	{
 		$cells = $this->makeCells((string) $n);
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setTitle('Rozdělení do buněk');
 		$step->setDescription('Číslo musíme rozdělit po dvou směrem od desetinné čárky do buněk.');
 		$step->setLatex(implode('\ |\ ', $cells));
 
 		$this->steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setDescription('Druhá mocnina jakého přirozeného čísla nebo nula se vejde do \(' . $cells[0] . '\)?');
 		$step->setAjaxEndpoint(
 			$this->stepFactory->getAjaxEndpoint(StepSqrtHelper::class, [
@@ -107,7 +95,7 @@ final class StepSqrtController implements IStepController
 		$step->setLatex((string) $squareRooted = floor(sqrt((float) $cells[0])));
 		$this->steps[] = $step;
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setDescription('Druhou mocninu odečteme od čísla z první buňky.');
 		$step->setLatex($cells[0] . ' - ' . ($squareRooted ** 2) . ' = ' . ($cells[0] - ($squareRooted ** 2)));
 

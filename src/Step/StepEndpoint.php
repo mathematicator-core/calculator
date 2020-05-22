@@ -13,9 +13,6 @@ use Psr\Container\ContainerInterface;
 final class StepEndpoint
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 	/** @var ContainerInterface */
 	private $container;
 
@@ -24,12 +21,10 @@ final class StepEndpoint
 
 
 	/**
-	 * @param StepFactory $stepFactory
 	 * @param ContainerInterface $container
 	 */
-	public function __construct(StepFactory $stepFactory, ContainerInterface $container)
+	public function __construct(ContainerInterface $container)
 	{
-		$this->stepFactory = $stepFactory;
 		$this->container = $container;
 	}
 
@@ -51,9 +46,7 @@ final class StepEndpoint
 			}
 			$steps = $this->callback->actionDefault($arrayHash);
 		} catch (TerminateException $e) {
-			$step = $this->stepFactory->create();
-			$step->setTitle('Nepodařilo se najít postup pro [' . $type . ']');
-			$steps[] = $step;
+			$steps[] = StepFactory::addStep('Nepodařilo se najít postup pro [' . $type . ']');
 		}
 
 		$return = [];

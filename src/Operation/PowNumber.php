@@ -19,14 +19,10 @@ class PowNumber
 	/** @var NumberFactory */
 	private $numberFactory;
 
-	/** @var StepFactory */
-	private $stepFactory;
 
-
-	public function __construct(NumberFactory $numberFactory, StepFactory $stepFactory)
+	public function __construct(NumberFactory $numberFactory)
 	{
 		$this->numberFactory = $numberFactory;
-		$this->stepFactory = $stepFactory;
 	}
 
 
@@ -81,7 +77,7 @@ class PowNumber
 			->setTitle('Umocňování čísel ' . $left->getNumber()->getHumanString() . ' ^ ' . $right->getNumber()->getHumanString())
 			->setDescription($this->renderDescription($left->getNumber(), $right->getNumber(), $newNumber->getNumber()))
 			->setAjaxEndpoint(
-				$this->stepFactory->getAjaxEndpoint(StepPowController::class, [
+				StepFactory::getAjaxEndpoint(StepPowController::class, [
 					'x' => $left->getNumber()->getHumanString(),
 					'y' => $right->getNumber()->getHumanString(),
 					'result' => $newNumber->getNumber()->getString(),

@@ -6,6 +6,7 @@ namespace Mathematicator\MathFunction;
 
 
 use Mathematicator\Engine\MathErrorException;
+use Mathematicator\Numbers\NumberException;
 use Mathematicator\Step\Controller\StepSqrtController;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\IToken;
@@ -14,23 +15,10 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class SqrtFunction implements IFunction
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
-
-	/**
-	 * @param StepFactory $stepFactory
-	 */
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
-
-
 	/**
 	 * @param NumberToken|IToken $token
 	 * @return FunctionResult
-	 * @throws MathErrorException
+	 * @throws MathErrorException|NumberException
 	 */
 	public function process(IToken $token): FunctionResult
 	{
@@ -43,13 +31,12 @@ class SqrtFunction implements IFunction
 		}
 
 		$sqrt = bcsqrt($number->getFloatString(), 100);
-
-		$token->getNumber()->setValue((string) $sqrt);
+		$token->getNumber()->setValue($sqrt);
 		$token->setToken($sqrt);
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setAjaxEndpoint(
-			$this->stepFactory->getAjaxEndpoint(StepSqrtController::class, [
+			StepFactory::getAjaxEndpoint(StepSqrtController::class, [
 				'n' => $number->getFloat(),
 			])
 		);

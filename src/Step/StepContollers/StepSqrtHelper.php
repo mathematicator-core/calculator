@@ -13,17 +13,8 @@ use Nette\Utils\Html;
 final class StepSqrtHelper implements IStepController
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
 	/** @var Step[] */
 	private $steps = [];
-
-
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
 
 
 	/**
@@ -33,7 +24,7 @@ final class StepSqrtHelper implements IStepController
 	public function actionDefault(ArrayHash $data): array
 	{
 		if ($data->offsetExists('numberSet')) {
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setDescription('N - Přirozená čísla: 1, 2, 3, 100, 105, 1006, ...');
 			$this->steps[] = $step;
 		}
@@ -55,7 +46,7 @@ final class StepSqrtHelper implements IStepController
 			[$fittingNumber + 1, ($fittingNumber + 1) ** 2],
 		];
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 
 		$outerDiv = Html::el('div');
 		$outerDiv->create('style')

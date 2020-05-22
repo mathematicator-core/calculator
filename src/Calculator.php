@@ -19,10 +19,6 @@ use Nette\Tokenizer\Exception;
 
 class Calculator
 {
-
-	/** @var StepFactory */
-	private $stepFactory;
-
 	/** @var Tokenizer */
 	private $tokenizer;
 
@@ -34,14 +30,12 @@ class Calculator
 
 
 	/**
-	 * @param StepFactory $stepFactory
 	 * @param Tokenizer $tokenizer
 	 * @param TokensCalculator $tokensCalculator
 	 * @param QueryNormalizer $queryNormalizer
 	 */
-	public function __construct(StepFactory $stepFactory, Tokenizer $tokenizer, TokensCalculator $tokensCalculator, QueryNormalizer $queryNormalizer)
+	public function __construct(Tokenizer $tokenizer, TokensCalculator $tokensCalculator, QueryNormalizer $queryNormalizer)
 	{
-		$this->stepFactory = $stepFactory;
 		$this->tokenizer = $tokenizer;
 		$this->tokensCalculator = $tokensCalculator;
 		$this->queryNormalizer = $queryNormalizer;
@@ -69,7 +63,7 @@ class Calculator
 		$iterator = 0;
 		$steps = [];
 
-		$interpretStep = $this->stepFactory->create();
+		$interpretStep = StepFactory::addStep();
 		$interpretStep->setTitle('Zadání úlohy');
 		$interpretStep->setLatex($this->tokenizer->tokensToLatex($tokens));
 
@@ -88,7 +82,7 @@ class Calculator
 
 			$stepLatexCurrent = $this->tokenizer->tokensToLatex($tokens);
 
-			$step = $this->stepFactory->create();
+			$step = StepFactory::addStep();
 			$step->setLatex($stepLatexCurrent);
 			$step->setTitle($process->getStepTitle());
 			$step->setDescription($process->getStepDescription());

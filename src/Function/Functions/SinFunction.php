@@ -15,18 +15,6 @@ use Mathematicator\Tokenizer\Token\PiToken;
 class SinFunction implements IFunction
 {
 
-	/** @var StepFactory */
-	private $stepFactory;
-
-
-	/**
-	 * @param StepFactory $stepFactory
-	 */
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
-
 
 	/**
 	 * @param NumberToken|IToken $token
@@ -48,9 +36,9 @@ class SinFunction implements IFunction
 		$token->getNumber()->setValue((string) $sin);
 		$token->setToken((string) $sin);
 
-		$step = $this->stepFactory->create();
+		$step = StepFactory::addStep();
 		$step->setAjaxEndpoint(
-			$this->stepFactory->getAjaxEndpoint(StepSinController::class, [
+			StepFactory::getAjaxEndpoint(StepSinController::class, [
 				'x' => $x,
 			])
 		);
