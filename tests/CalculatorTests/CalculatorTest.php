@@ -11,19 +11,20 @@ use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../Bootstrap.php';
 
 class CalculatorTest extends TestCase
 {
-	/**
-	 * @var Calculator
-	 */
+
+	/** @var Calculator */
 	private $calculator;
+
 
 	public function __construct(Container $container)
 	{
 		$this->calculator = $container->getService('calculator');
 	}
+
 
 	/**
 	 * @dataprovider getCalculateStringCases
@@ -34,6 +35,7 @@ class CalculatorTest extends TestCase
 	{
 		Assert::same($expected, (string) $this->calculator->calculateString(new Query($query, $query)));
 	}
+
 
 	/**
 	 * @return string[]
@@ -64,5 +66,4 @@ class CalculatorTest extends TestCase
 	}
 }
 
-$container = Bootstrap::boot();
-(new CalculatorTest($container))->run();
+(new CalculatorTest(Bootstrap::boot()))->run();

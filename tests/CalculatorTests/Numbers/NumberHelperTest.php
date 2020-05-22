@@ -11,19 +11,19 @@ use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../../bootstrap.php';
+require __DIR__ . '/../../Bootstrap.php';
 
 class NumberHelperTest extends TestCase
 {
-	/**
-	 * @var NumberHelper
-	 */
+	/** @var NumberHelper */
 	private $numberHelper;
+
 
 	public function __construct(Container $container)
 	{
 		$this->numberHelper = $container->getByType(NumberHelper::class);
 	}
+
 
 	/**
 	 * @dataprovider getPfactorCases
@@ -34,6 +34,7 @@ class NumberHelperTest extends TestCase
 	{
 		Assert::same($expected, $this->numberHelper->pfactor($query));
 	}
+
 
 	/**
 	 * @return string[]
@@ -48,5 +49,4 @@ class NumberHelperTest extends TestCase
 	}
 }
 
-$container = Bootstrap::boot();
-(new NumberHelperTest($container))->run();
+(new NumberHelperTest(Bootstrap::boot()))->run();
