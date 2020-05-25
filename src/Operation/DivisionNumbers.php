@@ -36,8 +36,10 @@ final class DivisionNumbers
 		$rightFraction = $right->getNumber()->getFraction();
 
 		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
-			$bcDiv = preg_replace('/\.0+$/', '',
-				bcdiv($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals())
+			$bcDiv = preg_replace(
+				'/\.0+$/',
+				'',
+				(string) bcdiv($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals())
 			);
 			if (Validators::isNumericInt($bcDiv)) {
 				$result = $bcDiv;
@@ -45,7 +47,11 @@ final class DivisionNumbers
 				$result = $left->getNumber()->getInteger() . '/' . $right->getNumber()->getInteger();
 			}
 		} else {
-			$result = bcmul($leftFraction[0], $rightFraction[1], $query->getDecimals()) . '/' . bcmul($leftFraction[1], $rightFraction[0], $query->getDecimals());
+			$result = bcmul(
+					(string) $leftFraction[0],
+					(string) $rightFraction[1],
+					$query->getDecimals()) . '/' . bcmul((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()
+				);
 		}
 
 		$newNumber = new NumberToken($this->numberFactory->create($result));

@@ -78,7 +78,7 @@ final class Factorial
 			$result = bcmul((string) $result, (string) (int) $num);
 		}
 
-		return $result;
+		return (string) $result;
 	}
 
 

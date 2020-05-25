@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Mathematicator;
 
 
-use Contributte\Psr6\CachePool;
 use Contributte\Psr6\ICachePoolFactory;
 use Nette\Application\LinkGenerator;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
+use Psr\Cache\CacheItemPoolInterface;
 
 class NumberHelper
 {
@@ -40,7 +40,7 @@ class NumberHelper
 	/** @var LinkGenerator */
 	private $linkGenerator;
 
-	/** @var CachePool */
+	/** @var CacheItemPoolInterface */
 	private $cachePool;
 
 
@@ -185,9 +185,9 @@ class NumberHelper
 
 		while ($i <= $s) {
 			if (!bcmod($n, (string) $i)) {
-				$a[] = $i;
+				$a[] = (string) $i;
 				if ($i !== $s) {
-					$a[] = bcdiv($n, (string) $i);
+					$a[] = (string) bcdiv($n, (string) $i);
 				}
 			}
 			++$i;
@@ -245,7 +245,7 @@ class NumberHelper
 		$animation = '';
 
 		$numberFormat = static function (string $number): string {
-			return (string) preg_replace('/\.0*$/', '', preg_replace('/\.(\d*?)0+$/', '.$1', $number));
+			return (string) preg_replace('/\.0*$/', '', (string) preg_replace('/\.(\d*?)0+$/', '.$1', $number));
 		};
 
 		$result = $numberFormat(bcadd($x, $y, 10));

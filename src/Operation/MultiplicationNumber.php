@@ -41,7 +41,7 @@ class MultiplicationNumber
 			$leftFraction = $left->getNumber()->getFraction();
 			$rightFraction = $right->getNumber()->getFraction();
 
-			$result = bcmul($leftFraction[0], $rightFraction[0], $query->getDecimals()) . '/' . bcmul($leftFraction[1], $rightFraction[1], $query->getDecimals());
+			$result = bcmul((string) $leftFraction[0], (string) $rightFraction[0], $query->getDecimals()) . '/' . bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
 		}
 
 		$newNumber = new NumberToken($this->numberFactory->create($result));

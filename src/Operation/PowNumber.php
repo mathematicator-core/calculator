@@ -47,7 +47,7 @@ class PowNumber
 
 			$result = bcpow($left->getToken(), $right->getToken(), $query->getDecimals());
 		} elseif ($rightInteger === true) {
-			$result = bcpow($leftFraction[0], $right->getToken(), $query->getDecimals()) . '/' . bcpow($leftFraction[1], $right->getToken(), $query->getDecimals());
+			$result = bcpow((string) $leftFraction[0], $right->getToken(), $query->getDecimals()) . '/' . bcpow((string) $leftFraction[1], $right->getToken(), $query->getDecimals());
 		} else {
 			if ($right->getNumber()->isNegative()) {
 				$rightFraction = [
@@ -57,13 +57,13 @@ class PowNumber
 			}
 
 			$result = pow(
-					(float) bcpow($leftFraction[0], $rightFraction[0], $query->getDecimals()),
-					(float) bcdiv('1', $rightFraction[1], $query->getDecimals())
+					(float) bcpow((string) $leftFraction[0], (string) $rightFraction[0], $query->getDecimals()),
+					(float) bcdiv('1', (string) $rightFraction[1], $query->getDecimals())
 				)
 				. '/'
 				. pow(
-					(float) bcpow($leftFraction[1], $rightFraction[0], $query->getDecimals()),
-					(float) bcdiv('1', $rightFraction[1], $query->getDecimals())
+					(float) bcpow((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()),
+					(float) bcdiv('1', (string) $rightFraction[1], $query->getDecimals())
 				);
 		}
 
