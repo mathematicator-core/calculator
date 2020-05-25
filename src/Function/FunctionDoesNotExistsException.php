@@ -6,6 +6,7 @@ namespace Mathematicator\MathFunction;
 
 
 use Mathematicator\Engine\MathematicatorException;
+use Throwable;
 
 final class FunctionDoesNotExistsException extends MathematicatorException
 {
@@ -17,10 +18,10 @@ final class FunctionDoesNotExistsException extends MathematicatorException
 	/**
 	 * @param string $message
 	 * @param int $code
-	 * @param \Throwable|null $previous
+	 * @param Throwable|null $previous
 	 * @param string $function
 	 */
-	public function __construct(string $message = '', int $code = 0, \Throwable $previous = null, string $function = '')
+	public function __construct(string $message = '', int $code = 0, Throwable $previous = null, string $function = '')
 	{
 		parent::__construct($message, $code, $previous);
 		$this->function = $function;

@@ -7,9 +7,11 @@ namespace Mathematicator;
 
 use Contributte\Psr6\ICachePoolFactory;
 use Nette\Application\LinkGenerator;
+use Nette\Application\UI\InvalidLinkException;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 use Psr\Cache\CacheItemPoolInterface;
+use function strlen;
 
 class NumberHelper
 {
@@ -101,7 +103,7 @@ class NumberHelper
 		$return = 0;
 		for ($i = 0; $i < $romanLength; $i++) {
 			$x = self::$romanNumber[$roman[$i]];
-			if ($i + 1 < \strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
+			if ($i + 1 < strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
 				$return += $nextToken - $x;
 				$i++;
 			} else {
@@ -237,7 +239,7 @@ class NumberHelper
 	 * @param string $y
 	 * @param bool $renderAnimation
 	 * @return string
-	 * @throws \Nette\Application\UI\InvalidLinkException
+	 * @throws InvalidLinkException
 	 */
 	public function getAddStepAsHtml(string $x, string $y, bool $renderAnimation = false): string
 	{
@@ -252,9 +254,9 @@ class NumberHelper
 		$x = $numberFormat($x);
 		$y = $numberFormat($y);
 
-		$lenX = \strlen($x);
-		$lenY = \strlen($y) + 2;
-		$lenResult = \strlen($result);
+		$lenX = strlen($x);
+		$lenY = strlen($y) + 2;
+		$lenResult = strlen($result);
 
 		$return .= $x . '<br>';
 		$return .= '+&nbsp;' . $y . '<br>';

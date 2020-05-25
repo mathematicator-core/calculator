@@ -16,6 +16,7 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
 use Nette\Tokenizer\Exception;
+use function count;
 
 class Calculator
 {
@@ -53,7 +54,7 @@ class Calculator
 	{
 		$result = new CalculatorResult($tokens);
 
-		if (\count($tokens) === 1 && !($tokens[0] instanceof FunctionToken || $tokens[0] instanceof FactorialToken)) {
+		if (count($tokens) === 1 && !($tokens[0] instanceof FunctionToken || $tokens[0] instanceof FactorialToken)) {
 			$result->setResultTokens($tokens);
 			$result->setSteps([]);
 
