@@ -8,6 +8,9 @@ namespace Mathematicator\Step\Controller;
 use Mathematicator\Engine\Step;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
+use function count;
+use function strlen;
+use function substr;
 
 final class StepSqrtController implements IStepController
 {
@@ -120,7 +123,7 @@ final class StepSqrtController implements IStepController
 		}
 
 		$cells = [];
-		if ((($beforeLength = \strlen($beforeDecPoint)) % 2) !== 0) {
+		if ((($beforeLength = strlen($beforeDecPoint)) % 2) !== 0) {
 			$cells[] = $beforeDecPoint[0];
 			$offset = 1;
 		} else {
@@ -128,17 +131,17 @@ final class StepSqrtController implements IStepController
 		}
 
 		for ($i = $offset; $i < $beforeLength; $i += 2) {
-			$cells[] = \substr($beforeDecPoint, $i, 2);
+			$cells[] = substr($beforeDecPoint, $i, 2);
 		}
 
 		if ($afterDecPoint !== null) {
-			$afterLength = \strlen($afterDecPoint);
+			$afterLength = strlen($afterDecPoint);
 			for ($i = 0; $i < $afterLength; $i += 2) {
-				$cells[] = \substr($afterDecPoint, $i, 2);
+				$cells[] = substr($afterDecPoint, $i, 2);
 			}
 
-			if (\strlen(end($cells)) === 1) {
-				$cells[\count($cells) - 1] .= '0';
+			if (strlen(end($cells)) === 1) {
+				$cells[count($cells) - 1] .= '0';
 			}
 		}
 

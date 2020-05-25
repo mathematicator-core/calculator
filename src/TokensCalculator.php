@@ -22,6 +22,7 @@ use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
+use function count;
 
 final class TokensCalculator
 {
@@ -111,7 +112,7 @@ final class TokensCalculator
 					$resultEntity->setStepDescription('Přepsání výrazu');
 				}
 			} elseif ($token instanceof SubToken) {
-				if (\count($token->getTokens()) === 1) {
+				if (count($token->getTokens()) === 1) {
 					if ($token instanceof FunctionToken) {
 						$inputToken = $token->getTokens()[0];
 						$resultEntity->setStepTitle(
@@ -142,7 +143,7 @@ final class TokensCalculator
 						->setAjaxEndpoint($_result->getAjaxEndpoint());
 					$token->setObjectTokens(
 						(static function (array $results) {
-							if (\count($results) === 1) {
+							if (count($results) === 1) {
 								return ($results[0] ?? null) === null ? null : [$results[0]];
 							}
 
@@ -158,7 +159,7 @@ final class TokensCalculator
 				$resultEntity->setStepTitle($newEntity->getTitle())
 					->setStepDescription($newEntity->getDescription())
 					->setAjaxEndpoint($newEntity->getAjaxEndpoint());
-			} elseif ($token instanceof OperatorToken && \count($result) === 0 && $iterator->getNextToken() instanceof NumberToken) {
+			} elseif ($token instanceof OperatorToken && count($result) === 0 && $iterator->getNextToken() instanceof NumberToken) {
 				$result[] = (new NumberToken($this->numberFactory->create('')))
 					->setPosition($token->getPosition())
 					->setToken('0')

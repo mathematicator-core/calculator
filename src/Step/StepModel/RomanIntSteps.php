@@ -7,6 +7,7 @@ namespace Mathematicator\Step;
 
 use Mathematicator\Engine\Step;
 use Nette\Utils\Strings;
+use function strlen;
 
 final class RomanIntSteps
 {
@@ -92,7 +93,7 @@ final class RomanIntSteps
 		for ($i = 0; $i < $romanLength; $i++) {
 			$step = StepFactory::addStep();
 			$x = self::$romanNumber[$roman[$i]];
-			if ($i + 1 < \strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
+			if ($i + 1 < strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
 				$return += $nextToken - $x;
 				$step->setTitle(
 					$this->getTitleBasic($lastPosition, $i + 1, $roman)
