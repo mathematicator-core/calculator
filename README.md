@@ -35,7 +35,7 @@ echo $calculator->calculateString('(5 + 3) * (2 / (7 + 3))'); // \frac{8}{5}
 
 Method `calculateString()` returns entity `CalculatorResult` that implements `__toString()` method.
 
-Advance use is by array of tokens created by `Tokenizer`:
+Advance use is by an array of tokens created by `Tokenizer`:
 
 ```php
 $tokenizer = new Tokenizer(/* some dependencies */);
@@ -56,9 +56,14 @@ Contribution
 
 All new contributions should have its unit tests in `/tests` directory.
 
-Before you send a PR, please, check that all tests pass.
+Before you send a PR, please, check all tests pass.
 
 This package uses [Nette Tester](https://tester.nette.org/). You can run tests via command:
 ```bash
-vendor/bin/tester -c tests/php.ini tests
+composer test
+````
+
+Before PR, please run complete code check via command:
+```bash
+composer pre-commit
 ````
