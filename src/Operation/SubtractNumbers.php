@@ -37,12 +37,12 @@ class SubtractNumbers
 			$rightFraction = $right->getNumber()->getFraction();
 
 			$result = bcsub(
-					bcmul($rightFraction[1], $leftFraction[0], $query->getDecimals()),
-					bcmul($leftFraction[1], $rightFraction[0], $query->getDecimals()),
+					bcmul((string) $rightFraction[1], (string) $leftFraction[0], $query->getDecimals()),
+					bcmul((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()),
 					$query->getDecimals()
 				)
 				. '/'
-				. bcmul($leftFraction[1], $rightFraction[1], $query->getDecimals());
+				. bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
 		}
 
 		$newNumber = new NumberToken($this->numberFactory->create($result));
