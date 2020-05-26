@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Mathematicator\Step\Controller;
 
 
+use function count;
 use Mathematicator\Engine\Step;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
-use function count;
 use function strlen;
 use function substr;
 
@@ -17,6 +17,15 @@ final class StepSqrtController implements IStepController
 
 	/** @var Step[] */
 	private $steps = [];
+
+	/** @var StepFactory */
+	private $stepFactory;
+
+
+	public function __construct(StepFactory $stepFactory)
+	{
+		$this->stepFactory = $stepFactory;
+	}
 
 
 	/**
@@ -135,12 +144,12 @@ final class StepSqrtController implements IStepController
 		}
 
 		if ($afterDecPoint !== null) {
-			$afterLength = strlen($afterDecPoint);
+			$afterLength = strlen((string) $afterDecPoint);
 			for ($i = 0; $i < $afterLength; $i += 2) {
 				$cells[] = substr($afterDecPoint, $i, 2);
 			}
 
-			if (strlen(end($cells)) === 1) {
+			if (strlen((string) end($cells)) === 1) {
 				$cells[count($cells) - 1] .= '0';
 			}
 		}

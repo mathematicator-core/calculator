@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator;
 
 
+use function count;
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\Query;
 use Mathematicator\Engine\QueryNormalizer;
@@ -16,7 +17,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
 use Nette\Tokenizer\Exception;
-use function count;
 
 class Calculator
 {

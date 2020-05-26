@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mathematicator\Calculator\Tests;
 
-// TODO: require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Nette\Configurator;
 use Nette\DI\Container;
@@ -23,7 +23,6 @@ class Bootstrap
 
 		$configurator->createRobotLoader()
 			->addDirectory(__DIR__ . '/../src')
-			->addDirectory(__DIR__ . '/Mocks')
 			->register();
 
 		$configurator

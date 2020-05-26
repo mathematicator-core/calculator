@@ -140,12 +140,12 @@ final class RomanIntSteps
 
 
 	/**
-	 * @param string $int (as integer)
+	 * @param string $input (as integer)
 	 * @return Step[]
 	 */
-	public function getIntToRomanSteps(string $int): array
+	public function getIntToRomanSteps(string $input): array
 	{
-		$input = $int;
+		$int = (int) $input;
 
 		$steps = [];
 
