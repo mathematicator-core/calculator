@@ -20,9 +20,9 @@
 		"brick/math": "^0.8.15",
 		"contributte/psr6-caching": "^0.2@dev",
 		"contributte/psr11-container-interface": "^0.4.1",
-		"mathematicator-core/engine": "^2.0",
-		"mathematicator-core/numbers": "^2.0",
-		"mathematicator-core/tokenizer": "^2.0",
+		"mathematicator-core/engine": "^2.0@dev",
+		"mathematicator-core/numbers": "^2.0@dev",
+		"mathematicator-core/tokenizer": "^2.0@dev",
 		"nette/application": "^3.0",
 		"nette/utils": "^3.0"
 	},
@@ -72,8 +72,7 @@
 		"test": "vendor/bin/tester -s -c tests/php.ini -p php tests --coverage coverage.xml --coverage-src src",
 		"cghooks": "vendor/bin/cghooks"
 	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
+	"minimum-stability": "stable",
 	"config": {
 		"sort-packages": true
 	},
