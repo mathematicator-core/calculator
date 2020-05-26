@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator;
 
 
+use function count;
 use Mathematicator\Calculator\Operation\BaseOperation;
+use Mathematicator\Calculator\Operation\NumberOperationResult;
 use Mathematicator\Engine\MathematicatorException;
 use Mathematicator\Engine\Query;
 use Mathematicator\Engine\UndefinedOperationException;
@@ -22,7 +24,6 @@ use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Token\VariableToken;
 use Mathematicator\Tokenizer\TokenIterator;
 use Mathematicator\Tokenizer\Tokens;
-use function count;
 
 final class TokensCalculator
 {
@@ -99,13 +100,14 @@ final class TokensCalculator
 						$iterator->next($newEntity->isAutoPower() ? 2 : 4);
 						$resultEntity->setStepTitle('Převod na mnohočlen')
 							->setStepDescription('Výraz: \(' . $newEntity->getToken() . '\)');
-					} else {
+					} elseif ($newEntity instanceof NumberOperationResult) {
 						$result[] = $newEntity->getNumber();
 						$resultEntity->setStepTitle($newEntity->getTitle())
 							->setStepDescription($newEntity->getDescription())
 							->setAjaxEndpoint($newEntity->getAjaxEndpoint());
 						$iterator->next($newEntity->getIteratorStep());
 					}
+
 					$wasMatched = true;
 				} else {
 					$result[] = $token;
@@ -180,6 +182,7 @@ final class TokensCalculator
 			}
 		}
 
+		/** @phpstan-ignore-next-line TODO */
 		return $resultEntity->setResult($result);
 	}
 
