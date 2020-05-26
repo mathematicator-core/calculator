@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mathematicator\Step;
 
 
+use Brick\Math\BigInteger;
+use Brick\Math\RoundingMode;
 use Mathematicator\Engine\Step;
 use Nette\Utils\Strings;
 use function strlen;
@@ -140,16 +142,16 @@ final class RomanIntSteps
 
 
 	/**
-	 * @param string $input (as integer)
+	 * @param BigInteger|int|string $input
 	 * @return Step[]
 	 */
-	public function getIntToRomanSteps(string $input): array
+	public function getIntToRomanSteps($input): array
 	{
-		$int = (int) $input;
+		$int = BigInteger::of($input);
 
 		$steps = [];
 
-		if ($int < 0) {
+		if ($int->isLessThan(0)) {
 			$step = StepFactory::addStep();
 			$step->setTitle('Pravidlo pro záporná čísla');
 			$step->setDescription('Pouze kladná čísla lze převádět na Římská čísla. Výpočet byl proto zastaven.');
@@ -185,13 +187,13 @@ final class RomanIntSteps
 		$return = '';
 		$iterator = 0;
 		foreach (self::$romanNumber as $key => $val) {
-			$repeat = (int) floor($int / $val);
-			if ($repeat > 0) {
+			$repeat = $int->dividedBy($val, RoundingMode::FLOOR);
+			if ($repeat->isGreaterThan(0)) {
 				$return .= '\\' . ($val >= 5000
 						? 'overline'
 						: 'textrm'
 					) . '{'
-					. Strings::upper(str_repeat($key, $repeat))
+					. Strings::upper(str_repeat($key, $repeat->toInt()))
 					. '}';
 
 				$step = StepFactory::addStep();
@@ -209,11 +211,11 @@ final class RomanIntSteps
 					) . '</p>'
 					. '<div class="my-3 text-center">\(' . $repeat . '\cdot \textrm{' . $key . '}'
 					. '\ \rightarrow\ ' . $repeat . '\cdot ' . $val
-					. '\ =\ ' . ($repeat * $val) . '\)</div>'
+					. '\ =\ ' . ($repeat->multipliedBy($val)) . '\)</div>'
 					. '<p>Odečteme z aktuální hodnoty nejnovější mezivýsledek '
 					. 'a zapamatujeme si ho do dalšího kroku jako zbytek:</p>'
 					. '<div class="my-3 text-center">\('
-					. $int . ' - ' . ($repeat * $val) . ' = ' . ($int - ($repeat * $val))
+					. $int . ' - ' . ($repeat->multipliedBy($val)) . ' = ' . $int->minus($repeat->multipliedBy($val))
 					. '\)</div>'
 					. '<p>Zapíšeme mezivýsledek do celkového výsledku:</p>',
 					true
@@ -223,7 +225,7 @@ final class RomanIntSteps
 				$steps[] = $step;
 				$iterator++;
 			}
-			$int %= $val;
+			$int = $int->mod($val);
 		}
 
 		$step = StepFactory::addStep();

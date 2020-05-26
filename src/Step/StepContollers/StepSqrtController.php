@@ -18,15 +18,6 @@ final class StepSqrtController implements IStepController
 	/** @var Step[] */
 	private $steps = [];
 
-	/** @var StepFactory */
-	private $stepFactory;
-
-
-	public function __construct(StepFactory $stepFactory)
-	{
-		$this->stepFactory = $stepFactory;
-	}
-
 
 	/**
 	 * @param ArrayHash $data
@@ -99,7 +90,7 @@ final class StepSqrtController implements IStepController
 		$step = StepFactory::addStep();
 		$step->setDescription('Druhá mocnina jakého přirozeného čísla nebo nula se vejde do \(' . $cells[0] . '\)?');
 		$step->setAjaxEndpoint(
-			$this->stepFactory->getAjaxEndpoint(StepSqrtHelper::class, [
+			StepFactory::getAjaxEndpoint(StepSqrtHelper::class, [
 				'numberSet' => 'N',
 				'whatBaseOfPower' => $cells[0],
 			])
