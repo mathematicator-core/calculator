@@ -1,19 +1,7 @@
-parameters:
-	math:
-		functions:
-			- sin
-			- cos
-			- tan
-			- cotan
-			- log
-			- log\d*
-			- ln
-			- sqrt
-
 services:
 	- Mathematicator\Engine\QueryNormalizer
 	- Mathematicator\Numbers\NumberFactory
 	- Mathematicator\NumberRewriter
-	- Mathematicator\Tokenizer\Tokenizer(%math%)
-	- Mathematicator\Tokenizer\TokensToLatex(%math.functions%)
+	- Mathematicator\Tokenizer\Tokenizer
+	- Mathematicator\Tokenizer\TokensToLatex
 	- Mathematicator\Tokenizer\TokensToObject
