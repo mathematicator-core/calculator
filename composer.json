@@ -31,7 +31,7 @@
 		"phpstan/phpstan": "^0.12.18",
 		"phpstan/phpstan-nette": "^0.12.6",
 		"tracy/tracy": "^2.7",
-		"brainmaestro/composer-git-hooks": "^2.8"
+		"brainmaestro/composer-git-hooks": "dev-master"
 	},
 	"suggest": {
 		"nette/caching": "(^3.0) To use package in Nette Framework",
@@ -58,7 +58,7 @@
 			"php temp/coding-standard/ecs check src --config temp/coding-standard/coding-standard-php71.yml --fix"
 		],
 		"phpstan": "vendor/bin/phpstan analyse src -c phpstan.neon --level 8 --no-progress",
-		"pre-commit": [
+		"fix": [
 			"composer update",
 			"composer cs:fix",
 			"composer phpstan",
@@ -77,7 +77,12 @@
 			"dev-master": "2.0.x-dev"
 		},
 		"hooks": {
-			"post-merge": "composer install"
+			"post-merge": "composer install",
+			"pre-commit": [
+				"composer cs:check",
+				"composer phpstan",
+				"composer test"
+			]
 		}
 	}
 }
