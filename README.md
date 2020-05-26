@@ -66,5 +66,5 @@ composer test
 Before PR, please run complete code check via command:
 ```bash
 composer cs:install # only first time
-composer pre-commit
+composer fix # otherwise pre-commit hook can fail
 ````
