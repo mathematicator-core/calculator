@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
-use Mathematicator\Engine\Query;
+use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Step\Controller\StepPlusController;
 use Mathematicator\Step\StepFactory;

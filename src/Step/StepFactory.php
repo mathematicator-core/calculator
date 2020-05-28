@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Step;
+namespace Mathematicator\Calculator\Step;
 
 
 use function json_encode;
-use Mathematicator\Engine\Step;
+use Mathematicator\Engine\Step\Step;
 
 final class StepFactory
 {

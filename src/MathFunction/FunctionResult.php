@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\MathFunction;
+namespace Mathematicator\Calculator\MathFunction;
 
 
-use Mathematicator\Engine\Step;
+use Mathematicator\Engine\Step\Step;
 use Mathematicator\Tokenizer\Token\IToken;
 use Nette\SmartObject;
 

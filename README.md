@@ -1,14 +1,23 @@
-Robust PHP math calculator
-==========================
+<h1 align="center">
+    Robust PHP math calculator
+</h1>
+
+<p align="center">
+    <a href="https://mathematicator.com" target="_blank">
+        <img src="https://avatars3.githubusercontent.com/u/44620375?s=100&v=4">
+    </a>
+</p>
 
 [![Integrity check](https://github.com/mathematicator-core/calculator/workflows/Integrity%20check/badge.svg)](https://github.com/mathematicator-core/calculator/actions?query=workflow%3A%22Integrity+check%22)
 [![codecov](https://codecov.io/gh/mathematicator-core/calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/mathematicator-core/calculator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
-
+[![PHPStan Enabled](https://img.shields.io/badge/PHPStan-enabled%20L8-brightgreen.svg?style=flat)](https://phpstan.org/)
 
 Simple to use robust math library for symbolic-work with numbers, operations and patterns.
 
 > Please help improve this documentation by sending a Pull request.
+
+## Installation
 
 Install by Composer:
 
@@ -16,8 +25,7 @@ Install by Composer:
 composer require mathematicator-core/calculator
 ```
 
-Idea
-----
+## Idea
 
 Imagine you want compute some math problem, for instance:
 
@@ -49,8 +57,7 @@ $objectTokens = $tokenizer->tokensToObject($tokens);
 $calculator->calculate($objectTokens);
 ```
 
-Contribution
-----
+## Contribution
 
 ### Tests
 

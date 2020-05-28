@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
-use Mathematicator\Engine\MathErrorException;
+use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\NumberToken;

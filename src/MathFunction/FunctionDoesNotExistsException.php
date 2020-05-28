@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\MathFunction;
+namespace Mathematicator\Calculator\MathFunction;
 
 
-use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\Exception\MathematicatorException;
 use Throwable;
 
 final class FunctionDoesNotExistsException extends MathematicatorException

@@ -6,8 +6,8 @@ namespace Mathematicator\Calculator;
 
 
 use function count;
-use Mathematicator\Engine\MathematicatorException;
-use Mathematicator\Engine\Query;
+use Mathematicator\Engine\Entity\Query;
+use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Engine\QueryNormalizer;
 use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
@@ -20,6 +20,7 @@ use Nette\Tokenizer\Exception;
 
 class Calculator
 {
+
 	/** @var Tokenizer */
 	private $tokenizer;
 
