@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Step;
+namespace Mathematicator\Calculator\Step\Model;
 
 
 use Brick\Math\BigInteger;
 use Brick\Math\RoundingMode;
-use Mathematicator\Engine\Step;
+use Mathematicator\Engine\Step\Step;
 use Nette\Utils\Strings;
 use function strlen;
 

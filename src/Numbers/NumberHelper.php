@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator;
+namespace Mathematicator\Calculator\Numbers;
 
 
 use Contributte\Psr6\ICachePoolFactory;

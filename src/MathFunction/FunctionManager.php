@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\MathFunction;
+namespace Mathematicator\Calculator\MathFunction;
 
 
-use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Tokenizer\Token\IToken;
 use Psr\Container\ContainerInterface;
 

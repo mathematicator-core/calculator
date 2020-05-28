@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Step\Controller;
+namespace Mathematicator\Calculator\Step\Controller;
 
 
-use Mathematicator\Engine\Step;
+use Mathematicator\Engine\Step\Step;
 use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;

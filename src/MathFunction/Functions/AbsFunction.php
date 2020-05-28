@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\MathFunction;
+namespace Mathematicator\Calculator\MathFunction\Functions;
 
 
 use Mathematicator\Tokenizer\Token\IToken;

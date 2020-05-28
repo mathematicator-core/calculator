@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
-use Mathematicator\Engine\MathematicatorException;
-use Mathematicator\Engine\MathErrorException;
-use Mathematicator\Engine\Query;
+use Mathematicator\Engine\Entity\Query;
+use Mathematicator\Engine\Exception\MathematicatorException;
+use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Engine\UndefinedOperationException;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;

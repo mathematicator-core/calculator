@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\MathFunction;
+namespace Mathematicator\Calculator\MathFunction\Functions;
 
 
-use Mathematicator\Engine\MathErrorException;
+use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Numbers\NumberException;
 use Mathematicator\Step\Controller\StepSqrtController;
 use Mathematicator\Step\StepFactory;

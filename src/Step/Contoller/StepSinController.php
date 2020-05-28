@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Step\Controller;
+namespace Mathematicator\Calculator\Step\Controller;
 
 
 final class StepSinController

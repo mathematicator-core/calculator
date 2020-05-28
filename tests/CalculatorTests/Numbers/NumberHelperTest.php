@@ -15,6 +15,7 @@ require __DIR__ . '/../../bootstrap.php';
 
 class NumberHelperTest extends TestCase
 {
+
 	/** @var NumberHelper */
 	private $numberHelper;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator;
+namespace Mathematicator\Engine\Equation;
 
 
-use Mathematicator\Engine\MathematicatorException;
+use Mathematicator\Engine\Exception\MathematicatorException;
 
 class NewtonMethod
 {

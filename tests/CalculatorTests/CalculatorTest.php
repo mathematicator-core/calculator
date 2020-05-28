@@ -6,7 +6,7 @@ namespace Mathematicator\Calculator\Tests;
 
 
 use Mathematicator\Calculator\Calculator;
-use Mathematicator\Engine\Query;
+use Mathematicator\Engine\Entity\Query;
 use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;

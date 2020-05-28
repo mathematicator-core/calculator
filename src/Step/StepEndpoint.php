@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Step;
+namespace Mathematicator\Calculator\Step;
 
 
-use Mathematicator\Engine\TerminateException;
+use Mathematicator\Engine\Exception\TerminateException;
 use Mathematicator\Step\Controller\IStepController;
 use Nette\Utils\ArrayHash;
 use Psr\Container\ContainerInterface;
