@@ -79,7 +79,7 @@ final class RomanIntSteps
 	{
 		$steps = [];
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Převodní tabulka');
 		$step->setDescription(
 			'Ivan Vedl Xenii Lesem Cestou Do Města.' . $this->getTranslateTable($roman),
@@ -93,7 +93,7 @@ final class RomanIntSteps
 		$return = 0;
 		$lastPosition = 0;
 		for ($i = 0; $i < $romanLength; $i++) {
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$x = self::$romanNumber[$roman[$i]];
 			if ($i + 1 < strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
 				$return += $nextToken - $x;
@@ -131,7 +131,7 @@ final class RomanIntSteps
 			$lastPosition = $i;
 		}
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Řešení');
 		$step->setLatex('\\text{' . $roman . '} \rightarrow ' . $return);
 
@@ -152,7 +152,7 @@ final class RomanIntSteps
 		$steps = [];
 
 		if ($int->isLessThan(0)) {
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setTitle('Pravidlo pro záporná čísla');
 			$step->setDescription('Pouze kladná čísla lze převádět na Římská čísla. Výpočet byl proto zastaven.');
 
@@ -161,7 +161,7 @@ final class RomanIntSteps
 			return $steps;
 		}
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Převodní tabulka');
 		$step->setDescription(
 			'Ivan Vedl Xenii Lesem Cestou Do Města.' . $this->getTranslateTable(),
@@ -170,7 +170,7 @@ final class RomanIntSteps
 
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Strategie');
 		$step->setDescription(
 			'<p>Při převodu čísla se budeme snažit najít vždy co nejvyšší možnou cifru, '
@@ -196,7 +196,7 @@ final class RomanIntSteps
 					. Strings::upper(str_repeat($key, $repeat->toInt()))
 					. '}';
 
-				$step = StepFactory::addStep();
+				$step = new Step();
 				$step->setTitle(
 					($iterator === 0
 						? 'Začínáme s hodnotou'
@@ -228,7 +228,7 @@ final class RomanIntSteps
 			$int = $int->mod($val);
 		}
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Řešení');
 		$step->setDescription(
 			'Zbytek má hodnotu nula, číslo je tedy převedeno.'

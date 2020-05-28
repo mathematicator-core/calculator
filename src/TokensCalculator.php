@@ -6,12 +6,13 @@ namespace Mathematicator\Calculator;
 
 
 use function count;
+use Mathematicator\Calculator\MathFunction\FunctionManager;
 use Mathematicator\Calculator\Operation\BaseOperation;
 use Mathematicator\Calculator\Operation\NumberOperationResult;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\MathematicatorException;
-use Mathematicator\Engine\UndefinedOperationException;
-use Mathematicator\MathFunction\FunctionManager;
+use Mathematicator\Engine\Exception\UndefinedOperationException;
+use Mathematicator\Numbers\NumberException;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
@@ -191,7 +192,7 @@ final class TokensCalculator
 	 * @param TokenIterator $iterator
 	 * @param Query $query
 	 * @return IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
-	 * @throws UndefinedOperationException|MathematicatorException
+	 * @throws UndefinedOperationException|MathematicatorException|NumberException
 	 */
 	private function solveNumberToken(TokenIterator $iterator, Query $query)
 	{

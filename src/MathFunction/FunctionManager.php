@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\MathFunction;
 
 
+use Mathematicator\Calculator\MathFunction\Functions\AbsFunction;
+use Mathematicator\Calculator\MathFunction\Functions\SinFunction;
+use Mathematicator\Calculator\MathFunction\Functions\SqrtFunction;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Tokenizer\Token\IToken;
 use Psr\Container\ContainerInterface;

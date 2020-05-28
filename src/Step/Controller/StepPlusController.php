@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Step\Controller;
 
 
+use Mathematicator\Calculator\Numbers\NumberHelper;
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\NumberHelper;
-use Mathematicator\Step\StepFactory;
+use Nette\Application\UI\InvalidLinkException;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 
@@ -33,6 +33,7 @@ final class StepPlusController implements IStepController
 	/**
 	 * @param ArrayHash $data
 	 * @return Step[]
+	 * @throws InvalidLinkException
 	 */
 	public function actionDefault(ArrayHash $data): array
 	{
@@ -42,7 +43,7 @@ final class StepPlusController implements IStepController
 		$y = $this->numberToFraction($data->y);
 
 		if ($x[1] === '1' && $y[1] === '1') {
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setTitle('Sčítání čísel');
 			$step->setDescription(
 				$this->number->getAddStepAsHtml($x[0], $y[0])
@@ -50,13 +51,13 @@ final class StepPlusController implements IStepController
 
 			$steps[] = $step;
 		} else {
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setTitle('Sčítání čísel');
 			$step->setLatex($this->numberToLatex($x) . ' + ' . $this->numberToLatex($y));
 			$steps[] = $step;
 
 			$sp = bcmul($x[1], $y[1], $this->tolerance);
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setTitle('Nalezení společného jmenovatele');
 			$step->setLatex($x[1] . '\ \cdot\ ' . $y[1] . ' = ' . $sp);
 			$steps[] = $step;
@@ -67,7 +68,7 @@ final class StepPlusController implements IStepController
 				$this->tolerance
 			);
 
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setTitle('Převod na jeden zlomek');
 			$step->setLatex(
 				'\frac{' . $x[0] . '}{' . $x[1] . '}' . ' + \frac{' . $y[0] . '}{' . $y[1] . '}'

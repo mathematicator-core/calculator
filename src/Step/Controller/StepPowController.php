@@ -6,7 +6,6 @@ namespace Mathematicator\Calculator\Step\Controller;
 
 
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 
@@ -31,7 +30,7 @@ final class StepPowController implements IStepController
 
 		$steps = [];
 
-		$step = StepFactory::addStep(
+		$step = new Step(
 			'Umocňování čísel',
 			'{' . $data['x'] . '}^{' . $data['y'] . '}\ =\ ' . $data['result'],
 			'Řešení je jen přibližné.'
@@ -51,32 +50,32 @@ final class StepPowController implements IStepController
 	{
 		$steps = [];
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Uvažujme');
 		$step->setDescription('\(x^0=a\) pro \(x, a \in \mathbb{R}_{-\{0\}}\)');
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setDescription('Nula je zajímavé číslo v tom, že jako pro jediné platí:');
 		$step->setLatex('0=-0');
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setDescription('Díky tomuto faktu je možné tvrdit že:');
 		$step->setLatex('x^0=x^{-0}');
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Úprava pravé strany');
 		$step->setDescription('\(x^0=\frac{1}{x^0}\) a následně \((x^0)^2=1\)');
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Použití pravidel o umocňování');
 		$step->setLatex('x^{0\cdot2}=1 \rightarrow x^{0}=1');
 		$steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Řešení');
 		$step->setDescription(
 			'Pokud tedy umocňujeme jakékoliv číslo různé od nuly na nultou, výsledkem bude vždy 1.'
@@ -108,7 +107,7 @@ final class StepPowController implements IStepController
 			$numbers .= ($numbers ? '\ \cdot\ ' : '') . $x;
 		}
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Řešení');
 		$step->setDescription('Umocňování je operace, která vyjadřuje opakované násobení.');
 		$step->setLatex('{' . $x . '}^{' . $y . '}\ =\ ' . $numbers . '\ =\ ' . bcpow($x, $y));

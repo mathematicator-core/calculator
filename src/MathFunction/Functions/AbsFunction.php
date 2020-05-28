@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\MathFunction\Functions;
 
 
+use Mathematicator\Calculator\MathFunction\FunctionResult;
+use Mathematicator\Calculator\MathFunction\IFunction;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 

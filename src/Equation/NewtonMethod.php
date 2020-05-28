@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mathematicator\Engine\Equation;
+namespace Mathematicator\Calculator\Equation;
 
 
 use Mathematicator\Engine\Exception\MathematicatorException;

@@ -1,8 +1,8 @@
 services:
 	calculator: Mathematicator\Calculator\Calculator
 	- Mathematicator\Calculator\TokensCalculator
-	- Mathematicator\NumberHelper
-	- Mathematicator\Step\StepFactory
+	- Mathematicator\Calculator\Numbers\NumberHelper
+	- Mathematicator\Calculator\Step\StepFactory
 
 	# operations
 	baseOperation: Mathematicator\Calculator\Operation\BaseOperation
@@ -14,25 +14,25 @@ services:
 	- Mathematicator\Calculator\Operation\Factorial
 
 	# steps
-	- Mathematicator\Step\StepEndpoint
-	- Mathematicator\Step\RomanIntSteps
+	- Mathematicator\Calculator\Step\StepEndpoint
+	- Mathematicator\Calculator\Step\Model\RomanIntSteps
 
 	# step controllers
-	- Mathematicator\Step\Controller\StepPlusController
-	- Mathematicator\Step\Controller\StepMultiplicationController
-	- Mathematicator\Step\Controller\StepSqrtController
-	- Mathematicator\Step\Controller\StepSqrtHelper
-	- Mathematicator\Step\Controller\StepPowController
-	- Mathematicator\Step\Controller\StepSinController
+	- Mathematicator\Calculator\Step\Controller\StepPlusController
+	- Mathematicator\Calculator\Step\Controller\StepMultiplicationController
+	- Mathematicator\Calculator\Step\Controller\StepSqrtController
+	- Mathematicator\Calculator\Step\Controller\StepSqrtHelper
+	- Mathematicator\Calculator\Step\Controller\StepPowController
+	- Mathematicator\Calculator\Step\Controller\StepSinController
 
 	# Functions
-	- Mathematicator\MathFunction\FunctionManager
-	- Mathematicator\MathFunction\AbsFunction
-	- Mathematicator\MathFunction\SqrtFunction
-	- Mathematicator\MathFunction\SinFunction
+	- Mathematicator\Calculator\MathFunction\FunctionManager
+	- Mathematicator\Calculator\MathFunction\Functions\AbsFunction
+	- Mathematicator\Calculator\MathFunction\Functions\SqrtFunction
+	- Mathematicator\Calculator\MathFunction\Functions\SinFunction
 
 	# Algorithm
-	- Mathematicator\NewtonMethod
+	- Mathematicator\Calculator\Equation\NewtonMethod
 
 extensions:
 	psr6: Contributte\Psr6\DI\Psr6CachingExtension

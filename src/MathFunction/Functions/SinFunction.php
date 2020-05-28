@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\MathFunction\Functions;
 
 
-use Mathematicator\Step\Controller\StepSinController;
-use Mathematicator\Step\StepFactory;
+use Mathematicator\Calculator\MathFunction\FunctionResult;
+use Mathematicator\Calculator\MathFunction\IFunction;
+use Mathematicator\Calculator\Step\Controller\StepSinController;
+use Mathematicator\Calculator\Step\StepFactory;
+use Mathematicator\Engine\Step\Step;
+use Mathematicator\Numbers\NumberException;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
@@ -19,6 +23,7 @@ class SinFunction implements IFunction
 	/**
 	 * @param NumberToken|IToken $token
 	 * @return FunctionResult
+	 * @throws NumberException
 	 */
 	public function process(IToken $token): FunctionResult
 	{
@@ -36,7 +41,7 @@ class SinFunction implements IFunction
 		$token->getNumber()->setValue((string) $sin);
 		$token->setToken((string) $sin);
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSinController::class, [
 				'x' => $x,
