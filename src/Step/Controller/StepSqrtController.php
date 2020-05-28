@@ -6,8 +6,8 @@ namespace Mathematicator\Calculator\Step\Controller;
 
 
 use function count;
+use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use function strlen;
 use function substr;
@@ -34,7 +34,7 @@ final class StepSqrtController implements IStepController
 			if ($sqrtInt <= 100) {
 				$this->solveAsInteger((int) $n, $sqrtInt);
 			} else {
-				$this->steps[] = StepFactory::addStep(
+				$this->steps[] = new Step(
 					'Řešení',
 					null,
 					'<p>Využijeme vztahu:</p>'
@@ -62,7 +62,7 @@ final class StepSqrtController implements IStepController
 				. '</tr>';
 		}
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Tabulka základních mocnin a odmocnin');
 		$step->setDescription(
 			'<p>Řešení vyhledáme v tabulce základních mocnin a odmocnin, kterou bychom si měli pamatovat.</p>'
@@ -80,14 +80,14 @@ final class StepSqrtController implements IStepController
 	{
 		$cells = $this->makeCells((string) $n);
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setTitle('Rozdělení do buněk');
 		$step->setDescription('Číslo musíme rozdělit po dvou směrem od desetinné čárky do buněk.');
 		$step->setLatex(implode('\ |\ ', $cells));
 
 		$this->steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setDescription('Druhá mocnina jakého přirozeného čísla nebo nula se vejde do \(' . $cells[0] . '\)?');
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtHelper::class, [
@@ -98,7 +98,7 @@ final class StepSqrtController implements IStepController
 		$step->setLatex((string) $squareRooted = floor(sqrt((float) $cells[0])));
 		$this->steps[] = $step;
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setDescription('Druhou mocninu odečteme od čísla z první buňky.');
 		$step->setLatex($cells[0] . ' - ' . ($squareRooted ** 2) . ' = ' . ($cells[0] - ($squareRooted ** 2)));
 

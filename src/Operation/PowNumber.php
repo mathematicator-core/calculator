@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Mathematicator\Calculator\Step\Controller\StepPowController;
+use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
-use Mathematicator\Engine\UndefinedOperationException;
+use Mathematicator\Engine\Exception\UndefinedOperationException;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;
-use Mathematicator\Step\Controller\StepPowController;
-use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
 class PowNumber

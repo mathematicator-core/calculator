@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Tests\Numbers;
 
 
+use Mathematicator\Calculator\Numbers\NumberHelper;
 use Mathematicator\Calculator\Tests\Bootstrap;
-use Mathematicator\NumberHelper;
 use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;

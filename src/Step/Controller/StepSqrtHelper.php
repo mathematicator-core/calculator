@@ -6,7 +6,6 @@ namespace Mathematicator\Calculator\Step\Controller;
 
 
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\Step\StepFactory;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Html;
 
@@ -24,7 +23,7 @@ final class StepSqrtHelper implements IStepController
 	public function actionDefault(ArrayHash $data): array
 	{
 		if ($data->offsetExists('numberSet')) {
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setDescription('N - Přirozená čísla: 1, 2, 3, 100, 105, 1006, ...');
 			$this->steps[] = $step;
 		}
@@ -46,7 +45,7 @@ final class StepSqrtHelper implements IStepController
 			[$fittingNumber + 1, ($fittingNumber + 1) ** 2],
 		];
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 
 		$outerDiv = Html::el('div');
 		$outerDiv->create('style')

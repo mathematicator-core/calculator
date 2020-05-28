@@ -8,7 +8,7 @@ namespace Mathematicator\Calculator\Operation;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Engine\Exception\MathErrorException;
-use Mathematicator\Engine\UndefinedOperationException;
+use Mathematicator\Engine\Exception\UndefinedOperationException;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\IToken;

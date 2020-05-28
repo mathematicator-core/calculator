@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\MathFunction\Functions;
 
 
+use Mathematicator\Calculator\MathFunction\FunctionResult;
+use Mathematicator\Calculator\MathFunction\IFunction;
+use Mathematicator\Calculator\Step\Controller\StepSqrtController;
+use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Exception\MathErrorException;
+use Mathematicator\Engine\Step\Step;
 use Mathematicator\Numbers\NumberException;
-use Mathematicator\Step\Controller\StepSqrtController;
-use Mathematicator\Step\StepFactory;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
@@ -34,7 +37,7 @@ class SqrtFunction implements IFunction
 		$token->getNumber()->setValue($sqrt);
 		$token->setToken($sqrt);
 
-		$step = StepFactory::addStep();
+		$step = new Step();
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtController::class, [
 				'n' => $number->getFloat(),

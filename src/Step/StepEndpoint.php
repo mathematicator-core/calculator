@@ -6,7 +6,6 @@ namespace Mathematicator\Calculator\Step;
 
 
 use Mathematicator\Engine\Exception\TerminateException;
-use Mathematicator\Step\Controller\IStepController;
 use Nette\Utils\ArrayHash;
 use Psr\Container\ContainerInterface;
 
@@ -15,9 +14,6 @@ final class StepEndpoint
 
 	/** @var ContainerInterface */
 	private $container;
-
-	/** @var IStepController */
-	private $callback;
 
 
 	/**
@@ -36,7 +32,7 @@ final class StepEndpoint
 	 */
 	public function getStep(string $type, string $data): array
 	{
-		$this->callback = $this->container->get($type);
+		$callback = $this->container->get($type);
 
 		try {
 			$data = json_decode($data);
@@ -44,7 +40,7 @@ final class StepEndpoint
 			foreach ($data as $k => $v) {
 				$arrayHash->{$k} = $v;
 			}
-			$steps = $this->callback->actionDefault($arrayHash);
+			$steps = $callback->actionDefault($arrayHash);
 		} catch (TerminateException $e) {
 			$steps[] = StepFactory::addStep('Nepodařilo se najít postup pro [' . $type . ']');
 		}

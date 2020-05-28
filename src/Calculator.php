@@ -6,10 +6,11 @@ namespace Mathematicator\Calculator;
 
 
 use function count;
+use Mathematicator\Calculator\Entity\CalculatorResult;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Engine\QueryNormalizer;
-use Mathematicator\Step\StepFactory;
+use Mathematicator\Engine\Step\Step;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
 use Mathematicator\Tokenizer\Token\IToken;
@@ -65,7 +66,7 @@ class Calculator
 		$iterator = 0;
 		$steps = [];
 
-		$interpretStep = StepFactory::addStep();
+		$interpretStep = new Step();
 		$interpretStep->setTitle('Zadání úlohy');
 		$interpretStep->setLatex($this->tokenizer->tokensToLatex($tokens));
 
@@ -84,7 +85,7 @@ class Calculator
 
 			$stepLatexCurrent = $this->tokenizer->tokensToLatex($tokens);
 
-			$step = StepFactory::addStep();
+			$step = new Step();
 			$step->setLatex($stepLatexCurrent);
 			$step->setTitle($process->getStepTitle());
 			$step->setDescription($process->getStepDescription());
