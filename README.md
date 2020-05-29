@@ -13,7 +13,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
 [![PHPStan Enabled](https://img.shields.io/badge/PHPStan-enabled%20L8-brightgreen.svg?style=flat)](https://phpstan.org/)
 
-Simple to use robust math library for symbolic-work with numbers, operations and patterns.
+Simple to use robust and modular math library for symbolic-work with numbers, operations and patterns.
 
 > Please help improve this documentation by sending a Pull request.
 

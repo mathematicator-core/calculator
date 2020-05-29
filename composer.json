@@ -20,11 +20,13 @@
 		"brick/math": "^0.8.15",
 		"contributte/psr6-caching": "^0.2@dev",
 		"contributte/psr11-container-interface": "^0.4.1",
+		"doctrine/orm": "^2.7",
 		"mathematicator-core/engine": "^2.0@dev",
 		"mathematicator-core/numbers": "^2.0@dev",
 		"mathematicator-core/tokenizer": "^2.0@dev",
 		"nette/application": "^3.0",
-		"nette/utils": "^3.0"
+		"nette/utils": "^3.0",
+		"symfony/polyfill-php80": "^1.17"
 	},
 	"require-dev": {
 		"nette/bootstrap": "^3.0",
