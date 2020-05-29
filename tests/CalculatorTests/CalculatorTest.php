@@ -11,7 +11,7 @@ use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../Bootstrapx.php';
 
 class CalculatorTest extends TestCase
 {
@@ -66,4 +66,4 @@ class CalculatorTest extends TestCase
 	}
 }
 
-(new CalculatorTest(Bootstrap::boot()))->run();
+(new CalculatorTest(Bootstrapx::boot()))->run();

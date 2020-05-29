@@ -96,5 +96,4 @@ final class StepPlusController implements IStepController
 
 		return $steps;
 	}
-
 }
