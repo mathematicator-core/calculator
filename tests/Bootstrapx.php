@@ -12,7 +12,7 @@ use Tester\Environment;
 
 Environment::setup();
 
-class Bootstrap
+class Bootstrapx
 {
 	public static function boot(): Container
 	{

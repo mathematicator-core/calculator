@@ -57,6 +57,7 @@ class Fraction
 	 */
 	protected $parentInDenominator;
 
+
 	/**
 	 * @param string|Stringable|BigNumber|Fraction|null $numerator optional
 	 * @param string|Stringable|BigNumber|Fraction|null $denominator optional
@@ -71,10 +72,12 @@ class Fraction
 		}
 	}
 
+
 	public function __toString(): string
 	{
 		return $this->getNumerator() . '/' . $this->getDenominator();
 	}
+
 
 	/**
 	 * @return Fraction|string|null
@@ -87,6 +90,7 @@ class Fraction
 			return $this->numeratorString;
 		}
 	}
+
 
 	/**
 	 * @param int|string|Stringable|BigNumber|Fraction $numerator
@@ -102,6 +106,7 @@ class Fraction
 		}
 	}
 
+
 	/**
 	 * @return Fraction|string|null
 	 */
@@ -114,6 +119,7 @@ class Fraction
 		}
 	}
 
+
 	/**
 	 * @return Fraction|string
 	 */
@@ -122,12 +128,13 @@ class Fraction
 		return $this->getDenominator() ?: '1';
 	}
 
+
 	/**
 	 * @param int|string|Stringable|BigNumber|Fraction $denominator
 	 */
 	public function setDenominator($denominator): void
 	{
-		if ($denominator instanceof Fraction) {
+		if ($denominator instanceof self) {
 			$this->denominatorString = null;
 			$this->denominatorFraction = $denominator;
 		} else {
@@ -136,7 +143,8 @@ class Fraction
 		}
 	}
 
-	public function getParent(): ?Fraction
+
+	public function getParent(): ?self
 	{
 		if ($this->parentInNumerator) {
 			return $this->parentInNumerator;
@@ -144,5 +152,4 @@ class Fraction
 			return $this->parentInDenominator;
 		}
 	}
-
 }

@@ -9,7 +9,7 @@ use Mathematicator\Calculator\Helpers\FractionHelper;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../../bootstrap.php';
+require __DIR__ . '/../../Bootstrapx.php';
 
 class FractionHelperTest extends TestCase
 {
@@ -54,13 +54,14 @@ class FractionHelperTest extends TestCase
 		];
 	}
 
+
 	/**
 	 * @return string[]
 	 */
 	public function getFractionToLatexCases(): array
 	{
 		return [
-			['\frac{2}{1}', '2/1']
+			['\frac{2}{1}', '2/1'],
 		];
 	}
 }

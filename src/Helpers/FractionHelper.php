@@ -34,9 +34,10 @@ class FractionHelper
 				$fraction->setDenominator($explode[1]);
 				return $fraction;
 			default:
-				throw new MathematicatorException("Parsing of compound fractions is not supported.");
+				throw new MathematicatorException('Parsing of compound fractions is not supported.');
 		}
 	}
+
 
 	/**
 	 * @param Fraction $fraction
@@ -69,5 +70,4 @@ class FractionHelper
 		// Create LaTeX
 		return (string) LatexBuilder::frac($numeratorLatex, $denominatorLatex);
 	}
-
 }

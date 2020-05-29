@@ -10,10 +10,9 @@ use Stringable;
 class LatexBuilder implements Stringable
 {
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	private $latex;
+
 
 	/**
 	 * @param string|Stringable $latex
@@ -23,6 +22,7 @@ class LatexBuilder implements Stringable
 		$this->latex = (string) $latex;
 	}
 
+
 	/**
 	 * @param string|Stringable $latex
 	 * @return LatexBuilder
@@ -31,6 +31,7 @@ class LatexBuilder implements Stringable
 	{
 		return new self($latex);
 	}
+
 
 	/**
 	 * @param string|Stringable $numerator
@@ -42,10 +43,12 @@ class LatexBuilder implements Stringable
 		return new self('\frac{' . $numerator . '}{' . $denominator . '}');
 	}
 
+
 	public function __toString()
 	{
 		return $this->latex;
 	}
+
 
 	/**
 	 * @param string|Stringable $add
@@ -57,6 +60,7 @@ class LatexBuilder implements Stringable
 		return $this;
 	}
 
+
 	/**
 	 * @param string|Stringable $with
 	 * @return LatexBuilder
@@ -66,6 +70,7 @@ class LatexBuilder implements Stringable
 		$this->latex = '\ \cdot\ ' . $with;
 		return $this;
 	}
+
 
 	/**
 	 * @param string|Stringable $to
