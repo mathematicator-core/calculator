@@ -23,13 +23,11 @@ final class StepMultiplicationController implements IStepController
 		$x = $this->numberToFraction($data->x);
 		$y = $this->numberToFraction($data->y);
 
-		$step = new Step();
-		$step->setTitle('Násobení čísel');
-		$step->setDescription(
+		$steps[] = new Step(
+			'Násobení čísel',
+			null,
 			'Tuto sekci teprve plánujeme.'
 		); // TODO!!!
-
-		$steps[] = $step;
 
 		return $steps;
 	}

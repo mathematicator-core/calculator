@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Helpers;
 
 use Brick\Math\BigNumber;
-use Mathematicator\Calculator\Entity\Fraction;
-use Mathematicator\Calculator\Latex\LatexBuilder;
 use Mathematicator\Engine\Exception\MathematicatorException;
+use Mathematicator\Numbers\Entity\Fraction;
+use Mathematicator\Numbers\Latex\MathLatexToolkit;
 
-
+/**
+ * @internal
+ */
 class FractionHelper
 {
 
@@ -68,6 +70,6 @@ class FractionHelper
 		}
 
 		// Create LaTeX
-		return (string) LatexBuilder::frac($numeratorLatex, $denominatorLatex);
+		return (string) MathLatexToolkit::frac($numeratorLatex, $denominatorLatex);
 	}
 }

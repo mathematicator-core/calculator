@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator\Step\Controller;
 
 
 use Mathematicator\Engine\Step\Step;
+use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
 
@@ -30,13 +31,11 @@ final class StepPowController implements IStepController
 
 		$steps = [];
 
-		$step = new Step(
+		$steps[] = new Step(
 			'Umocňování čísel',
-			'{' . $data['x'] . '}^{' . $data['y'] . '}\ =\ ' . $data['result'],
+			(string) MathLatexToolkit::pow($data['x'], $data['y'])->equals($data['result']),
 			'Řešení je jen přibližné.'
 		);
-
-		$steps[] = $step;
 
 		return $steps;
 	}
@@ -57,7 +56,7 @@ final class StepPowController implements IStepController
 
 		$step = new Step();
 		$step->setDescription('Nula je zajímavé číslo v tom, že jako pro jediné platí:');
-		$step->setLatex('0=-0');
+		$step->setLatex((string) MathLatexToolkit::create('0')->equals('-0'));
 		$steps[] = $step;
 
 		$step = new Step();
@@ -100,18 +99,24 @@ final class StepPowController implements IStepController
 	private function getAbsSmallIntegers(string $x, string $y): array
 	{
 		$steps = [];
-
-		$numbers = '';
+		$numbers = null;
 
 		for ($i = 1; $i <= $y; $i++) {
-			$numbers .= ($numbers ? '\ \cdot\ ' : '') . $x;
+			if ($numbers === null) {
+				$numbers = MathLatexToolkit::create($x);
+			} else {
+				$numbers->multipliedBy($x);
+			}
 		}
 
-		$step = new Step();
-		$step->setTitle('Řešení');
-		$step->setDescription('Umocňování je operace, která vyjadřuje opakované násobení.');
-		$step->setLatex('{' . $x . '}^{' . $y . '}\ =\ ' . $numbers . '\ =\ ' . bcpow($x, $y));
-		$steps[] = $step;
+		$steps[] = new Step(
+			'Řešení',
+			MathLatexToolkit::create(MathLatexToolkit::pow($x, $y))
+				->equals((string) $numbers)
+				->equals(bcpow($x, $y))
+				->__toString(),
+			'Umocňování je operace, která vyjadřuje opakované násobení.'
+		);
 
 		return $steps;
 	}

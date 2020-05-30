@@ -7,10 +7,10 @@ namespace Mathematicator\Calculator\Step\Controller;
 
 use Brick\Math\BigDecimal;
 use Mathematicator\Calculator\Helpers\FractionHelper;
-use Mathematicator\Calculator\Latex\LatexBuilder;
 use Mathematicator\Calculator\Numbers\NumberHelper;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Engine\Step\Step;
+use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Utils\ArrayHash;
 
@@ -57,7 +57,7 @@ final class StepPlusController implements IStepController
 		} else {
 			$steps[] = new Step(
 				'Sčítání čísel',
-				LatexBuilder::create(FractionHelper::fractionToLatex($x, true))
+				MathLatexToolkit::create(FractionHelper::fractionToLatex($x, true))
 					->plus(FractionHelper::fractionToLatex($y, true))
 					->__toString()
 			);
@@ -66,7 +66,7 @@ final class StepPlusController implements IStepController
 
 			$steps[] = new Step(
 				'Nalezení společného jmenovatele',
-				LatexBuilder::create((string) $xDenominator)
+				MathLatexToolkit::create((string) $xDenominator)
 					->multipliedBy((string) $yDenominator)
 					->equals((string) $sp)
 					->__toString()
@@ -77,11 +77,11 @@ final class StepPlusController implements IStepController
 
 			$steps[] = new Step(
 				'Převod na jeden zlomek',
-				LatexBuilder::frac((string) $xNumerator, (string) $xDenominator)
-					->plus(LatexBuilder::frac((string) $yNumerator, (string) $yDenominator))
+				MathLatexToolkit::frac((string) $xNumerator, (string) $xDenominator)
+					->plus(MathLatexToolkit::frac((string) $yNumerator, (string) $yDenominator))
 					->equals(
-						LatexBuilder::frac(
-							LatexBuilder::create((string) $yDenominator)
+						MathLatexToolkit::frac(
+							MathLatexToolkit::create((string) $yDenominator)
 								->multipliedBy((string) $xNumerator)
 								->plus((string) $xDenominator)
 								->multipliedBy((string) $yNumerator)
@@ -89,7 +89,7 @@ final class StepPlusController implements IStepController
 							(string) $sp
 						)
 					)
-					->equals(LatexBuilder::frac((string) $left, (string) $sp))
+					->equals(MathLatexToolkit::frac((string) $left, (string) $sp))
 					->__toString()
 			);
 		}
