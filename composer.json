@@ -17,10 +17,10 @@
 	],
 	"require": {
 		"php": ">=7.2",
+		"ext-bcmath": "*",
 		"brick/math": "^0.8.15",
 		"contributte/psr6-caching": "^0.2@dev",
 		"contributte/psr11-container-interface": "^0.4.1",
-		"doctrine/orm": "^2.7",
 		"mathematicator-core/engine": "^2.0@dev",
 		"mathematicator-core/numbers": "^2.0@dev",
 		"mathematicator-core/tokenizer": "^2.0@dev",

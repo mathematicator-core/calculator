@@ -6,12 +6,12 @@ namespace Mathematicator\Calculator\Tests\Numbers;
 
 
 use Mathematicator\Calculator\Numbers\NumberHelper;
-use Mathematicator\Calculator\Tests\Bootstrapx;
+use Mathematicator\Calculator\Tests\Bootstrap;
 use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../../Bootstrapx.php';
+require __DIR__ . '/../../Bootstrap.php';
 
 class NumberHelperTest extends TestCase
 {
@@ -50,4 +50,4 @@ class NumberHelperTest extends TestCase
 	}
 }
 
-(new NumberHelperTest(Bootstrapx::boot()))->run();
+(new NumberHelperTest(Bootstrap::boot()))->run();

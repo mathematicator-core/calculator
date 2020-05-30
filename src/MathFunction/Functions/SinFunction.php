@@ -10,7 +10,7 @@ use Mathematicator\Calculator\MathFunction\IFunction;
 use Mathematicator\Calculator\Step\Controller\StepSinController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\Numbers\NumberException;
+use Mathematicator\Numbers\Exception\NumberException;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;

@@ -11,7 +11,7 @@ use Mathematicator\Calculator\Step\Controller\StepSqrtController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Engine\Step\Step;
-use Mathematicator\Numbers\NumberException;
+use Mathematicator\Numbers\Exception\NumberException;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 

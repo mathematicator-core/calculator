@@ -9,6 +9,7 @@ use Mathematicator\Calculator\Step\Controller\StepPowController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\UndefinedOperationException;
+use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
@@ -104,6 +105,11 @@ class PowNumber
 				. 'proto se limitně blíží k jedné.';
 		}
 
-		return '\({' . $left->getHumanString() . '}^{' . $right->getHumanString() . '}\ =\ ' . $result->getString() . '\)';
+		return (string) MathLatexToolkit::create(
+			MathLatexToolkit::pow(
+				$left->getHumanString(), $right->getHumanString()
+			)->equals($result->getString()),
+			'\(', '\)'
+		);
 	}
 }

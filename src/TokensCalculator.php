@@ -12,7 +12,7 @@ use Mathematicator\Calculator\Operation\NumberOperationResult;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Engine\Exception\UndefinedOperationException;
-use Mathematicator\Numbers\NumberException;
+use Mathematicator\Numbers\Exception\NumberException;
 use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\FunctionToken;
