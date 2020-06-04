@@ -8,23 +8,12 @@ namespace Mathematicator\Calculator\Operation;
 use Mathematicator\Calculator\Step\Controller\StepPlusController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
-use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Numbers\Calculation;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
 class AddNumbers
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	/**
-	 * @param NumberFactory $numberFactory
-	 */
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
 
 
 	/**
@@ -35,27 +24,30 @@ class AddNumbers
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
-		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
-			$result = bcadd($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals());
-		} else {
-			$leftFraction = $left->getNumber()->getFraction();
-			$rightFraction = $right->getNumber()->getFraction();
+		$leftNumber = $left->getNumber();
+		$rightNumber = $right->getNumber();
 
-			$result = bcadd(
-					bcmul((string) $rightFraction[1], (string) $leftFraction[0], $query->getDecimals()),
-					bcmul((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()),
-					$query->getDecimals()
-				) . '/' .
-				bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
+		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
+			$result = Calculation::of($leftNumber)->plus($rightNumber);
+		} else {
+			$leftFraction = $leftNumber->toFraction();
+			$rightFraction = $rightNumber->toFraction();
+
+			$result = $rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
+					->plus(
+						$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())
+					) . '/' .
+				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator());
 		}
 
-		$newNumber = new NumberToken($this->numberFactory->create($result));
-		$newNumber->setToken($newNumber->getNumber()->getString());
-		$newNumber->setPosition($left->getPosition());
-		$newNumber->setType('number');
+		$newNumber = new NumberToken(SmartNumber::of($result));
+		$newNumber
+			->setToken($newNumber->getNumber()->getString())
+			->setPosition($left->getPosition())
+			->setType('number');
 
-		$_left = $left->getNumber()->getHumanString();
-		$_right = $right->getNumber()->getHumanString();
+		$_left = $leftNumber->toHumanString();
+		$_right = $rightNumber->toHumanString();
 
 		return (new NumberOperationResult)
 			->setNumber($newNumber)
@@ -67,8 +59,8 @@ class AddNumbers
 			)
 			->setAjaxEndpoint(
 				StepFactory::getAjaxEndpoint(StepPlusController::class, [
-					'x' => $left->getNumber()->getHumanString(),
-					'y' => $right->getNumber()->getHumanString(),
+					'x' => $leftNumber->toHumanString(),
+					'y' => $rightNumber->toHumanString(),
 				])
 			);
 	}

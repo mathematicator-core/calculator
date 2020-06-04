@@ -8,12 +8,14 @@ use Brick\Math\BigNumber;
 use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Numbers\Entity\Fraction;
 use Mathematicator\Numbers\Latex\MathLatexToolkit;
+use Nette\StaticClass;
 
 /**
  * @internal
  */
 class FractionHelper
 {
+	use StaticClass;
 
 	/**
 	 * @param string $input

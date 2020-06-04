@@ -61,12 +61,27 @@ final class StepPowController implements IStepController
 
 		$step = new Step();
 		$step->setDescription('Díky tomuto faktu je možné tvrdit že:');
-		$step->setLatex('x^0=x^{-0}');
+		$step->setLatex((string) MathLatexToolkit::pow('x', 0)->equals(MathLatexToolkit::pow("-0")));
 		$steps[] = $step;
 
 		$step = new Step();
 		$step->setTitle('Úprava pravé strany');
-		$step->setDescription('\(x^0=\frac{1}{x^0}\) a následně \((x^0)^2=1\)');
+
+		$latex1 = MathLatexToolkit::pow('x', 0)
+			->equals(
+				MathLatexToolkit::frac(1, MathLatexToolkit::pow('x', 0))
+			)
+			->wrap('\(', '\)');
+
+		$latex2 = MathLatexToolkit::pow(
+			MathLatexToolkit::pow('x', 0)
+				->wrap('(', ')'),
+			2
+		)
+			->equals(1)
+			->wrap('\(', '\)');
+
+		$step->setDescription($latex1 . ' a následně ' . $latex2);
 		$steps[] = $step;
 
 		$step = new Step();

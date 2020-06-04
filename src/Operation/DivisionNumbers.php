@@ -6,22 +6,15 @@ namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\Entity\Query;
-use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Numbers\Calculation;
+use Mathematicator\Numbers\Latex\MathLatexBuilder;
+use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Nette\Utils\Validators;
 
 final class DivisionNumbers
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
 
 
 	/**
@@ -32,41 +25,36 @@ final class DivisionNumbers
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
-		$leftFraction = $left->getNumber()->getFraction();
-		$rightFraction = $right->getNumber()->getFraction();
+		$leftNumber = $left->getNumber();
+		$rightNumber = $right->getNumber();
+		$leftFraction = $leftNumber->toFraction();
+		$rightFraction = $rightNumber->toFraction();
 
-		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
-			$bcDiv = preg_replace(
-				'/\.0+$/',
-				'',
-				(string) bcdiv($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals())
-			);
+		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
+			$bcDiv = Calculation::of($leftNumber)->dividedBy($rightNumber->getInteger(), $query->getDecimals())->getResult()->toBigInteger();
 			if (Validators::isNumericInt($bcDiv)) {
 				$result = $bcDiv;
 			} else {
-				$result = $left->getNumber()->getInteger() . '/' . $right->getNumber()->getInteger();
+				$result = $leftNumber->toBigInteger() . '/' . $rightNumber->toBigInteger();
 			}
 		} else {
-			$result = bcmul(
-					(string) $leftFraction[0],
-					(string) $rightFraction[1],
-					$query->getDecimals()) . '/' . bcmul((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()
-				);
+			$result = $leftFraction->getNumerator()->multipliedBy($rightFraction->getDenominator())
+				. '/' . $leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator());
 		}
 
-		$newNumber = new NumberToken($this->numberFactory->create($result));
-		$newNumber->setToken($newNumber->getNumber()->getString());
-		$newNumber->setPosition($left->getPosition());
-		$newNumber->setType('number');
+		$newNumber = new NumberToken(SmartNumber::of($result));
+		$newNumber->setToken((string) $newNumber->getNumber())
+			->setPosition($left->getPosition())
+			->setType('number');
 
-		return (new NumberOperationResult)
+		return (new NumberOperationResult())
 			->setNumber($newNumber)
 			->setTitle('Dělení čísel')
 			->setDescription(
 				'Na dělení dvou čísel se můžeme dívat také jako na zlomek. '
 				. 'Čísla převedeme na zlomek, který se následně pokusíme zkrátit (pokud to bude možné).'
 				. "\n\n"
-				. $this->renderDescription($left->getNumber(), $right->getNumber(), $newNumber->getNumber())
+				. $this->renderDescription($leftNumber, $rightNumber, $newNumber->getNumber())
 				. "\n"
 			);
 	}
@@ -80,18 +68,24 @@ final class DivisionNumbers
 	 */
 	private function renderDescription(SmartNumber $left, SmartNumber $right, SmartNumber $result): string
 	{
-		$isEqual = ($left->getHumanString() . '/' . $right->getHumanString()) === $result->getHumanString();
+		$isEqual = ($left->toHumanString() . '/' . $right->toHumanString()) === $result->toHumanString();
 
-		$fraction = '\frac{' . $left->getString() . '}{' . $right->getString() . '}';
+		$fraction = MathLatexToolkit::frac($left, $right);
 
 		$return = !$isEqual
 			? 'Zlomek \(' . $fraction . '\) lze zkrátit na \(' . $result->getString() . '\).'
 			: 'Zlomek \(' . $fraction . '\) je v základním tvaru a nelze dále zkrátit.';
 
-		$return .= "\n\n" . '\(' . $left->getString() . '\ \div\ ' . $right->getString() . '\ =\ '
-			. (!$isEqual ? $fraction . '\ =\ ' : '')
-			. $result->getString() . '\)' . "\n";
+		$returnLatex = (new MathLatexBuilder($left->toLatex()))
+			->dividedBy($right->toLatex());
 
-		return $return;
+		if (!$isEqual) {
+			$returnLatex->equals($fraction);
+		}
+
+		$returnLatex->equals($result->toLatex())
+			->wrap("\n\n\\(", "\\)\n");
+
+		return $return . $returnLatex;
 	}
 }

@@ -6,25 +6,13 @@ namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\Exception\MathErrorException;
-use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\FactorialToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Tokens;
 
 final class Factorial
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	/**
-	 * @param NumberFactory $numberFactory
-	 */
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
 
 
 	/**
@@ -35,12 +23,12 @@ final class Factorial
 	public function process(FactorialToken $token): NumberOperationResult
 	{
 		$result = $token->getNumber()->getInteger();
-		$number = $this->numberFactory->create($this->bcFact($result));
+		$number = SmartNumber::of($this->bcFact($result));
 
 		$newNumber = new NumberToken($number);
-		$newNumber->setToken($number->getHumanString());
-		$newNumber->setPosition($token->getPosition());
-		$newNumber->setType(Tokens::M_NUMBER);
+		$newNumber->setToken($number->toHumanString())
+			->setPosition($token->getPosition())
+			->setType(Tokens::M_NUMBER);
 
 		$return = new NumberOperationResult;
 		$return->setNumber($newNumber);
