@@ -6,20 +6,11 @@ namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\Entity\Query;
-use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
 class SubtractNumbers
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
 
 
 	/**
@@ -30,32 +21,31 @@ class SubtractNumbers
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
-		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
-			$result = bcsub($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals());
-		} else {
-			$leftFraction = $left->getNumber()->getFraction();
-			$rightFraction = $right->getNumber()->getFraction();
+		$leftNumber = $left->getNumber();
+		$rightNumber = $right->getNumber();
 
-			$result = bcsub(
-					bcmul((string) $rightFraction[1], (string) $leftFraction[0], $query->getDecimals()),
-					bcmul((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()),
-					$query->getDecimals()
-				)
-				. '/'
-				. bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
+		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
+			$result = $leftNumber->getInteger()->minus($rightNumber);
+		} else {
+			$leftFraction = $leftNumber->getRational();
+			$rightFraction = $rightNumber->getRational();
+
+			$resultNumerator = $rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
+				->minus($leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator()));
+			$resultDenominator = $leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator());
+
+			$result = "$resultNumerator/$resultDenominator";
 		}
 
-		$newNumber = new NumberToken($this->numberFactory->create($result));
-		$newNumber->setToken($newNumber->getNumber()->getString());
-		$newNumber->setPosition($left->getPosition());
-		$newNumber->setType('number');
+		$newNumber = new NumberToken(SmartNumber::of($result));
+		$newNumber->setToken($newNumber->getNumber()->getString())
+			->setPosition($left->getPosition())
+			->setType('number');
 
-		return (new NumberOperationResult)
+		return (new NumberOperationResult())
 			->setNumber($newNumber)
 			->setDescription(
-				'Odčítání čísel '
-				. $left->getNumber()->getHumanString()
-				. ' - ' . $right->getNumber()->getHumanString()
+				'Odčítání čísel ' . $leftNumber->toHumanString() . ' - ' . $rightNumber->toHumanString()
 			);
 	}
 }

@@ -8,24 +8,11 @@ namespace Mathematicator\Calculator\Operation;
 use Mathematicator\Calculator\Step\Controller\StepMultiplicationController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
-use Mathematicator\Numbers\NumberFactory;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
 class MultiplicationNumber
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	/**
-	 * @param NumberFactory $numberFactory
-	 */
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
-
 
 	/**
 	 * @param NumberToken $left
@@ -38,13 +25,13 @@ class MultiplicationNumber
 		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
 			$result = bcmul($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals());
 		} else {
-			$leftFraction = $left->getNumber()->getFraction();
-			$rightFraction = $right->getNumber()->getFraction();
+			$leftFraction = $left->getNumber()->toFraction();
+			$rightFraction = $right->getNumber()->toFraction();
 
 			$result = bcmul((string) $leftFraction[0], (string) $rightFraction[0], $query->getDecimals()) . '/' . bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
 		}
 
-		$newNumber = new NumberToken($this->numberFactory->create($result));
+		$newNumber = new NumberToken(SmartNumber::of($result));
 		$newNumber->setToken($newNumber->getNumber()->getString());
 		$newNumber->setPosition($left->getPosition());
 		$newNumber->setType('number');
@@ -52,12 +39,12 @@ class MultiplicationNumber
 		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
-				'Násobení čísel ' . $left->getNumber()->getHumanString() . ' * ' . $right->getNumber()->getHumanString()
+				'Násobení čísel ' . $left->getNumber()->toHumanString() . ' * ' . $right->getNumber()->toHumanString()
 			)
 			->setAjaxEndpoint(
 				StepFactory::getAjaxEndpoint(StepMultiplicationController::class, [
-					'x' => $left->getNumber()->getHumanString(),
-					'y' => $right->getNumber()->getHumanString(),
+					'x' => $left->getNumber()->toHumanString(),
+					'y' => $right->getNumber()->toHumanString(),
 				])
 			);
 	}

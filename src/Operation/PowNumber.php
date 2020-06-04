@@ -10,21 +10,11 @@ use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\UndefinedOperationException;
 use Mathematicator\Numbers\Latex\MathLatexToolkit;
-use Mathematicator\Numbers\NumberFactory;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
 class PowNumber
 {
-
-	/** @var NumberFactory */
-	private $numberFactory;
-
-
-	public function __construct(NumberFactory $numberFactory)
-	{
-		$this->numberFactory = $numberFactory;
-	}
 
 
 	/**
@@ -36,21 +26,28 @@ class PowNumber
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
-		$leftFraction = $left->getNumber()->getFraction();
-		$rightFraction = $right->getNumber()->getFraction();
+		$leftNumber = $left->getNumber();
+		$rightNumber = $right->getNumber();
+		$leftFraction = $leftNumber->toFraction();
+		$rightFraction = $rightNumber->toFraction();
 
 		$result = null;
 
-		if (($rightInteger = $right->getNumber()->isInteger()) && $left->getNumber()->isInteger()) {
-			if ($left->getNumber()->getInteger() === '0' && $right->getNumber()->getInteger() === '0') {
+		$rightIsInteger = $rightNumber->isInteger();
+
+		if ($rightIsInteger && $leftNumber->isInteger()) {
+			if (
+				$leftNumber->getInteger()->isEqualTo(0)
+				&& $rightNumber->getInteger()->isEqualTo(0)
+			) {
 				throw new UndefinedOperationException(__METHOD__ . ': Undefined operation.');
 			}
 
 			$result = bcpow($left->getToken(), $right->getToken(), $query->getDecimals());
-		} elseif ($rightInteger === true) {
+		} elseif ($rightIsInteger === true) {
 			$result = bcpow((string) $leftFraction[0], $right->getToken(), $query->getDecimals()) . '/' . bcpow((string) $leftFraction[1], $right->getToken(), $query->getDecimals());
 		} else {
-			if ($right->getNumber()->isNegative()) {
+			if ($rightNumber->isNegative()) {
 				$rightFraction = [
 					$rightFraction[1],
 					$rightFraction[0],
@@ -68,19 +65,19 @@ class PowNumber
 				);
 		}
 
-		$newNumber = new NumberToken($this->numberFactory->create($result));
+		$newNumber = new NumberToken(SmartNumber::of($result));
 		$newNumber->setToken($newNumber->getNumber()->getString());
 		$newNumber->setPosition($left->getPosition());
 		$newNumber->setType('number');
 
 		return (new NumberOperationResult)
 			->setNumber($newNumber)
-			->setTitle('Umocňování čísel ' . $left->getNumber()->getHumanString() . ' ^ ' . $right->getNumber()->getHumanString())
-			->setDescription($this->renderDescription($left->getNumber(), $right->getNumber(), $newNumber->getNumber()))
+			->setTitle('Umocňování čísel ' . $leftNumber->toHumanString() . ' ^ ' . $rightNumber->toHumanString())
+			->setDescription($this->renderDescription($leftNumber, $rightNumber, $newNumber->getNumber()))
 			->setAjaxEndpoint(
 				StepFactory::getAjaxEndpoint(StepPowController::class, [
-					'x' => $left->getNumber()->getHumanString(),
-					'y' => $right->getNumber()->getHumanString(),
+					'x' => $leftNumber->toHumanString(),
+					'y' => $rightNumber->toHumanString(),
 					'result' => $newNumber->getNumber()->getString(),
 				])
 			);
@@ -107,7 +104,7 @@ class PowNumber
 
 		return (string) MathLatexToolkit::create(
 			MathLatexToolkit::pow(
-				$left->getHumanString(), $right->getHumanString()
+				$left->toHumanString(), $right->toHumanString()
 			)->equals($result->getString()),
 			'\(', '\)'
 		);

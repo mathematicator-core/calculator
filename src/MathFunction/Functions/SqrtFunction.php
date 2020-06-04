@@ -30,7 +30,7 @@ class SqrtFunction implements IFunction
 		$number = $token->getNumber();
 
 		if ($number->isNegative() === true) {
-			throw new MathErrorException('Sqrt is smaller than 0, but number "' . $number->getHumanString() . '" given.');
+			throw new MathErrorException('Sqrt is smaller than 0, but number "' . $number->toHumanString() . '" given.');
 		}
 
 		$sqrt = bcsqrt($number->getFloatString(), 100);
