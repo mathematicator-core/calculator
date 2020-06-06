@@ -155,7 +155,7 @@ class BaseOperation
 	{
 		return $this->processFactorial(
 			(new FactorialToken($token->getNumber()))
-				->setToken($token->getNumber()->toHumanString())
+				->setToken((string) $token->getNumber()->toHumanString())
 				->setPosition($token->getPosition())
 				->setType(Tokens::M_FACTORIAL)
 		)->setIteratorStep(1);

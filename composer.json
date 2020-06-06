@@ -20,9 +20,9 @@
 		"brick/math": "^0.8.15",
 		"contributte/psr6-caching": "^0.2@dev",
 		"contributte/psr11-container-interface": "^0.4.1",
-		"mathematicator-core/engine": "^2.1@dev",
-		"mathematicator-core/numbers": "^2.1@dev",
-		"mathematicator-core/tokenizer": "^2.1@dev",
+		"mathematicator-core/engine": "^2.2@dev",
+		"mathematicator-core/numbers": "^2.2@dev",
+		"mathematicator-core/tokenizer": "^2.2@dev",
 		"nette/application": "^3.0",
 		"nette/utils": "^3.0",
 		"symfony/polyfill-php80": "^1.17"
@@ -81,7 +81,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.1.x-dev"
+			"dev-master": "2.2.x-dev"
 		},
 		"hooks": {
 			"post-merge": "composer install",

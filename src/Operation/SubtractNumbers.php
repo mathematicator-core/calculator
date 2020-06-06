@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator\Operation;
 
 
 use Mathematicator\Engine\Entity\Query;
+use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
@@ -25,10 +26,10 @@ class SubtractNumbers
 		$rightNumber = $right->getNumber();
 
 		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
-			$result = $leftNumber->getInteger()->minus($rightNumber);
+			$result = Calculation::of($leftNumber)->minus($rightNumber->getNumber())->getResult();
 		} else {
-			$leftFraction = $leftNumber->getRational();
-			$rightFraction = $rightNumber->getRational();
+			$leftFraction = $leftNumber->toBigRational();
+			$rightFraction = $rightNumber->toBigRational();
 
 			$resultNumerator = $rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
 				->minus($leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator()));
@@ -38,7 +39,7 @@ class SubtractNumbers
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));
-		$newNumber->setToken($newNumber->getNumber()->getString())
+		$newNumber->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');
 

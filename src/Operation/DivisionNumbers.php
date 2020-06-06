@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Brick\Math\BigRational;
+use Brick\Math\Exception\RoundingNecessaryException;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\Latex\MathLatexBuilder;
 use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
-use Nette\Utils\Validators;
 
 final class DivisionNumbers
 {
@@ -27,19 +28,26 @@ final class DivisionNumbers
 	{
 		$leftNumber = $left->getNumber();
 		$rightNumber = $right->getNumber();
-		$leftFraction = $leftNumber->toFraction();
-		$rightFraction = $rightNumber->toFraction();
 
 		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
-			$bcDiv = Calculation::of($leftNumber)->dividedBy($rightNumber->getInteger(), $query->getDecimals())->getResult()->toBigInteger();
-			if (Validators::isNumericInt($bcDiv)) {
-				$result = $bcDiv;
-			} else {
-				$result = $leftNumber->toBigInteger() . '/' . $rightNumber->toBigInteger();
+			$result = Calculation::of($leftNumber)
+				->dividedBy($rightNumber->toBigInteger())
+				->getResult()
+				->toBigRational()
+				->simplified();
+
+			try {
+				$result = $result->toBigInteger();
+			} catch (RoundingNecessaryException $e) {
 			}
 		} else {
-			$result = $leftFraction->getNumerator()->multipliedBy($rightFraction->getDenominator())
-				. '/' . $leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator());
+			$leftFraction = $leftNumber->toBigRational();
+			$rightFraction = $rightNumber->toBigRational();
+
+			$result = BigRational::nd(
+				$leftFraction->getNumerator()->multipliedBy($rightFraction->getDenominator()),
+				$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())
+			)->simplified();
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));
@@ -68,13 +76,13 @@ final class DivisionNumbers
 	 */
 	private function renderDescription(SmartNumber $left, SmartNumber $right, SmartNumber $result): string
 	{
-		$isEqual = ($left->toHumanString() . '/' . $right->toHumanString()) === $result->toHumanString();
+		$isEqual = ((string) $left . '/' . (string) $right) === (string) $result;
 
-		$fraction = MathLatexToolkit::frac($left, $right);
+		$fraction = MathLatexToolkit::frac((string) $left, (string) $right);
 
-		$return = !$isEqual
-			? 'Zlomek \(' . $fraction . '\) lze zkrátit na \(' . $result->getString() . '\).'
-			: 'Zlomek \(' . $fraction . '\) je v základním tvaru a nelze dále zkrátit.';
+		$return = $isEqual
+			? 'Zlomek \(' . $fraction . '\) je v základním tvaru a nelze dále zkrátit.'
+			: 'Zlomek \(' . $fraction . '\) lze zkrátit na \(' . $result . '\).';
 
 		$returnLatex = (new MathLatexBuilder($left->toLatex()))
 			->dividedBy($right->toLatex());

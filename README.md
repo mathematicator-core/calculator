@@ -1,5 +1,5 @@
 <h1 align="center">
-    Robust PHP math calculator
+    Advance PHP Calculator
 </h1>
 
 <p align="center">
@@ -10,16 +10,18 @@
 
 [![Integrity check](https://github.com/mathematicator-core/calculator/workflows/Integrity%20check/badge.svg)](https://github.com/mathematicator-core/calculator/actions?query=workflow%3A%22Integrity+check%22)
 [![codecov](https://codecov.io/gh/mathematicator-core/calculator/branch/master/graph/badge.svg)](https://codecov.io/gh/mathematicator-core/calculator)
+[![Latest Stable Version](https://poser.pugx.org/mathematicator-core/calculator/v/stable)](https://packagist.org/packages/mathematicator-core/calculator)
+[![Latest Unstable Version](https://poser.pugx.org/mathematicator-core/calculator/v/unstable)](https://packagist.org/packages/mathematicator-core/calculator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
 [![PHPStan Enabled](https://img.shields.io/badge/PHPStan-enabled%20L8-brightgreen.svg?style=flat)](https://phpstan.org/)
 
-Simple to use robust and modular math library for symbolic-work with numbers, operations and patterns.
+Simple to use **modular calculator** with **steps to solution** and **result explanation**.
 
-> Please help improve this documentation by sending a Pull request.
+It is highly recommended to make sure you have enabled [BCMath](https://www.php.net/manual/en/book.bc.php)
+or [GMP](https://www.php.net/manual/en/book.gmp.php) extension on your PHP server for much
+faster calculations.
 
 ## Installation
-
-Install by Composer:
 
 ```
 composer require mathematicator-core/calculator
@@ -164,7 +166,31 @@ one to the most abstract one:
     </tr>
 </table>
 
+**Third-party packages:**
+
+⚠️ Not guaranteed!
+
+<table>
+    <tr>
+        <td>
+            <b>
+            <a href="https://github.com/cothema/math-php-api">
+                REST API
+            </a>
+            </b>
+        </td>
+        <td>
+            Install the whole pack as a REST API service
+            on your server (Docker ready) or
+            access it via public cloud REST API.
+        </td>
+    </tr>
+</table>
+
+
 ## Contribution
+
+> Please help improve this documentation by sending a Pull request.
 
 ### Tests
 

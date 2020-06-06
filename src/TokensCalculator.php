@@ -120,7 +120,7 @@ final class TokensCalculator
 								: $inputToken->getToken()
 							) . ')'
 						);
-						if (($functionResult = $this->functionManager->solve($token->getName(), $inputToken)) === null) {
+						if ($token->getName() === '' || ($functionResult = $this->functionManager->solve($token->getName(), $inputToken)) === null) {
 							$result[] = $inputToken;
 						} else {
 							$result[] = $functionResult->getOutput();
