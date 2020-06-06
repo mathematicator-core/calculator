@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Brick\Math\BigInteger;
 use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\FactorialToken;
@@ -22,24 +23,24 @@ final class Factorial
 	 */
 	public function process(FactorialToken $token): NumberOperationResult
 	{
-		$result = $token->getNumber()->getInteger();
+		$result = $token->getNumber()->toBigInteger();
 		$number = SmartNumber::of($this->bcFact($result));
 
 		$newNumber = new NumberToken($number);
-		$newNumber->setToken($number->toHumanString())
+		$newNumber->setToken((string) $number->toHumanString())
 			->setPosition($token->getPosition())
 			->setType(Tokens::M_NUMBER);
 
-		$return = new NumberOperationResult;
+		$return = new NumberOperationResult();
 		$return->setNumber($newNumber);
 		$return->setTitle('Faktoriál ' . $result . '!');
 		$return->setDescription(
 			'Definice:' . "\n"
 			. '\(n!\ =\ n\ \cdot\ (n-1)\ \cdot\ (n-2)\ \cdot\ \cdots\)' . "\n\n"
 			. 'Výpočet:' . "\n"
-			. $this->getDescriptionTimes((int) $token->getNumber()->getInteger()) . "\n"
-			. '\(' . $token->getNumber()->getString() . '!\ =\ '
-			. preg_replace('/(\d{3})/', '$1\ ', $newNumber->getNumber()->getString())
+			. $this->getDescriptionTimes($token->getNumber()->toInt()) . "\n"
+			. '\(' . $token->getNumber() . '!\ =\ '
+			. preg_replace('/(\d{3})/', '$1\ ', (string) $newNumber->getNumber())
 			. '\)'
 		);
 
@@ -48,25 +49,25 @@ final class Factorial
 
 
 	/**
-	 * @param string $num
-	 * @return string
+	 * @param BigInteger $num
+	 * @return BigInteger
 	 * @throws MathErrorException
 	 */
-	private function bcFact(string $num): string
+	private function bcFact(BigInteger $num): BigInteger
 	{
-		if ($num === '0') {
-			return '1';
+		if ($num->isEqualTo(0)) {
+			return BigInteger::one();
 		}
 
-		if ($num <= 0 || !filter_var($num, FILTER_VALIDATE_INT)) {
+		if ($num->isLessThanOrEqualTo(0)) {
 			throw new MathErrorException('Argument must be natural number, "' . $num . '" given.');
 		}
 
-		for ($result = 1; $num > 0; $num--) {
-			$result = bcmul((string) $result, (string) (int) $num);
+		for ($result = BigInteger::one(); $num->isGreaterThan(0); $num = $num->minus(1)) {
+			$result = $result->multipliedBy($num);
 		}
 
-		return (string) $result;
+		return $result;
 	}
 
 

@@ -12,6 +12,7 @@ use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Exception\MathErrorException;
 use Mathematicator\Engine\Step\Step;
 use Mathematicator\Numbers\Exception\NumberException;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
@@ -25,7 +26,10 @@ class SqrtFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
-		assert($token instanceof NumberToken);
+		if (!($token instanceof NumberToken)) {
+			throw new \InvalidArgumentException();
+		}
+
 		$result = new FunctionResult();
 		$number = $token->getNumber();
 
@@ -33,14 +37,14 @@ class SqrtFunction implements IFunction
 			throw new MathErrorException('Sqrt is smaller than 0, but number "' . $number->toHumanString() . '" given.');
 		}
 
-		$sqrt = bcsqrt($number->getFloatString(), 100);
-		$token->getNumber()->setValue($sqrt);
-		$token->setToken($sqrt);
+		$sqrt = $number->toBigDecimal()->sqrt(100);
+		$token->setNumber(SmartNumber::of($sqrt));
+		$token->setToken((string) $sqrt);
 
 		$step = new Step();
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtController::class, [
-				'n' => $number->getFloat(),
+				'n' => $number->toFloat(),
 			])
 		);
 

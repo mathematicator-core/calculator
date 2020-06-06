@@ -1,7 +1,0 @@
-services:
-	- Mathematicator\Engine\QueryNormalizer
-	- Mathematicator\Numbers\NumberFactory
-	- Mathematicator\Engine\NumberRewriter
-	- Mathematicator\Tokenizer\Tokenizer
-	- Mathematicator\Tokenizer\TokensToLatex
-	- Mathematicator\Tokenizer\TokensToObject

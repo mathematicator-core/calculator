@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Brick\Math\BigDecimal;
+use Brick\Math\BigRational;
+use Brick\Math\RoundingMode;
 use Mathematicator\Calculator\Step\Controller\StepPowController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
 use Mathematicator\Engine\Exception\UndefinedOperationException;
+use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
@@ -28,8 +32,8 @@ class PowNumber
 	{
 		$leftNumber = $left->getNumber();
 		$rightNumber = $right->getNumber();
-		$leftFraction = $leftNumber->toFraction();
-		$rightFraction = $rightNumber->toFraction();
+		$leftFraction = $leftNumber->toBigRational();
+		$rightFraction = $rightNumber->toBigRational();
 
 		$result = null;
 
@@ -37,40 +41,46 @@ class PowNumber
 
 		if ($rightIsInteger && $leftNumber->isInteger()) {
 			if (
-				$leftNumber->getInteger()->isEqualTo(0)
-				&& $rightNumber->getInteger()->isEqualTo(0)
+				$leftNumber->isEqualTo(0)
+				&& $rightNumber->isEqualTo(0)
 			) {
 				throw new UndefinedOperationException(__METHOD__ . ': Undefined operation.');
 			}
 
-			$result = bcpow($left->getToken(), $right->getToken(), $query->getDecimals());
-		} elseif ($rightIsInteger === true) {
-			$result = bcpow((string) $leftFraction[0], $right->getToken(), $query->getDecimals()) . '/' . bcpow((string) $leftFraction[1], $right->getToken(), $query->getDecimals());
+			$result = Calculation::of($left->getNumber())
+				->power($right->getNumber()->toInt())
+				->getResult();
+		} elseif ($rightIsInteger) {
+			$result = BigRational::nd(
+				$leftFraction->getNumerator()->power($right->getNumber()->toInt()),
+				$leftFraction->getDenominator()->power($right->getNumber()->toInt())
+			);
 		} else {
 			if ($rightNumber->isNegative()) {
-				$rightFraction = [
-					$rightFraction[1],
-					$rightFraction[0],
-				];
+				$rightFraction = BigRational::nd(
+					$rightFraction->getDenominator(),
+					$rightFraction->getNumerator()
+				);
 			}
 
-			$result = pow(
-					(float) bcpow((string) $leftFraction[0], (string) $rightFraction[0], $query->getDecimals()),
-					(float) bcdiv('1', (string) $rightFraction[1], $query->getDecimals())
+			$result = BigRational::nd(
+				pow(
+					$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt(),
+					BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
+				),
+				pow(
+					$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt(),
+					BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
 				)
-				. '/'
-				. pow(
-					(float) bcpow((string) $leftFraction[1], (string) $rightFraction[0], $query->getDecimals()),
-					(float) bcdiv('1', (string) $rightFraction[1], $query->getDecimals())
-				);
+			);
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));
-		$newNumber->setToken($newNumber->getNumber()->getString());
-		$newNumber->setPosition($left->getPosition());
-		$newNumber->setType('number');
+		$newNumber->setToken((string) $newNumber->getNumber())
+			->setPosition($left->getPosition())
+			->setType('number');
 
-		return (new NumberOperationResult)
+		return (new NumberOperationResult())
 			->setNumber($newNumber)
 			->setTitle('Umocňování čísel ' . $leftNumber->toHumanString() . ' ^ ' . $rightNumber->toHumanString())
 			->setDescription($this->renderDescription($leftNumber, $rightNumber, $newNumber->getNumber()))
@@ -78,7 +88,7 @@ class PowNumber
 				StepFactory::getAjaxEndpoint(StepPowController::class, [
 					'x' => $leftNumber->toHumanString(),
 					'y' => $rightNumber->toHumanString(),
-					'result' => $newNumber->getNumber()->getString(),
+					'result' => (string) $newNumber->getNumber(),
 				])
 			);
 	}
@@ -96,7 +106,7 @@ class PowNumber
 			return 'Umocňování zlomků je zatím experimentální a může poskytnout jen přibližný výsledek.';
 		}
 
-		if ($right->isInteger() && $right->getInteger() === '0') {
+		if ($right->isEqualTo(0)) {
 			return '\({a}^{0}\ =\ 1\) Cokoli na nultou (kromě nuly) je vždy jedna. '
 				. 'Umocňování na nultou si lze také představit jako nekonečné odmocňování, '
 				. 'proto se limitně blíží k jedné.';
@@ -105,7 +115,7 @@ class PowNumber
 		return (string) MathLatexToolkit::create(
 			MathLatexToolkit::pow(
 				$left->toHumanString(), $right->toHumanString()
-			)->equals($result->getString()),
+			)->equals((string) $result),
 			'\(', '\)'
 		);
 	}

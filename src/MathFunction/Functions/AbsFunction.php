@@ -7,6 +7,7 @@ namespace Mathematicator\Calculator\MathFunction\Functions;
 
 use Mathematicator\Calculator\MathFunction\FunctionResult;
 use Mathematicator\Calculator\MathFunction\IFunction;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
@@ -19,11 +20,14 @@ class AbsFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
-		assert($token instanceof NumberToken);
+		if (!($token instanceof NumberToken)) {
+			throw new \InvalidArgumentException();
+		}
+
 		$result = new FunctionResult();
 
-		$abs = preg_replace('/^-/', '', $token->getNumber()->getInput());
-		$token->getNumber()->setValue((string) $abs);
+		$abs = $token->getNumber()->getNumber()->toBigDecimal()->abs();
+		$token->setNumber(SmartNumber::of($abs));
 
 		$result->setOutput($token);
 

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Step\Controller;
 
 
+use Brick\Math\BigInteger;
 use Mathematicator\Engine\Step\Step;
+use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Validators;
@@ -61,7 +63,7 @@ final class StepPowController implements IStepController
 
 		$step = new Step();
 		$step->setDescription('Díky tomuto faktu je možné tvrdit že:');
-		$step->setLatex((string) MathLatexToolkit::pow('x', 0)->equals(MathLatexToolkit::pow("-0")));
+		$step->setLatex((string) MathLatexToolkit::pow('x', 0)->equals(MathLatexToolkit::pow('x', '-0')));
 		$steps[] = $step;
 
 		$step = new Step();
@@ -126,10 +128,9 @@ final class StepPowController implements IStepController
 
 		$steps[] = new Step(
 			'Řešení',
-			MathLatexToolkit::create(MathLatexToolkit::pow($x, $y))
+			(string) MathLatexToolkit::create(MathLatexToolkit::pow($x, $y))
 				->equals((string) $numbers)
-				->equals(bcpow($x, $y))
-				->__toString(),
+				->equals((string) Calculation::of($x)->power(BigInteger::of($y))),
 			'Umocňování je operace, která vyjadřuje opakované násobení.'
 		);
 

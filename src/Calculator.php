@@ -168,7 +168,7 @@ class Calculator
 			if ($token instanceof SubToken) {
 				$tokensToSerialize .= 'SUB:' . $this->tokensSerialize($token->getTokens());
 			} elseif ($token instanceof NumberToken) {
-				$tokensToSerialize .= $token->getNumber()->getString();
+				$tokensToSerialize .= (string) $token->getNumber();
 			} else {
 				$tokensToSerialize .= $token->getType();
 			}

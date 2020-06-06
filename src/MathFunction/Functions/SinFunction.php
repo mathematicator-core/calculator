@@ -11,6 +11,7 @@ use Mathematicator\Calculator\Step\Controller\StepSinController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Step\Step;
 use Mathematicator\Numbers\Exception\NumberException;
+use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\InfinityToken;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
@@ -27,10 +28,13 @@ class SinFunction implements IFunction
 	 */
 	public function process(IToken $token): FunctionResult
 	{
-		assert($token instanceof NumberToken);
+		if (!($token instanceof NumberToken)) {
+			throw new \InvalidArgumentException();
+		}
+
 		$result = new FunctionResult();
 
-		$x = $token->getNumber()->getFloat();
+		$x = $token->getNumber()->toFloat();
 
 		if ($token instanceof PiToken) {
 			$sin = 0;
@@ -38,7 +42,7 @@ class SinFunction implements IFunction
 			$sin = sin($x);
 		}
 
-		$token->getNumber()->setValue((string) $sin);
+		$token->setNumber(SmartNumber::of($sin));
 		$token->setToken((string) $sin);
 
 		$step = new Step();

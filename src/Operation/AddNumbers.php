@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Brick\Math\BigRational;
 use Mathematicator\Calculator\Step\Controller\StepPlusController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
@@ -28,28 +29,32 @@ class AddNumbers
 		$rightNumber = $right->getNumber();
 
 		if ($leftNumber->isInteger() && $rightNumber->isInteger()) {
-			$result = Calculation::of($leftNumber)->plus($rightNumber);
+			$result = Calculation::of($leftNumber)
+				->plus($rightNumber->getNumber())
+				->getResult();
 		} else {
-			$leftFraction = $leftNumber->toFraction();
-			$rightFraction = $rightNumber->toFraction();
+			$leftFraction = $leftNumber->toBigRational();
+			$rightFraction = $rightNumber->toBigRational();
 
-			$result = $rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
+			$result = BigRational::nd(
+				$rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
 					->plus(
 						$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())
-					) . '/' .
-				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator());
+					),
+				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
+			)->simplified();
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));
 		$newNumber
-			->setToken($newNumber->getNumber()->getString())
+			->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');
 
-		$_left = $leftNumber->toHumanString();
-		$_right = $rightNumber->toHumanString();
+		$_left = (string) $leftNumber->toHumanString();
+		$_right = (string) $rightNumber->toHumanString();
 
-		return (new NumberOperationResult)
+		return (new NumberOperationResult())
 			->setNumber($newNumber)
 			->setDescription(
 				'Sčítání čísel '

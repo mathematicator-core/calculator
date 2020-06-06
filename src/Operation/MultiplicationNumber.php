@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Operation;
 
 
+use Brick\Math\BigRational;
 use Mathematicator\Calculator\Step\Controller\StepMultiplicationController;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Entity\Query;
+use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
@@ -23,20 +25,25 @@ class MultiplicationNumber
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {
-			$result = bcmul($left->getNumber()->getInteger(), $right->getNumber()->getInteger(), $query->getDecimals());
+			$result = Calculation::of($left->getNumber()->getNumber())
+				->multipliedBy($right->getNumber()->getNumber())
+				->getResult();
 		} else {
-			$leftFraction = $left->getNumber()->toFraction();
-			$rightFraction = $right->getNumber()->toFraction();
+			$leftFraction = $left->getNumber()->toBigRational();
+			$rightFraction = $right->getNumber()->toBigRational();
 
-			$result = bcmul((string) $leftFraction[0], (string) $rightFraction[0], $query->getDecimals()) . '/' . bcmul((string) $leftFraction[1], (string) $rightFraction[1], $query->getDecimals());
+			$result = BigRational::nd(
+				$leftFraction->getNumerator()->multipliedBy($rightFraction->getNumerator()),
+				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
+			);
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));
-		$newNumber->setToken($newNumber->getNumber()->getString());
-		$newNumber->setPosition($left->getPosition());
-		$newNumber->setType('number');
+		$newNumber->setToken((string) $newNumber->getNumber())
+			->setPosition($left->getPosition())
+			->setType('number');
 
-		return (new NumberOperationResult)
+		return (new NumberOperationResult())
 			->setNumber($newNumber)
 			->setDescription(
 				'Násobení čísel ' . $left->getNumber()->toHumanString() . ' * ' . $right->getNumber()->toHumanString()

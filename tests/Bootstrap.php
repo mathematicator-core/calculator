@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Mathematicator\Calculator\Tests;
 
-require __DIR__ . '/../vendor/autoload.php';
 
 use Nette\Configurator;
 use Nette\DI\Container;
 use Tester\Environment;
 
-Environment::setup();
+if (\is_file($autoload = __DIR__ . '/../vendor/autoload.php')) {
+	require_once $autoload;
+	Environment::setup();
+}
 
 class Bootstrap
 {
@@ -26,8 +28,9 @@ class Bootstrap
 			->register();
 
 		$configurator
-			->addConfig(__DIR__ . '/../common.neon')
-			->addConfig(__DIR__ . '/config.neon');
+			->addConfig(__DIR__ . '/../vendor/mathematicator-core/tokenizer/common.neon')
+			->addConfig(__DIR__ . '/../vendor/mathematicator-core/engine/common.neon')
+			->addConfig(__DIR__ . '/../common.neon');
 
 		return $configurator->createContainer();
 	}
