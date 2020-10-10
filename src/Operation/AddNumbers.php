@@ -28,16 +28,16 @@ final class AddNumbers
 			$leftFraction = $leftNumber->toBigRational();
 			$rightFraction = $rightNumber->toBigRational();
 
-			$result = BigRational::nd(
-				$rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
-					->plus(
-						$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())
-					),
-				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
-			)->simplified();
+			$result = SmartNumber::of(
+				BigRational::nd(
+					$rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
+						->plus($leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())),
+					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
+				)->simplified()
+			);
 		}
 
-		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
+		$newNumber = new NumberToken($result);
 		$newNumber
 			->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())

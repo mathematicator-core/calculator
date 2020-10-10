@@ -30,10 +30,7 @@ final class PowNumber
 		$leftFraction = $leftNumber->toBigRational();
 		$rightFraction = $rightNumber->toBigRational();
 
-		$result = null;
-		$rightIsInteger = $rightNumber->isInteger();
-
-		if ($rightIsInteger && $leftNumber->isInteger()) {
+		if (($rightIsInteger = $rightNumber->isInteger()) === true && $leftNumber->isInteger()) {
 			if ($leftNumber->isEqualTo(0) && $rightNumber->isEqualTo(0)) {
 				throw new UndefinedOperationException(__METHOD__ . ': Undefined operation.');
 			}
@@ -41,32 +38,36 @@ final class PowNumber
 			$result = Calculation::of($left->getNumber())
 				->power($right->getNumber()->toInt())
 				->getResult();
-		} elseif ($rightIsInteger) {
-			$result = BigRational::nd(
-				$leftFraction->getNumerator()->power($right->getNumber()->toInt()),
-				$leftFraction->getDenominator()->power($right->getNumber()->toInt())
+		} elseif ($rightIsInteger === true) {
+			$result = SmartNumber::of(
+				BigRational::nd(
+					$leftFraction->getNumerator()->power($right->getNumber()->toInt()),
+					$leftFraction->getDenominator()->power($right->getNumber()->toInt())
+				)
 			);
 		} else {
-			if ($rightNumber->isNegative()) {
+			if ($rightNumber->isNegative() === true) {
 				$rightFraction = BigRational::nd(
 					$rightFraction->getDenominator(),
 					$rightFraction->getNumerator()
 				);
 			}
 
-			$result = BigRational::nd(
-				pow(
-					$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt(),
-					BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
-				),
-				pow(
-					$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt(),
-					BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
+			$result = SmartNumber::of(
+				BigRational::nd(
+					pow(
+						$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt(),
+						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
+					),
+					pow(
+						$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt(),
+						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
+					)
 				)
 			);
 		}
 
-		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
+		$newNumber = new NumberToken($result);
 		$newNumber->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');

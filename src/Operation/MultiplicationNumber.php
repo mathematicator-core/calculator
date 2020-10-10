@@ -25,13 +25,15 @@ class MultiplicationNumber
 			$leftFraction = $left->getNumber()->toBigRational();
 			$rightFraction = $right->getNumber()->toBigRational();
 
-			$result = BigRational::nd(
-				$leftFraction->getNumerator()->multipliedBy($rightFraction->getNumerator()),
-				$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
+			$result = SmartNumber::of(
+				BigRational::nd(
+					$leftFraction->getNumerator()->multipliedBy($rightFraction->getNumerator()),
+					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
+				)
 			);
 		}
 
-		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
+		$newNumber = new NumberToken($result);
 		$newNumber->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');
