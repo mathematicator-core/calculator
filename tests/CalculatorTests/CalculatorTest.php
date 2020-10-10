@@ -22,14 +22,12 @@ class CalculatorTest extends TestCase
 
 	public function __construct(Container $container)
 	{
-		$this->calculator = $container->getService('calculator');
+		$this->calculator = $container->getByType(Calculator::class);
 	}
 
 
 	/**
 	 * @dataprovider getCalculateStringCases
-	 * @param string $expected
-	 * @param string $query
 	 */
 	public function testCalculateString(string $expected, string $query): void
 	{
