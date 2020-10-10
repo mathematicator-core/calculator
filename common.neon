@@ -1,4 +1,2 @@
 extensions:
 	mathematicator.calculator: Mathematicator\Calculator\CalculatorExtension
-	psr6: Contributte\Psr6\DI\Psr6CachingExtension
-	psr11: Contributte\Psr11\DI\Psr11ContainerExtension
