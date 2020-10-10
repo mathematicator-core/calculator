@@ -1,39 +1,4 @@
-services:
-	calculator: Mathematicator\Calculator\Calculator
-	- Mathematicator\Calculator\TokensCalculator
-	- Mathematicator\Calculator\Numbers\NumberHelper
-	- Mathematicator\Calculator\Step\StepFactory
-
-	# operations
-	baseOperation: Mathematicator\Calculator\Operation\BaseOperation
-	- Mathematicator\Calculator\Operation\AddNumbers
-	- Mathematicator\Calculator\Operation\SubtractNumbers
-	- Mathematicator\Calculator\Operation\MultiplicationNumber
-	- Mathematicator\Calculator\Operation\DivisionNumbers
-	- Mathematicator\Calculator\Operation\PowNumber
-	- Mathematicator\Calculator\Operation\Factorial
-
-	# steps
-	- Mathematicator\Calculator\Step\StepEndpoint
-	- Mathematicator\Calculator\Step\Model\RomanIntSteps
-
-	# step controllers
-	- Mathematicator\Calculator\Step\Controller\StepPlusController
-	- Mathematicator\Calculator\Step\Controller\StepMultiplicationController
-	- Mathematicator\Calculator\Step\Controller\StepSqrtController
-	- Mathematicator\Calculator\Step\Controller\StepSqrtHelper
-	- Mathematicator\Calculator\Step\Controller\StepPowController
-	- Mathematicator\Calculator\Step\Controller\StepSinController
-
-	# Functions
-	- Mathematicator\Calculator\MathFunction\FunctionManager
-	- Mathematicator\Calculator\MathFunction\Functions\AbsFunction
-	- Mathematicator\Calculator\MathFunction\Functions\SqrtFunction
-	- Mathematicator\Calculator\MathFunction\Functions\SinFunction
-
-	# Algorithm
-	- Mathematicator\Calculator\Equation\NewtonMethod
-
 extensions:
+	mathematicator.calculator: Mathematicator\Calculator\CalculatorExtension
 	psr6: Contributte\Psr6\DI\Psr6CachingExtension
 	psr11: Contributte\Psr11\DI\Psr11ContainerExtension
