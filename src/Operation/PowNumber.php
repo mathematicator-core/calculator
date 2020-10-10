@@ -66,7 +66,7 @@ final class PowNumber
 			);
 		}
 
-		$newNumber = new NumberToken(SmartNumber::of($result));
+		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
 		$newNumber->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');

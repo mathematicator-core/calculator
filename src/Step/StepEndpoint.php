@@ -42,9 +42,8 @@ final class StepEndpoint
 		}
 
 		$return = [];
-
-		/** @var Step[] $steps */
 		foreach ($steps as $step) {
+			/** @var Step $step */
 			$return[] = [
 				'title' => $step->getTitle(),
 				'latex' => $step->getLatex(),

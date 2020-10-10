@@ -11,7 +11,6 @@ use Nette\Application\UI\InvalidLinkException;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 use Psr\Cache\CacheItemPoolInterface;
-use function strlen;
 
 class NumberHelper
 {
@@ -88,7 +87,7 @@ class NumberHelper
 		$return = 0;
 		for ($i = 0; $i < $romanLength; $i++) {
 			$x = self::$romanNumber[$roman[$i]];
-			if ($i + 1 < strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
+			if ($i + 1 < \strlen($roman) && ($nextToken = self::$romanNumber[$roman[$i + 1]]) > $x) {
 				$return += $nextToken - $x;
 				$i++;
 			} else {
@@ -100,7 +99,7 @@ class NumberHelper
 	}
 
 
-	public function getPi($len = 16): string
+	public function getPi(int $len = 16): string
 	{
 		$pi = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
 			. '8214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196'
@@ -126,9 +125,9 @@ class NumberHelper
 	/**
 	 * @return int[]
 	 */
-	public function floatToFraction(float $n, $tolerance = 1.e-8): array
+	public function floatToFraction(float $n, float $tolerance = 1.e-8): array
 	{
-		$n = abs($n);
+		$n = \abs($n);
 		$h1 = 1;
 		$h2 = 0;
 		$k1 = 0;
@@ -223,9 +222,9 @@ class NumberHelper
 		$x = $numberFormat($x);
 		$y = $numberFormat($y);
 
-		$lenX = strlen($x);
-		$lenY = strlen($y) + 2;
-		$lenResult = strlen($result);
+		$lenX = \strlen($x);
+		$lenY = \strlen($y) + 2;
+		$lenResult = \strlen($result);
 
 		$return .= $x . '<br>';
 		$return .= '+&nbsp;' . $y . '<br>';
