@@ -18,11 +18,11 @@
 	"require": {
 		"php": ">=7.2",
 		"brick/math": "^0.8.15",
-		"contributte/psr6-caching": "^0.2@dev",
+		"contributte/psr6-caching": "^0.2",
 		"contributte/psr11-container-interface": "^0.4.1",
-		"mathematicator-core/engine": "^2.2@dev",
-		"mathematicator-core/numbers": "^2.2@dev",
-		"mathematicator-core/tokenizer": "^2.2@dev",
+		"mathematicator-core/engine": "^2.0",
+		"mathematicator-core/numbers": "^2.1",
+		"mathematicator-core/tokenizer": "^2.1",
 		"nette/application": "^3.0",
 		"nette/utils": "^3.0",
 		"symfony/polyfill-php80": "^1.17"
