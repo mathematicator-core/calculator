@@ -32,7 +32,7 @@ final class SubtractNumbers
 			$result = SmartNumber::of($resultNumerator . '/' . $resultDenominator);
 		}
 
-		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
+		$newNumber = new NumberToken($result);
 		$newNumber->setToken((string) $newNumber->getNumber())
 			->setPosition($left->getPosition())
 			->setType('number');
