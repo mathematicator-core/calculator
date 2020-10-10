@@ -29,7 +29,7 @@ final class SubtractNumbers
 
 			$resultDenominator = $leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator());
 
-			$result = $resultNumerator . '/' . $resultDenominator;
+			$result = SmartNumber::of($resultNumerator . '/' . $resultDenominator);
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result->getNumber()));
