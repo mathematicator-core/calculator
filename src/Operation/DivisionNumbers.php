@@ -16,7 +16,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 final class DivisionNumbers
 {
-
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		$leftNumber = $left->getNumber();

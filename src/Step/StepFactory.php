@@ -6,7 +6,6 @@ namespace Mathematicator\Calculator\Step;
 
 
 use Mathematicator\Engine\Step\Step;
-use function json_encode;
 
 final class StepFactory
 {
@@ -26,7 +25,7 @@ final class StepFactory
 	 */
 	public static function getAjaxEndpoint(string $controllerClass, array $data): string
 	{
-		return self::getBaseUrl() . '/api/v1/mathematicator-engine/search-step?controller=' . urlencode((string) $controllerClass) . '&data=' . urlencode((string) json_encode($data));
+		return self::getBaseUrl() . '/api/v1/mathematicator-engine/search-step?controller=' . urlencode((string) $controllerClass) . '&data=' . urlencode((string) \json_encode($data));
 	}
 
 
