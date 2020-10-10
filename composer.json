@@ -24,6 +24,7 @@
 		"nette/application": "^3.0",
 		"nette/utils": "^3.0",
 		"nette/di": "^3.0",
+		"nette/caching": "^3.0",
 		"symfony/polyfill-php80": "^1.17"
 	},
 	"require-dev": {

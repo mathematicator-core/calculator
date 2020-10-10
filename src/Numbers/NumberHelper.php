@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Numbers;
 
 
-use Contributte\Psr6\ICachePoolFactory;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\InvalidLinkException;
+use Nette\Caching\Cache;
+use Nette\Caching\IStorage;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
-use Psr\Cache\CacheItemPoolInterface;
 
 class NumberHelper
 {
@@ -41,14 +41,14 @@ class NumberHelper
 	/** @var LinkGenerator */
 	private $linkGenerator;
 
-	/** @var CacheItemPoolInterface */
-	private $cachePool;
+	/** @var Cache */
+	private $cache;
 
 
-	public function __construct(LinkGenerator $linkGenerator, ICachePoolFactory $cachePoolFactory)
+	public function __construct(LinkGenerator $linkGenerator, IStorage $storage)
 	{
 		$this->linkGenerator = $linkGenerator;
-		$this->cachePool = $cachePoolFactory->create('number-helper');
+		$this->cache = new Cache($storage, 'number-helper');
 	}
 
 
@@ -180,11 +180,8 @@ class NumberHelper
 		if ($n === '1' || $n === '2' || $n === '3') {
 			return [$n];
 		}
-
-		$cacheItem = $this->cachePool->getItem($n);
-
-		if ($cacheItem->isHit()) {
-			return $cacheItem->get();
+		if (($cache = $this->cache->load($n)) !== null) {
+			return $cache;
 		}
 
 		$num = 0;
@@ -199,8 +196,9 @@ class NumberHelper
 
 		$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)));
 
-		$cacheItem->set($return);
-		$this->cachePool->save($cacheItem);
+		$this->cache->save($n, $return, [
+			Cache::TAGS => ['pfactor'],
+		]);
 
 		return $return;
 	}
