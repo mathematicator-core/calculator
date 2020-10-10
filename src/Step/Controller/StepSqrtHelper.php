@@ -17,7 +17,6 @@ final class StepSqrtHelper implements IStepController
 
 
 	/**
-	 * @param ArrayHash $data
 	 * @return Step[]
 	 */
 	public function actionDefault(ArrayHash $data): array

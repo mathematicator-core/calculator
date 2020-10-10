@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Step\Controller;
 
 
-use function count;
 use Mathematicator\Calculator\Step\StepFactory;
 use Mathematicator\Engine\Step\Step;
 use Nette\Utils\ArrayHash;
+use function count;
 use function strlen;
 use function substr;
 
@@ -20,7 +20,6 @@ final class StepSqrtController implements IStepController
 
 
 	/**
-	 * @param ArrayHash $data
 	 * @return Step[]
 	 */
 	public function actionDefault(ArrayHash $data): array
@@ -107,7 +106,6 @@ final class StepSqrtController implements IStepController
 
 
 	/**
-	 * @param string $n
 	 * @return string[] $cells
 	 */
 	private function makeCells(string $n): array

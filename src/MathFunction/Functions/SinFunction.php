@@ -17,9 +17,8 @@ use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\PiToken;
 
-class SinFunction implements IFunction
+final class SinFunction implements IFunction
 {
-
 
 	/**
 	 * @param NumberToken|IToken $token
@@ -59,10 +58,6 @@ class SinFunction implements IFunction
 	}
 
 
-	/**
-	 * @param IToken $token
-	 * @return bool
-	 */
 	public function isValidInput(IToken $token): bool
 	{
 		return $token instanceof NumberToken || $token instanceof InfinityToken;

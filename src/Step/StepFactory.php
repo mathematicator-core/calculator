@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mathematicator\Calculator\Step;
 
 
-use function json_encode;
 use Mathematicator\Engine\Step\Step;
+use function json_encode;
 
 final class StepFactory
 {
@@ -30,10 +30,6 @@ final class StepFactory
 	}
 
 
-	/**
-	 * @param bool $useCache
-	 * @return string|null
-	 */
 	private static function getBaseUrl(bool $useCache = true): ?string
 	{
 		static $return;
@@ -41,7 +37,6 @@ final class StepFactory
 		if ($useCache === true && $return !== null) {
 			return $return;
 		}
-
 		if (($currentUrl = self::getCurrentUrl()) !== null) {
 			if (preg_match('/^(https?:\/\/.+)\/www\//', $currentUrl, $localUrlParser)) {
 				$return = $localUrlParser[0];
@@ -49,7 +44,6 @@ final class StepFactory
 				$return = $publicUrlParser[1];
 			}
 		}
-
 		if ($return !== null) {
 			$return = rtrim($return, '/');
 		}
@@ -61,8 +55,6 @@ final class StepFactory
 	/**
 	 * Return current absolute URL.
 	 * Return null, if current URL does not exist (for example in CLI mode).
-	 *
-	 * @return string|null
 	 */
 	private static function getCurrentUrl(): ?string
 	{

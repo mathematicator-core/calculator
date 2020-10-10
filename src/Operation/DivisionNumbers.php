@@ -17,13 +17,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 final class DivisionNumbers
 {
 
-
-	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param Query $query
-	 * @return NumberOperationResult
-	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		$leftNumber = $left->getNumber();
@@ -68,12 +61,6 @@ final class DivisionNumbers
 	}
 
 
-	/**
-	 * @param SmartNumber $left
-	 * @param SmartNumber $right
-	 * @param SmartNumber $result
-	 * @return string
-	 */
 	private function renderDescription(SmartNumber $left, SmartNumber $right, SmartNumber $result): string
 	{
 		$isEqual = ((string) $left . '/' . (string) $right) === (string) $result;

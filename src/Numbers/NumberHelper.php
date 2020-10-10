@@ -46,10 +46,6 @@ class NumberHelper
 	private $cachePool;
 
 
-	/**
-	 * @param LinkGenerator $linkGenerator
-	 * @param ICachePoolFactory $cachePoolFactory
-	 */
 	public function __construct(LinkGenerator $linkGenerator, ICachePoolFactory $cachePoolFactory)
 	{
 		$this->linkGenerator = $linkGenerator;
@@ -57,19 +53,12 @@ class NumberHelper
 	}
 
 
-	/**
-	 * @return string
-	 */
 	public static function getPiChar(): string
 	{
 		return 'π';
 	}
 
 
-	/**
-	 * @param string $haystack
-	 * @return string
-	 */
 	public static function intToRoman(string $haystack): string
 	{
 		$return = '';
@@ -92,10 +81,6 @@ class NumberHelper
 	}
 
 
-	/**
-	 * @param string $roman
-	 * @return int
-	 */
 	public static function romanToInt(string $roman): int
 	{
 		$roman = Strings::upper($roman);
@@ -115,10 +100,6 @@ class NumberHelper
 	}
 
 
-	/**
-	 * @param int $len
-	 * @return string
-	 */
 	public function getPi($len = 16): string
 	{
 		$pi = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679'
@@ -136,10 +117,6 @@ class NumberHelper
 	}
 
 
-	/**
-	 * @param string $number
-	 * @return bool
-	 */
 	public function isRoman(string $number): bool
 	{
 		return (bool) preg_match('/[IVXLCDMivxlcdm]{2,}/', $number);
@@ -147,8 +124,6 @@ class NumberHelper
 
 
 	/**
-	 * @param float $n
-	 * @param float $tolerance
 	 * @return int[]
 	 */
 	public function floatToFraction(float $n, $tolerance = 1.e-8): array
@@ -176,7 +151,6 @@ class NumberHelper
 
 
 	/**
-	 * @param string $n
 	 * @return string[]
 	 */
 	public function getDivisors(string $n): array
@@ -200,7 +174,6 @@ class NumberHelper
 
 
 	/**
-	 * @param string $n
 	 * @return int[]|string[]
 	 */
 	public function pfactor(string $n): array
@@ -235,10 +208,6 @@ class NumberHelper
 
 
 	/**
-	 * @param string $x
-	 * @param string $y
-	 * @param bool $renderAnimation
-	 * @return string
 	 * @throws InvalidLinkException
 	 */
 	public function getAddStepAsHtml(string $x, string $y, bool $renderAnimation = false): string
@@ -264,11 +233,7 @@ class NumberHelper
 			. $result
 			. '</span>';
 
-		if (
-			$renderAnimation === true
-			&& $lenX <= 10 && $lenY <= 12
-			&& Validators::isNumericInt($x) && Validators::isNumericInt($y)
-		) {
+		if ($renderAnimation === true && $lenX <= 10 && $lenY <= 12 && Validators::isNumericInt($x) && Validators::isNumericInt($y)) {
 			$uniqueId = uniqid('numberHelper', true);
 			$left = 'addNumbersLeft' . $uniqueId;
 			$right = 'addNumbersRight' . $uniqueId;

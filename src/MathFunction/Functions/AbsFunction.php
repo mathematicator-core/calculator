@@ -11,7 +11,7 @@ use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
-class AbsFunction implements IFunction
+final class AbsFunction implements IFunction
 {
 
 	/**
@@ -35,10 +35,6 @@ class AbsFunction implements IFunction
 	}
 
 
-	/**
-	 * @param IToken $token
-	 * @return bool
-	 */
 	public function isValidInput(IToken $token): bool
 	{
 		return $token instanceof NumberToken;

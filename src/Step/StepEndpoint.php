@@ -6,6 +6,7 @@ namespace Mathematicator\Calculator\Step;
 
 
 use Mathematicator\Engine\Exception\TerminateException;
+use Mathematicator\Engine\Step\Step;
 use Nette\Utils\ArrayHash;
 use Psr\Container\ContainerInterface;
 
@@ -16,9 +17,6 @@ final class StepEndpoint
 	private $container;
 
 
-	/**
-	 * @param ContainerInterface $container
-	 */
 	public function __construct(ContainerInterface $container)
 	{
 		$this->container = $container;
@@ -26,8 +24,6 @@ final class StepEndpoint
 
 
 	/**
-	 * @param string $type
-	 * @param string $data
 	 * @return mixed[]
 	 */
 	public function getStep(string $type, string $data): array
@@ -47,6 +43,7 @@ final class StepEndpoint
 
 		$return = [];
 
+		/** @var Step[] $steps */
 		foreach ($steps as $step) {
 			$return[] = [
 				'title' => $step->getTitle(),

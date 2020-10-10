@@ -21,9 +21,6 @@ final class StepPlusController implements IStepController
 	private $number;
 
 
-	/**
-	 * @param NumberHelper $number
-	 */
 	public function __construct(NumberHelper $number)
 	{
 		$this->number = $number;
@@ -31,10 +28,8 @@ final class StepPlusController implements IStepController
 
 
 	/**
-	 * @param ArrayHash $data
 	 * @return Step[]
-	 * @throws InvalidLinkException
-	 * @throws MathematicatorException
+	 * @throws InvalidLinkException|MathematicatorException
 	 */
 	public function actionDefault(ArrayHash $data): array
 	{

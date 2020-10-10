@@ -16,7 +16,6 @@ final class StepPowController implements IStepController
 {
 
 	/**
-	 * @param ArrayHash $data
 	 * @return Step[]
 	 */
 	public function actionDefault(ArrayHash $data): array
@@ -44,7 +43,6 @@ final class StepPowController implements IStepController
 
 
 	/**
-	 * @param string $x
 	 * @return Step[]
 	 */
 	private function getYIsZero(string $x): array
@@ -109,8 +107,6 @@ final class StepPowController implements IStepController
 
 
 	/**
-	 * @param string $x
-	 * @param string $y
 	 * @return Step[]
 	 */
 	private function getAbsSmallIntegers(string $x, string $y): array

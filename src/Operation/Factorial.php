@@ -15,10 +15,7 @@ use Mathematicator\Tokenizer\Tokens;
 final class Factorial
 {
 
-
 	/**
-	 * @param FactorialToken $token
-	 * @return NumberOperationResult
 	 * @throws MathErrorException
 	 */
 	public function process(FactorialToken $token): NumberOperationResult
@@ -49,8 +46,6 @@ final class Factorial
 
 
 	/**
-	 * @param BigInteger $num
-	 * @return BigInteger
 	 * @throws MathErrorException
 	 */
 	private function bcFact(BigInteger $num): BigInteger
@@ -58,11 +53,9 @@ final class Factorial
 		if ($num->isEqualTo(0)) {
 			return BigInteger::one();
 		}
-
 		if ($num->isLessThanOrEqualTo(0)) {
 			throw new MathErrorException('Argument must be natural number, "' . $num . '" given.');
 		}
-
 		for ($result = BigInteger::one(); $num->isGreaterThan(0); $num = $num->minus(1)) {
 			$result = $result->multipliedBy($num);
 		}
@@ -71,10 +64,6 @@ final class Factorial
 	}
 
 
-	/**
-	 * @param int $n
-	 * @return string
-	 */
 	private function getDescriptionTimes(int $n): string
 	{
 		if ($n === 0) {

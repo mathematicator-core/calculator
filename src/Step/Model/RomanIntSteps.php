@@ -72,7 +72,6 @@ final class RomanIntSteps
 
 
 	/**
-	 * @param string $roman
 	 * @return Step[]
 	 */
 	public function getRomanToIntSteps(string $roman): array
@@ -241,12 +240,6 @@ final class RomanIntSteps
 	}
 
 
-	/**
-	 * @param int $lastPosition
-	 * @param int $currentPosition
-	 * @param string $roman
-	 * @return string
-	 */
 	private function getTitleBasic(int $lastPosition, int $currentPosition, string $roman): string
 	{
 		$return = '';
@@ -263,10 +256,6 @@ final class RomanIntSteps
 	}
 
 
-	/**
-	 * @param string|null $roman
-	 * @return string
-	 */
 	private function getTranslateTable(string $roman = null): string
 	{
 		$return = '';

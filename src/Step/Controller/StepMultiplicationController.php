@@ -34,7 +34,6 @@ final class StepMultiplicationController implements IStepController
 
 
 	/**
-	 * @param string $number
 	 * @return string[]
 	 */
 	private function numberToFraction(string $number): array

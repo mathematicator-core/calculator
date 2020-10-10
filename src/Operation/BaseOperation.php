@@ -15,7 +15,7 @@ use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Tokens;
 
-class BaseOperation
+final class BaseOperation
 {
 
 	/** @var AddNumbers */
@@ -49,11 +49,6 @@ class BaseOperation
 
 
 	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param string $operation
-	 * @param Query $query
-	 * @return NumberOperationResult|null
 	 * @throws MathematicatorException
 	 */
 	public function process(NumberToken $left, NumberToken $right, string $operation, Query $query): ?NumberOperationResult
@@ -83,7 +78,6 @@ class BaseOperation
 	/**
 	 * @param NumberToken|InfinityToken $left
 	 * @param NumberToken|InfinityToken $right
-	 * @param string $operation
 	 * @return NumberOperationResult|InfinityToken|null
 	 * @throws UndefinedOperationException
 	 */
@@ -147,8 +141,6 @@ class BaseOperation
 
 
 	/**
-	 * @param NumberToken $token
-	 * @return NumberOperationResult
 	 * @throws MathErrorException
 	 */
 	public function processNumberToFactorial(NumberToken $token): NumberOperationResult

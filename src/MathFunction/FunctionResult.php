@@ -70,19 +70,12 @@ class FunctionResult
 	}
 
 
-	/**
-	 * @return Step|null
-	 */
 	public function getStep(): ?Step
 	{
 		return $this->step;
 	}
 
 
-	/**
-	 * @param Step $steps
-	 * @return FunctionResult
-	 */
 	public function setStep(Step $steps): self
 	{
 		$this->step = $steps;

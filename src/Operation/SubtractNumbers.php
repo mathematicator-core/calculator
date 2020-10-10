@@ -10,16 +10,8 @@ use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
-class SubtractNumbers
+final class SubtractNumbers
 {
-
-
-	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param Query $query
-	 * @return NumberOperationResult
-	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		$leftNumber = $left->getNumber();
@@ -31,11 +23,13 @@ class SubtractNumbers
 			$leftFraction = $leftNumber->toBigRational();
 			$rightFraction = $rightNumber->toBigRational();
 
-			$resultNumerator = $rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
+			$resultNumerator = $rightFraction->getDenominator()
+				->multipliedBy($leftFraction->getNumerator())
 				->minus($leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator()));
+
 			$resultDenominator = $leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator());
 
-			$result = "$resultNumerator/$resultDenominator";
+			$result = $resultNumerator . '/' . $resultDenominator;
 		}
 
 		$newNumber = new NumberToken(SmartNumber::of($result));

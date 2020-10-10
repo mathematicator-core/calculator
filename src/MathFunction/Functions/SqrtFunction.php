@@ -55,10 +55,6 @@ class SqrtFunction implements IFunction
 	}
 
 
-	/**
-	 * @param IToken $token
-	 * @return bool
-	 */
 	public function isValidInput(IToken $token): bool
 	{
 		return $token instanceof NumberToken;

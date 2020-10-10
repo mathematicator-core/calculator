@@ -15,13 +15,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 class MultiplicationNumber
 {
-
-	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param Query $query
-	 * @return NumberOperationResult
-	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		if ($left->getNumber()->isInteger() && $right->getNumber()->isInteger()) {

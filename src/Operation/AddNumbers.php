@@ -13,16 +13,8 @@ use Mathematicator\Numbers\Calculation;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
-class AddNumbers
+final class AddNumbers
 {
-
-
-	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param Query $query
-	 * @return NumberOperationResult
-	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
 	{
 		$leftNumber = $left->getNumber();

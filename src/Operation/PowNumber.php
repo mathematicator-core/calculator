@@ -17,15 +17,10 @@ use Mathematicator\Numbers\Latex\MathLatexToolkit;
 use Mathematicator\Numbers\SmartNumber;
 use Mathematicator\Tokenizer\Token\NumberToken;
 
-class PowNumber
+final class PowNumber
 {
 
-
 	/**
-	 * @param NumberToken $left
-	 * @param NumberToken $right
-	 * @param Query $query
-	 * @return NumberOperationResult
 	 * @throws UndefinedOperationException
 	 */
 	public function process(NumberToken $left, NumberToken $right, Query $query): NumberOperationResult
@@ -36,14 +31,10 @@ class PowNumber
 		$rightFraction = $rightNumber->toBigRational();
 
 		$result = null;
-
 		$rightIsInteger = $rightNumber->isInteger();
 
 		if ($rightIsInteger && $leftNumber->isInteger()) {
-			if (
-				$leftNumber->isEqualTo(0)
-				&& $rightNumber->isEqualTo(0)
-			) {
+			if ($leftNumber->isEqualTo(0) && $rightNumber->isEqualTo(0)) {
 				throw new UndefinedOperationException(__METHOD__ . ': Undefined operation.');
 			}
 
@@ -94,18 +85,11 @@ class PowNumber
 	}
 
 
-	/**
-	 * @param SmartNumber $left
-	 * @param SmartNumber $right
-	 * @param SmartNumber $result
-	 * @return string
-	 */
 	private function renderDescription(SmartNumber $left, SmartNumber $right, SmartNumber $result): string
 	{
 		if (!$left->isInteger() && !$right->isInteger()) {
 			return 'Umocňování zlomků je zatím experimentální a může poskytnout jen přibližný výsledek.';
 		}
-
 		if ($right->isEqualTo(0)) {
 			return '\({a}^{0}\ =\ 1\) Cokoli na nultou (kromě nuly) je vždy jedna. '
 				. 'Umocňování na nultou si lze také představit jako nekonečné odmocňování, '

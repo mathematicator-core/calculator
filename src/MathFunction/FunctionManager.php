@@ -8,11 +8,10 @@ namespace Mathematicator\Calculator\MathFunction;
 use Mathematicator\Calculator\MathFunction\Functions\AbsFunction;
 use Mathematicator\Calculator\MathFunction\Functions\SinFunction;
 use Mathematicator\Calculator\MathFunction\Functions\SqrtFunction;
-use Mathematicator\Engine\Exception\MathematicatorException;
 use Mathematicator\Tokenizer\Token\IToken;
 use Psr\Container\ContainerInterface;
 
-class FunctionManager
+final class FunctionManager
 {
 
 	/** @var string[][] */
@@ -35,9 +34,6 @@ class FunctionManager
 	private $callback;
 
 
-	/**
-	 * @param ContainerInterface $container
-	 */
 	public function __construct(ContainerInterface $container)
 	{
 		$this->container = $container;
@@ -45,20 +41,15 @@ class FunctionManager
 
 
 	/**
-	 * @param string $function
-	 * @param IToken $token
-	 * @return FunctionResult|null
-	 * @throws MathematicatorException
+	 * @throws FunctionDoesNotExistsException
 	 */
 	public function solve(string $function, IToken $token): ?FunctionResult
 	{
 		if (!isset(self::$functions[$function])) {
-			throw new FunctionDoesNotExistsException('Function [' . $function . '] does not exists.', 500, null, $function);
+			throw new FunctionDoesNotExistsException('Function "' . $function . '" does not exist.', 500, null, $function);
 		}
-
 		foreach (self::$functions[$function] as $callback) {
 			$this->callCallback($callback);
-
 			if ($this->callback->isValidInput($token)) {
 				return $this->callback->process($token);
 			}
@@ -68,9 +59,6 @@ class FunctionManager
 	}
 
 
-	/**
-	 * @param string $callback
-	 */
 	private function callCallback(string $callback): void
 	{
 		$this->callback = $this->container->get($callback);
