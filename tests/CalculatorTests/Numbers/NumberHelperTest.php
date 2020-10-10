@@ -7,6 +7,8 @@ namespace Mathematicator\Calculator\Tests\Numbers;
 
 use Mathematicator\Calculator\Numbers\NumberHelper;
 use Mathematicator\Calculator\Tests\Bootstrap;
+use Nette\Application\LinkGenerator;
+use Nette\Caching\Storages\DevNullStorage;
 use Nette\DI\Container;
 use Tester\Assert;
 use Tester\TestCase;
@@ -22,7 +24,10 @@ class NumberHelperTest extends TestCase
 
 	public function __construct(Container $container)
 	{
-		$this->numberHelper = $container->getByType(NumberHelper::class);
+		/** @var LinkGenerator $linkGenerator */
+		$linkGenerator = $container->getByType(LinkGenerator::class);
+
+		$this->numberHelper = new NumberHelper($linkGenerator, new DevNullStorage);
 	}
 
 
