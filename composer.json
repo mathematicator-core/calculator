@@ -17,7 +17,7 @@
 	],
 	"require": {
 		"php": ">=7.2",
-		"brick/math": "^0.8.15",
+		"brick/math": "^0.8.15 || ^0.9.0",
 		"mathematicator-core/engine": "^2.0",
 		"mathematicator-core/numbers": "^2.1",
 		"mathematicator-core/tokenizer": "^2.1",
