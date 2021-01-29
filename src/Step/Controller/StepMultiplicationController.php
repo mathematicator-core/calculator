@@ -11,7 +11,6 @@ use Nette\Utils\Validators;
 
 final class StepMultiplicationController implements IStepController
 {
-
 	/**
 	 * @param ArrayHash $data
 	 * @return Step[]
@@ -20,8 +19,8 @@ final class StepMultiplicationController implements IStepController
 	{
 		$steps = [];
 
-		$x = $this->numberToFraction($data->x);
-		$y = $this->numberToFraction($data->y);
+		// TODO: $x = $this->numberToFraction($data->x);
+		// TODO: $y = $this->numberToFraction($data->y);
 
 		$steps[] = new Step(
 			'Násobení čísel',
@@ -36,7 +35,7 @@ final class StepMultiplicationController implements IStepController
 	/**
 	 * @return string[]
 	 */
-	private function numberToFraction(string $number): array
+	public function numberToFraction(string $number): array
 	{
 		if (Validators::isNumericInt($number)) {
 			return [$number, '1'];

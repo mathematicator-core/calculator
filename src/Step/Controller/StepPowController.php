@@ -14,7 +14,6 @@ use Nette\Utils\Validators;
 
 final class StepPowController implements IStepController
 {
-
 	/**
 	 * @return Step[]
 	 */
@@ -49,22 +48,22 @@ final class StepPowController implements IStepController
 	{
 		$steps = [];
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Uvažujme');
 		$step->setDescription('\(x^0=a\) pro \(x, a \in \mathbb{R}_{-\{0\}}\)');
 		$steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setDescription('Nula je zajímavé číslo v tom, že jako pro jediné platí:');
 		$step->setLatex((string) MathLatexToolkit::create('0')->equals('-0'));
 		$steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setDescription('Díky tomuto faktu je možné tvrdit že:');
 		$step->setLatex((string) MathLatexToolkit::pow('x', 0)->equals(MathLatexToolkit::pow('x', '-0')));
 		$steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Úprava pravé strany');
 
 		$latex1 = MathLatexToolkit::pow('x', 0)
@@ -84,12 +83,12 @@ final class StepPowController implements IStepController
 		$step->setDescription($latex1 . ' a následně ' . $latex2);
 		$steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Použití pravidel o umocňování');
 		$step->setLatex('x^{0\cdot2}=1 \rightarrow x^{0}=1');
 		$steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Řešení');
 		$step->setDescription(
 			'Pokud tedy umocňujeme jakékoliv číslo různé od nuly na nultou, výsledkem bude vždy 1.'

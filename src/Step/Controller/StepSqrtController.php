@@ -58,7 +58,7 @@ final class StepSqrtController implements IStepController
 				. '</tr>';
 		}
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Tabulka základních mocnin a odmocnin');
 		$step->setDescription(
 			'<p>Řešení vyhledáme v tabulce základních mocnin a odmocnin, kterou bychom si měli pamatovat.</p>'
@@ -76,14 +76,14 @@ final class StepSqrtController implements IStepController
 	{
 		$cells = $this->makeCells((string) $n);
 
-		$step = new Step();
+		$step = new Step;
 		$step->setTitle('Rozdělení do buněk');
 		$step->setDescription('Číslo musíme rozdělit po dvou směrem od desetinné čárky do buněk.');
 		$step->setLatex(implode('\ |\ ', $cells));
 
 		$this->steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setDescription('Druhá mocnina jakého přirozeného čísla nebo nula se vejde do \(' . $cells[0] . '\)?');
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtHelper::class, [
@@ -94,7 +94,7 @@ final class StepSqrtController implements IStepController
 		$step->setLatex((string) $squareRooted = floor(sqrt((float) $cells[0])));
 		$this->steps[] = $step;
 
-		$step = new Step();
+		$step = new Step;
 		$step->setDescription('Druhou mocninu odečteme od čísla z první buňky.');
 		$step->setLatex($cells[0] . ' - ' . ($squareRooted ** 2) . ' = ' . ($cells[0] - ($squareRooted ** 2)));
 

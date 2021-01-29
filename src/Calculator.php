@@ -32,13 +32,11 @@ class Calculator
 	private $queryNormalizer;
 
 
-	/**
-	 * @param Tokenizer $tokenizer
-	 * @param TokensCalculator $tokensCalculator
-	 * @param QueryNormalizer $queryNormalizer
-	 */
-	public function __construct(Tokenizer $tokenizer, TokensCalculator $tokensCalculator, QueryNormalizer $queryNormalizer)
-	{
+	public function __construct(
+		Tokenizer $tokenizer,
+		TokensCalculator $tokensCalculator,
+		QueryNormalizer $queryNormalizer
+	) {
 		$this->tokenizer = $tokenizer;
 		$this->tokensCalculator = $tokensCalculator;
 		$this->queryNormalizer = $queryNormalizer;
@@ -66,7 +64,7 @@ class Calculator
 		$iterator = 0;
 		$steps = [];
 
-		$interpretStep = new Step();
+		$interpretStep = new Step;
 		$interpretStep->setTitle('Zadání úlohy');
 		$interpretStep->setLatex($this->tokenizer->tokensToLatex($tokens));
 
@@ -85,7 +83,7 @@ class Calculator
 
 			$stepLatexCurrent = $this->tokenizer->tokensToLatex($tokens);
 
-			$step = new Step();
+			$step = new Step;
 			$step->setLatex($stepLatexCurrent);
 			$step->setTitle($process->getStepTitle());
 			$step->setDescription($process->getStepDescription());

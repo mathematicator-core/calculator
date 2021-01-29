@@ -37,8 +37,14 @@ final class BaseOperation
 	private $factorial;
 
 
-	public function __construct(AddNumbers $addNumbers, SubtractNumbers $subtractNumbers, MultiplicationNumber $multiplicationNumber, DivisionNumbers $divisionNumbers, PowNumber $powNumber, Factorial $factorial)
-	{
+	public function __construct(
+		AddNumbers $addNumbers,
+		SubtractNumbers $subtractNumbers,
+		MultiplicationNumber $multiplicationNumber,
+		DivisionNumbers $divisionNumbers,
+		PowNumber $powNumber,
+		Factorial $factorial
+	) {
 		$this->addNumbers = $addNumbers;
 		$this->subtractNumbers = $subtractNumbers;
 		$this->multiplicationNumber = $multiplicationNumber;
@@ -51,8 +57,12 @@ final class BaseOperation
 	/**
 	 * @throws MathematicatorException
 	 */
-	public function process(NumberToken $left, NumberToken $right, string $operation, Query $query): ?NumberOperationResult
-	{
+	public function process(
+		NumberToken $left,
+		NumberToken $right,
+		string $operation,
+		Query $query
+	): ?NumberOperationResult {
 		switch ($operation) {
 			case '+':
 				return $this->addNumbers->process($left, $right, $query);
@@ -83,11 +93,10 @@ final class BaseOperation
 	 */
 	public function processInfinity($left, $right, string $operation)
 	{
-		$infinity = new InfinityToken();
+		$infinity = new InfinityToken;
 		$infinity->setToken('INF');
 		$infinity->setPosition($left->getPosition());
 		$infinity->setType(Tokens::M_INFINITY);
-		$result = new NumberOperationResult();
 
 		switch ($operation) {
 			case '+':

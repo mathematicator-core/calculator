@@ -32,7 +32,9 @@
 		"nette/bootstrap": "^3.0",
 		"nette/tester": "~2.3.2",
 		"phpstan/phpstan": "^0.12.18",
-		"phpstan/phpstan-nette": "^0.12.6"
+		"phpstan/phpstan-nette": "^0.12.6",
+		"spaze/phpstan-disallowed-calls": "^1.1",
+		"roave/security-advisories": "dev-master"
 	},
 	"suggest": {
 		"nette/caching": "(^3.0) To use package in Nette Framework",

@@ -13,7 +13,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 final class AbsFunction implements IFunction
 {
-
 	/**
 	 * @param NumberToken|IToken $token
 	 * @return FunctionResult
@@ -21,10 +20,10 @@ final class AbsFunction implements IFunction
 	public function process(IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
-			throw new \InvalidArgumentException();
+			throw new \InvalidArgumentException;
 		}
 
-		$result = new FunctionResult();
+		$result = new FunctionResult;
 
 		$abs = $token->getNumber()->getNumber()->toBigDecimal()->abs();
 		$token->setNumber(SmartNumber::of($abs));

@@ -22,7 +22,7 @@ final class StepSqrtHelper implements IStepController
 	public function actionDefault(ArrayHash $data): array
 	{
 		if ($data->offsetExists('numberSet')) {
-			$step = new Step();
+			$step = new Step;
 			$step->setDescription('N - Přirozená čísla: 1, 2, 3, 100, 105, 1006, ...');
 			$this->steps[] = $step;
 		}
@@ -44,7 +44,7 @@ final class StepSqrtHelper implements IStepController
 			[$fittingNumber + 1, ($fittingNumber + 1) ** 2],
 		];
 
-		$step = new Step();
+		$step = new Step;
 
 		$outerDiv = Html::el('div');
 		$outerDiv->create('style')

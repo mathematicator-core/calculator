@@ -19,7 +19,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 final class PowNumber
 {
-
 	/**
 	 * @throws UndefinedOperationException
 	 */
@@ -55,14 +54,10 @@ final class PowNumber
 
 			$result = SmartNumber::of(
 				BigRational::nd(
-					pow(
-						$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt(),
+					$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt()**
+						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat(),
+					$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt()**
 						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
-					),
-					pow(
-						$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt(),
-						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
-					)
 				)
 			);
 		}
@@ -72,7 +67,7 @@ final class PowNumber
 			->setPosition($left->getPosition())
 			->setType('number');
 
-		return (new NumberOperationResult())
+		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setTitle('Umocňování čísel ' . $leftNumber->toHumanString() . ' ^ ' . $rightNumber->toHumanString())
 			->setDescription($this->renderDescription($leftNumber, $rightNumber, $newNumber->getNumber()))
@@ -99,9 +94,11 @@ final class PowNumber
 
 		return (string) MathLatexToolkit::create(
 			MathLatexToolkit::pow(
-				$left->toHumanString(), $right->toHumanString()
+				$left->toHumanString(),
+				$right->toHumanString()
 			)->equals((string) $result),
-			'\(', '\)'
+			'\(',
+			'\)'
 		);
 	}
 }

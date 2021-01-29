@@ -37,7 +37,7 @@ final class SubtractNumbers
 			->setPosition($left->getPosition())
 			->setType('number');
 
-		return (new NumberOperationResult())
+		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
 				'Odčítání čísel ' . $leftNumber->toHumanString() . ' - ' . $rightNumber->toHumanString()

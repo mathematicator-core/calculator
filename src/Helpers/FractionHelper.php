@@ -15,11 +15,10 @@ use Mathematicator\Numbers\Latex\MathLatexToolkit;
  */
 final class FractionHelper
 {
-
 	/** @throws \Error */
 	public function __construct()
 	{
-		throw new \Error('Class ' . get_class($this) . ' is static and cannot be instantiated.');
+		throw new \Error('Class ' . static::class . ' is static and cannot be instantiated.');
 	}
 
 
@@ -28,7 +27,7 @@ final class FractionHelper
 	 */
 	public static function stringToSimpleFraction(string $input): Fraction
 	{
-		$fraction = new Fraction();
+		$fraction = new Fraction;
 
 		switch (\count($explode = explode('/', $input))) {
 			case 1:

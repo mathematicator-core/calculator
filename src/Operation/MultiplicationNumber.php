@@ -38,7 +38,7 @@ class MultiplicationNumber
 			->setPosition($left->getPosition())
 			->setType('number');
 
-		return (new NumberOperationResult())
+		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
 				'Násobení čísel ' . $left->getNumber()->toHumanString() . ' * ' . $right->getNumber()->toHumanString()

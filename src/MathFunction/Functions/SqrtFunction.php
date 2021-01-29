@@ -18,7 +18,6 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 class SqrtFunction implements IFunction
 {
-
 	/**
 	 * @param NumberToken|IToken $token
 	 * @return FunctionResult
@@ -27,10 +26,10 @@ class SqrtFunction implements IFunction
 	public function process(IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
-			throw new \InvalidArgumentException();
+			throw new \InvalidArgumentException;
 		}
 
-		$result = new FunctionResult();
+		$result = new FunctionResult;
 		$number = $token->getNumber();
 
 		if ($number->isNegative() === true) {
@@ -41,7 +40,7 @@ class SqrtFunction implements IFunction
 		$token->setNumber(SmartNumber::of($sqrt));
 		$token->setToken((string) $sqrt);
 
-		$step = new Step();
+		$step = new Step;
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtController::class, [
 				'n' => $number->toFloat(),

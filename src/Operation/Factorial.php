@@ -14,7 +14,6 @@ use Mathematicator\Tokenizer\Tokens;
 
 final class Factorial
 {
-
 	/**
 	 * @throws MathErrorException
 	 */
@@ -28,7 +27,7 @@ final class Factorial
 			->setPosition($token->getPosition())
 			->setType(Tokens::M_NUMBER);
 
-		$return = new NumberOperationResult();
+		$return = new NumberOperationResult;
 		$return->setNumber($newNumber);
 		$return->setTitle('Faktoriál ' . $result . '!');
 		$return->setDescription(

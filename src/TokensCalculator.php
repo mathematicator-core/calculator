@@ -36,10 +36,6 @@ final class TokensCalculator
 	private $functionManager;
 
 
-	/**
-	 * @param BaseOperation $baseOperation
-	 * @param FunctionManager $functionManager
-	 */
 	public function __construct(BaseOperation $baseOperation, FunctionManager $functionManager)
 	{
 		$this->baseOperation = $baseOperation;
@@ -82,7 +78,11 @@ final class TokensCalculator
 
 			if ($wasMatched === true) {
 				$result[] = $token;
-			} elseif ($token instanceof NumberToken || $token instanceof VariableToken || $token instanceof InfinityToken) {
+			} elseif (
+				$token instanceof NumberToken
+				|| $token instanceof VariableToken
+				|| $token instanceof InfinityToken
+			) {
 				if (($newEntity = $this->solveNumberToken($iterator, $query)) !== null) {
 					if ($newEntity instanceof InfinityToken) {
 						$result[] = $newEntity;
@@ -120,7 +120,10 @@ final class TokensCalculator
 								: $inputToken->getToken()
 							) . ')'
 						);
-						if ($token->getName() === '' || ($functionResult = $this->functionManager->solve($token->getName(), $inputToken)) === null) {
+						if (
+							$token->getName() === ''
+							|| ($functionResult = $this->functionManager->solve($token->getName(), $inputToken)) === null
+						) {
 							$result[] = $inputToken;
 						} else {
 							$result[] = $functionResult->getOutput();
@@ -218,9 +221,8 @@ final class TokensCalculator
 		}
 
 		// 2. Variable times number without power in format `x * n` or `n * x`
-		if ((($leftNumber instanceof VariableToken && $rightNumber instanceof NumberToken)
-				|| ($leftNumber instanceof NumberToken && $rightNumber instanceof VariableToken)
-			) && $operator instanceof OperatorToken && $operator->getToken() === '*'
+		if (($leftNumber instanceof VariableToken && $rightNumber instanceof NumberToken)
+				|| ($leftNumber instanceof NumberToken && $rightNumber instanceof VariableToken) && $operator instanceof OperatorToken && $operator->getToken() === '*'
 			&& ($nextOperator instanceof OperatorToken && $nextOperator->getToken() === '^') === false
 		) {
 			/** @var VariableToken|null $variable */
@@ -316,10 +318,6 @@ final class TokensCalculator
 	}
 
 
-	/**
-	 * @param TokenIterator $iterator
-	 * @return TokenIterator
-	 */
 	private function orderByType(TokenIterator $iterator): TokenIterator
 	{
 		return $iterator;

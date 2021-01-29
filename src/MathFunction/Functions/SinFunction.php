@@ -19,7 +19,6 @@ use Mathematicator\Tokenizer\Token\PiToken;
 
 final class SinFunction implements IFunction
 {
-
 	/**
 	 * @param NumberToken|IToken $token
 	 * @return FunctionResult
@@ -28,10 +27,10 @@ final class SinFunction implements IFunction
 	public function process(IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
-			throw new \InvalidArgumentException();
+			throw new \InvalidArgumentException;
 		}
 
-		$result = new FunctionResult();
+		$result = new FunctionResult;
 
 		$x = $token->getNumber()->toFloat();
 
@@ -44,7 +43,7 @@ final class SinFunction implements IFunction
 		$token->setNumber(SmartNumber::of($sin));
 		$token->setToken((string) $sin);
 
-		$step = new Step();
+		$step = new Step;
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSinController::class, [
 				'x' => $x,

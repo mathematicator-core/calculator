@@ -194,7 +194,9 @@ class NumberHelper
 			}
 		}
 
-		$return = $num === 0 ? [$n] : array_merge([$num], $this->pfactor((string) ($n / $num)));
+		$return = $num === 0
+			? [$n]
+			: array_merge([$num], $this->pfactor((string) ($n / $num)));
 
 		$this->cache->save($n, $return, [
 			Cache::TAGS => ['pfactor'],
@@ -230,7 +232,13 @@ class NumberHelper
 			. $result
 			. '</span>';
 
-		if ($renderAnimation === true && $lenX <= 10 && $lenY <= 12 && Validators::isNumericInt($x) && Validators::isNumericInt($y)) {
+		if (
+			$renderAnimation === true
+			&& $lenX <= 10
+			&& $lenY <= 12
+			&& Validators::isNumericInt($x)
+			&& Validators::isNumericInt($y)
+		) {
 			$uniqueId = uniqid('numberHelper', true);
 			$left = 'addNumbersLeft' . $uniqueId;
 			$right = 'addNumbersRight' . $uniqueId;

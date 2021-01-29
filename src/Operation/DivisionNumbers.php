@@ -47,7 +47,7 @@ final class DivisionNumbers
 			->setPosition($left->getPosition())
 			->setType('number');
 
-		return (new NumberOperationResult())
+		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setTitle('Dělení čísel')
 			->setDescription(

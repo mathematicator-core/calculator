@@ -49,7 +49,10 @@ final class NewtonMethod
 		$isIntervalAveragePositive = $this->isPositive($valueCenter);
 		$isIntervalRightPositive = $this->isPositive($valueRight);
 
-		if ($isIntervalLeftPositive === $isIntervalAveragePositive && $isIntervalAveragePositive === $isIntervalRightPositive) {
+		if (
+			$isIntervalLeftPositive === $isIntervalAveragePositive
+			&& $isIntervalAveragePositive === $isIntervalRightPositive
+		) {
 			throw new MathematicatorException('The equation has no solution.');
 		}
 

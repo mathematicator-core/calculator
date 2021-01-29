@@ -46,7 +46,7 @@ final class AddNumbers
 		$_left = (string) $leftNumber->toHumanString();
 		$_right = (string) $rightNumber->toHumanString();
 
-		return (new NumberOperationResult())
+		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
 				'Sčítání čísel '

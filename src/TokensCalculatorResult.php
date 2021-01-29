@@ -66,9 +66,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @return null|string
-	 */
 	public function getStepTitle(): ?string
 	{
 		return $this->stepTitle;
@@ -87,9 +84,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @return string|null
-	 */
 	public function getStepDescription(): ?string
 	{
 		return $this->stepDescription;
@@ -108,9 +102,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @return bool
-	 */
 	public function getWasModified(): bool
 	{
 		return $this->wasModified;
@@ -129,9 +120,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @return string|null
-	 */
 	public function getAjaxEndpoint(): ?string
 	{
 		return $this->ajaxEndpoint;

@@ -36,7 +36,7 @@ final class StepEndpoint
 
 		try {
 			$data = \json_decode($data);
-			$arrayHash = new ArrayHash();
+			$arrayHash = new ArrayHash;
 			foreach ($data as $k => $v) {
 				$arrayHash->{$k} = $v;
 			}
