@@ -186,9 +186,9 @@ final class TokensCalculator
 	 * @throws UndefinedOperationException|MathematicatorException|NumberException
 	 */
 	private function solveNumberToken(
-        TokenIterator $iterator,
-        Query $query
-    ): IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
+		TokenIterator $iterator,
+		Query $query
+	): IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
 	{
 		$leftNumber = $iterator->getToken();
 		$rightNumber = $iterator->getNextToken(2);
@@ -289,9 +289,9 @@ final class TokensCalculator
 	 * @throws UndefinedOperationException
 	 */
 	private function solveInfinityToken(
-        TokenIterator $iterator,
-        IToken|OperatorToken |null $operator
-    ): Operation\NumberOperationResult|InfinityToken|null
+		TokenIterator $iterator,
+		IToken|OperatorToken |null $operator
+	): Operation\NumberOperationResult|InfinityToken|null
 	{
 		if (($leftNumber = $iterator->getToken()) !== null && ($rightNumber = $iterator->getNextToken(2)) !== null
 			&& ($leftNumber instanceof InfinityToken || $rightNumber instanceof InfinityToken)
