@@ -42,7 +42,7 @@ class SqrtFunction implements IFunction
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSqrtController::class, [
 				'n' => $number->toFloat(),
-			])
+			]),
 		);
 
 		$result->setStep($step);

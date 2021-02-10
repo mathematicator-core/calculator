@@ -34,7 +34,7 @@ final class StepPowController implements IStepController
 		$steps[] = new Step(
 			'Umocňování čísel',
 			(string) MathLatexToolkit::pow($data['x'], $data['y'])->equals($data['result']),
-			'Řešení je jen přibližné.'
+			'Řešení je jen přibližné.',
 		);
 
 		return $steps;
@@ -68,14 +68,14 @@ final class StepPowController implements IStepController
 
 		$latex1 = MathLatexToolkit::pow('x', 0)
 			->equals(
-				MathLatexToolkit::frac(1, MathLatexToolkit::pow('x', 0))
+				MathLatexToolkit::frac(1, MathLatexToolkit::pow('x', 0)),
 			)
 			->wrap('\(', '\)');
 
 		$latex2 = MathLatexToolkit::pow(
 			MathLatexToolkit::pow('x', 0)
 				->wrap('(', ')'),
-			2
+			2,
 		)
 			->equals(1)
 			->wrap('\(', '\)');
@@ -97,7 +97,7 @@ final class StepPowController implements IStepController
 			Pokud by bylo \(n = 0\), a jakékoliv reálné číslo, tak dostáváme:<br><br>
 			\(x^0=\frac{x^{0+a}}{x^a}\)<br>
 			\(x^0=\frac{x^{a}}{x^a}\)<br>
-			\(x^0=1\)'
+			\(x^0=1\)',
 		);
 		$steps[] = $step;
 
@@ -126,7 +126,7 @@ final class StepPowController implements IStepController
 			(string) MathLatexToolkit::create(MathLatexToolkit::pow($x, $y))
 				->equals((string) $numbers)
 				->equals((string) Calculation::of($x)->power(BigInteger::of($y))),
-			'Umocňování je operace, která vyjadřuje opakované násobení.'
+			'Umocňování je operace, která vyjadřuje opakované násobení.',
 		);
 
 		return $steps;

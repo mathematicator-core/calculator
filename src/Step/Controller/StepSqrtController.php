@@ -26,7 +26,7 @@ final class StepSqrtController implements IStepController
 		$sqrt = sqrt($n);
 		$sqrtInt = (int) $sqrt;
 
-		if (abs($sqrt - $sqrtInt) < 0.000001) {
+		if (abs($sqrt - $sqrtInt) < 0.000_001) {
 			if ($sqrtInt <= 100) {
 				$this->solveAsInteger((int) $n, $sqrtInt);
 			} else {
@@ -34,7 +34,7 @@ final class StepSqrtController implements IStepController
 					'Řešení',
 					null,
 					'<p>Využijeme vztahu:</p>'
-					. '\(\sqrt{' . $nInt . '}\ =\ \sqrt{{' . $sqrtInt . '}^{2}}\ =\ ' . $sqrtInt . '\)'
+					. '\(\sqrt{' . $nInt . '}\ =\ \sqrt{{' . $sqrtInt . '}^{2}}\ =\ ' . $sqrtInt . '\)',
 				);
 			}
 		} else {
@@ -65,7 +65,7 @@ final class StepSqrtController implements IStepController
 			. '<table>'
 			. '<tr><th style="width:64px">Hodnota</th><th>Druhá mocnina</th></tr>'
 			. $table
-			. '</table>'
+			. '</table>',
 		);
 
 		$this->steps[] = $step;
@@ -89,7 +89,7 @@ final class StepSqrtController implements IStepController
 			StepFactory::getAjaxEndpoint(StepSqrtHelper::class, [
 				'numberSet' => 'N',
 				'whatBaseOfPower' => $cells[0],
-			])
+			]),
 		);
 		$step->setLatex((string) $squareRooted = floor(sqrt((float) $cells[0])));
 		$this->steps[] = $step;

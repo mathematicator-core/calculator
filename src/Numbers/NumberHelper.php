@@ -17,13 +17,13 @@ class NumberHelper
 
 	/** @var int[] */
 	private static array $romanNumber = [
-		'm' => 1000000,
-		'd' => 500000,
-		'c' => 100000,
-		'l' => 50000,
-		'x' => 10000,
-		'v' => 5000,
-		'M' => 1000,
+		'm' => 1_000_000,
+		'd' => 500_000,
+		'c' => 100_000,
+		'l' => 50_000,
+		'x' => 10_000,
+		'v' => 5_000,
+		'M' => 1_000,
 		'CM' => 900,
 		'D' => 500,
 		'CD' => 400,
@@ -64,7 +64,7 @@ class NumberHelper
 		}
 		foreach (self::$romanNumber as $key => $val) {
 			if (($repeat = (int) floor($int / $val)) > 0) {
-				$return .= '\\' . ($val >= 5000
+				$return .= '\\' . ($val >= 5_000
 						? 'overline'
 						: 'textrm'
 					) . '{'
@@ -212,9 +212,7 @@ class NumberHelper
 		$return = '';
 		$animation = '';
 
-		$numberFormat = static function (string $number): string {
-			return (string) preg_replace('/\.0*$/', '', (string) preg_replace('/\.(\d*?)0+$/', '.$1', $number));
-		};
+		$numberFormat = static fn (string $number): string => (string) preg_replace('/\.0*$/', '', (string) preg_replace('/\.(\d*?)0+$/', '.$1', $number));
 
 		$result = $numberFormat(bcadd($x, $y, 10));
 		$x = $numberFormat($x);

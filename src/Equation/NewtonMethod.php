@@ -89,7 +89,7 @@ final class NewtonMethod
 
 	private function isInTolerance(float $x, float $y): bool
 	{
-		return abs($x - $y) < 0.00001;
+		return abs($x - $y) < 0.00_001;
 	}
 
 

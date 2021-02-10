@@ -28,8 +28,8 @@ class MultiplicationNumber
 			$result = SmartNumber::of(
 				BigRational::nd(
 					$leftFraction->getNumerator()->multipliedBy($rightFraction->getNumerator()),
-					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
-				)
+					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator()),
+				),
 			);
 		}
 
@@ -41,13 +41,13 @@ class MultiplicationNumber
 		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
-				'Násobení čísel ' . $left->getNumber()->toHumanString() . ' * ' . $right->getNumber()->toHumanString()
+				'Násobení čísel ' . $left->getNumber()->toHumanString() . ' * ' . $right->getNumber()->toHumanString(),
 			)
 			->setAjaxEndpoint(
 				StepFactory::getAjaxEndpoint(StepMultiplicationController::class, [
 					'x' => $left->getNumber()->toHumanString(),
 					'y' => $right->getNumber()->toHumanString(),
-				])
+				]),
 			);
 	}
 }

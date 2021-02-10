@@ -45,7 +45,7 @@ final class SinFunction implements IFunction
 		$step->setAjaxEndpoint(
 			StepFactory::getAjaxEndpoint(StepSinController::class, [
 				'x' => $x,
-			])
+			]),
 		);
 
 		$result->setStep($step);

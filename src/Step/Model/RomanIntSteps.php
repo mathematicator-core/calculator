@@ -16,13 +16,13 @@ final class RomanIntSteps
 
 	/** @var int[] */
 	private static array $romanNumber = [
-		'm' => 1000000,
-		'd' => 500000,
-		'c' => 100000,
-		'l' => 50000,
-		'x' => 10000,
-		'v' => 5000,
-		'M' => 1000,
+		'm' => 1_000_000,
+		'd' => 500_000,
+		'c' => 100_000,
+		'l' => 50_000,
+		'x' => 10_000,
+		'v' => 5_000,
+		'M' => 1_000,
 		'CM' => 900,
 		'D' => 500,
 		'CD' => 400,
@@ -45,7 +45,7 @@ final class RomanIntSteps
 		'L' => 50,
 		'C' => 100,
 		'D' => 500,
-		'M' => 1000,
+		'M' => 1_000,
 	];
 
 	/** @var string[] */
@@ -67,7 +67,7 @@ final class RomanIntSteps
 		50 => 'L',
 		100 => 'C',
 		500 => 'D',
-		1000 => 'M',
+		1_000 => 'M',
 	];
 
 
@@ -82,7 +82,7 @@ final class RomanIntSteps
 		$step->setTitle('Převodní tabulka');
 		$step->setDescription(
 			'Ivan Vedl Xenii Lesem Cestou Do Města.' . $this->getTranslateTable($roman),
-			true
+			true,
 		);
 
 		$steps[] = $step;
@@ -99,14 +99,14 @@ final class RomanIntSteps
 				$step->setTitle(
 					$this->getTitleBasic($lastPosition, $i + 1, $roman)
 					. 'Přičteme hodnotu ' . ($nextToken - $x),
-					true
+					true,
 				);
 				$step->setDescription(
 					'Když menší římská číslice předchází větší, tak se menší číslo odečítá:'
 					. '<div class="my-3 text-center">'
 					. '\(\textrm{' . self::$translateTableInverse[$x] . self::$translateTableInverse[$nextToken] . '}'
 					. ' = ' . $nextToken . ' - ' . $x . ' = ' . ($nextToken - $x) . '\)</div>',
-					true
+					true,
 				);
 				$i++;
 			} else {
@@ -121,7 +121,7 @@ final class RomanIntSteps
 						? 'Začneme hodnotou ' . $tempValue . ', kterou si vyhledáme v tabulce.'
 						: 'Přičteme hodnotu ' . $tempValue . ' podle tabulky.'
 					),
-					true
+					true,
 				);
 				$return += $x;
 			}
@@ -164,7 +164,7 @@ final class RomanIntSteps
 		$step->setTitle('Převodní tabulka');
 		$step->setDescription(
 			'Ivan Vedl Xenii Lesem Cestou Do Města.' . $this->getTranslateTable(),
-			true
+			true,
 		);
 
 		$steps[] = $step;
@@ -178,7 +178,7 @@ final class RomanIntSteps
 			. '(například hodnota 4 se zapisuje jako \(\textrm{IV}\), protože \(5 - 1 = 4\))</p>'
 			. '<p>Pro odečet se používá jen \(\textrm{I}\), \(\textrm{X}\) a \(\textrm{C}\).</p>'
 			. '<p>Během výpočtu si budeme pamatovat aktuální zbytek.</p>',
-			true
+			true,
 		);
 
 		$steps[] = $step;
@@ -188,7 +188,7 @@ final class RomanIntSteps
 		foreach (self::$romanNumber as $key => $val) {
 			$repeat = $int->dividedBy($val, RoundingMode::FLOOR);
 			if ($repeat->isGreaterThan(0)) {
-				$return .= '\\' . ($val >= 5000
+				$return .= '\\' . ($val >= 5_000
 						? 'overline'
 						: 'textrm'
 					) . '{'
@@ -201,7 +201,7 @@ final class RomanIntSteps
 						? 'Začínáme s hodnotou'
 						: 'Zbytek'
 					) . ' <span style="color:black">' . $int . '</span>',
-					true
+					true,
 				);
 				$step->setDescription(
 					'<p>' . ($iterator === 0
@@ -217,7 +217,7 @@ final class RomanIntSteps
 					. $int . ' - ' . $repeat->multipliedBy($val) . ' = ' . $int->minus($repeat->multipliedBy($val))
 					. '\)</div>'
 					. '<p>Zapíšeme mezivýsledek do celkového výsledku:</p>',
-					true
+					true,
 				);
 				$step->setLatex($return);
 
@@ -230,7 +230,7 @@ final class RomanIntSteps
 		$step = new Step;
 		$step->setTitle('Řešení');
 		$step->setDescription(
-			'Zbytek má hodnotu nula, číslo je tedy převedeno.'
+			'Zbytek má hodnotu nula, číslo je tedy převedeno.',
 		);
 		$step->setLatex($input . ' \rightarrow ' . $return);
 

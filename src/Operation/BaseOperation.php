@@ -158,7 +158,7 @@ final class BaseOperation
 			(new FactorialToken($token->getNumber()))
 				->setToken((string) $token->getNumber()->toHumanString())
 				->setPosition($token->getPosition())
-				->setType(Tokens::M_FACTORIAL)
+				->setType(Tokens::M_FACTORIAL),
 		)->setIteratorStep(1);
 	}
 }

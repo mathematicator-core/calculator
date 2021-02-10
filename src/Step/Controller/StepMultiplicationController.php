@@ -25,7 +25,7 @@ final class StepMultiplicationController implements IStepController
 		$steps[] = new Step(
 			'Násobení čísel',
 			null,
-			'Tuto sekci teprve plánujeme.'
+			'Tuto sekci teprve plánujeme.',
 		); // TODO!!!
 
 		return $steps;

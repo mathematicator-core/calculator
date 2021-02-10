@@ -38,7 +38,7 @@ final class DivisionNumbers
 
 			$result = BigRational::nd(
 				$leftFraction->getNumerator()->multipliedBy($rightFraction->getDenominator()),
-				$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())
+				$leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator()),
 			)->simplified();
 		}
 
@@ -55,7 +55,7 @@ final class DivisionNumbers
 				. 'Čísla převedeme na zlomek, který se následně pokusíme zkrátit (pokud to bude možné).'
 				. "\n\n"
 				. $this->renderDescription($leftNumber, $rightNumber, $newNumber->getNumber())
-				. "\n"
+				. "\n",
 			);
 	}
 

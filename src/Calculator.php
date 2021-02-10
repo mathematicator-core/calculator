@@ -110,7 +110,7 @@ class Calculator
 	{
 		try {
 			$tokens = $this->tokenizer->tokenize(
-				$this->queryNormalizer->normalize($query->getQuery())
+				$this->queryNormalizer->normalize($query->getQuery()),
 			);
 		} catch (Exception $e) {
 			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);
@@ -118,7 +118,7 @@ class Calculator
 
 		return $this->calculate(
 			$this->tokenizer->tokensToObject($tokens),
-			$query
+			$query,
 		);
 	}
 
@@ -131,7 +131,7 @@ class Calculator
 	{
 		try {
 			$tokens = $this->tokenizer->tokenize(
-				$this->queryNormalizer->normalize($query->getQuery())
+				$this->queryNormalizer->normalize($query->getQuery()),
 			);
 		} catch (\Throwable $e) {
 			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);

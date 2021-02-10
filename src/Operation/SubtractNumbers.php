@@ -40,7 +40,7 @@ final class SubtractNumbers
 		return (new NumberOperationResult)
 			->setNumber($newNumber)
 			->setDescription(
-				'Odčítání čísel ' . $leftNumber->toHumanString() . ' - ' . $rightNumber->toHumanString()
+				'Odčítání čísel ' . $leftNumber->toHumanString() . ' - ' . $rightNumber->toHumanString(),
 			);
 	}
 }

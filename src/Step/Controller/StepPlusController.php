@@ -47,14 +47,14 @@ final class StepPlusController implements IStepController
 			$steps[] = new Step(
 				'Sčítání čísel',
 				null,
-				$this->number->getAddStepAsHtml((string) $x->getNumerator(), (string) $y->getNumerator())
+				$this->number->getAddStepAsHtml((string) $x->getNumerator(), (string) $y->getNumerator()),
 			);
 		} else {
 			$steps[] = new Step(
 				'Sčítání čísel',
 				MathLatexToolkit::create(FractionHelper::fractionToLatex($x, true))
 					->plus(FractionHelper::fractionToLatex($y, true))
-					->__toString()
+					->__toString(),
 			);
 
 			$sp = $xDenominator->multipliedBy($yDenominator);
@@ -64,7 +64,7 @@ final class StepPlusController implements IStepController
 				MathLatexToolkit::create((string) $xDenominator)
 					->multipliedBy((string) $yDenominator)
 					->equals((string) $sp)
-					->__toString()
+					->__toString(),
 			);
 
 			$left = $yDenominator->multipliedBy((string) $xNumerator)
@@ -81,11 +81,11 @@ final class StepPlusController implements IStepController
 								->plus((string) $xDenominator)
 								->multipliedBy((string) $yNumerator)
 								->__toString(),
-							(string) $sp
-						)
+							(string) $sp,
+						),
 					)
 					->equals(MathLatexToolkit::frac((string) $left, (string) $sp))
-					->__toString()
+					->__toString(),
 			);
 		}
 

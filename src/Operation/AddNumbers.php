@@ -32,8 +32,8 @@ final class AddNumbers
 				BigRational::nd(
 					$rightFraction->getDenominator()->multipliedBy($leftFraction->getNumerator())
 						->plus($leftFraction->getDenominator()->multipliedBy($rightFraction->getNumerator())),
-					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator())
-				)->simplified()
+					$leftFraction->getDenominator()->multipliedBy($rightFraction->getDenominator()),
+				)->simplified(),
 			);
 		}
 
@@ -52,13 +52,13 @@ final class AddNumbers
 				'Sčítání čísel '
 				. (strpos($_left, '-') === 0 ? '(' . $_left . ')' : $_left)
 				. ' + '
-				. (strpos($_right, '-') === 0 ? '(' . $_right . ')' : $_right)
+				. (strpos($_right, '-') === 0 ? '(' . $_right . ')' : $_right),
 			)
 			->setAjaxEndpoint(
 				StepFactory::getAjaxEndpoint(StepPlusController::class, [
 					'x' => $leftNumber->toHumanString(),
 					'y' => $rightNumber->toHumanString(),
-				])
+				]),
 			);
 	}
 }

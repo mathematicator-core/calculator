@@ -54,7 +54,7 @@ final class TokensCalculator
 	 * @param IToken[] $tokens
 	 * @throws MathematicatorException
 	 */
-	private function iterator(array $tokens, Query $query, int $ttl = 1024): TokensCalculatorResult
+	private function iterator(array $tokens, Query $query, int $ttl = 1_024): TokensCalculatorResult
 	{
 		if ($ttl <= 0) {
 			throw new MathematicatorException('Can not solve, because Calculator is in infinity recursion.');
@@ -110,7 +110,7 @@ final class TokensCalculator
 							. '(' . ($inputToken instanceof NumberToken
 								? $inputToken->getNumber()->toHumanString()
 								: $inputToken->getToken()
-							) . ')'
+							) . ')',
 						);
 						if (
 							$token->getName() === ''
@@ -141,7 +141,7 @@ final class TokensCalculator
 							}
 
 							return $results;
-						})($_result->getResult())
+						})($_result->getResult()),
 					);
 					$result[] = $token;
 				}
@@ -185,7 +185,10 @@ final class TokensCalculator
 	/**
 	 * @throws UndefinedOperationException|MathematicatorException|NumberException
 	 */
-	private function solveNumberToken(TokenIterator $iterator, Query $query): IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
+	private function solveNumberToken(
+        TokenIterator $iterator,
+        Query $query
+    ): IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
 	{
 		$leftNumber = $iterator->getToken();
 		$rightNumber = $iterator->getNextToken(2);
@@ -226,7 +229,7 @@ final class TokensCalculator
 
 				return (new VariableToken(
 					$variable->getToken(),
-					$newVariable->getNumber()->getNumber()
+					$newVariable->getNumber()->getNumber(),
 				))->setPosition($variable->getPosition());
 			}
 		}
@@ -241,7 +244,7 @@ final class TokensCalculator
 				new NumberToken($leftNumber->getTimes()),
 				new NumberToken($rightNumber->getTimes()),
 				$operator->getToken(),
-				$query
+				$query,
 			);
 
 			if ($newVariable === null) {
@@ -250,7 +253,7 @@ final class TokensCalculator
 
 			return (new VariableToken(
 				$leftNumber->getToken(),
-				$newVariable->getNumber()->getNumber()
+				$newVariable->getNumber()->getNumber(),
 			))->setPosition($leftNumber->getPosition());
 		}
 
@@ -285,7 +288,10 @@ final class TokensCalculator
 	/**
 	 * @throws UndefinedOperationException
 	 */
-	private function solveInfinityToken(TokenIterator $iterator, IToken|OperatorToken|null $operator): Operation\NumberOperationResult|InfinityToken|null
+	private function solveInfinityToken(
+        TokenIterator $iterator,
+        IToken|OperatorToken |null $operator
+    ): Operation\NumberOperationResult|InfinityToken|null
 	{
 		if (($leftNumber = $iterator->getToken()) !== null && ($rightNumber = $iterator->getNextToken(2)) !== null
 			&& ($leftNumber instanceof InfinityToken || $rightNumber instanceof InfinityToken)

@@ -37,7 +37,7 @@ final class Factorial
 			. $this->getDescriptionTimes($token->getNumber()->toInt()) . "\n"
 			. '\(' . $token->getNumber() . '!\ =\ '
 			. preg_replace('/(\d{3})/', '$1\ ', (string) $newNumber->getNumber())
-			. '\)'
+			. '\)',
 		);
 
 		return $return;

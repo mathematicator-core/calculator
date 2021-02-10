@@ -41,14 +41,14 @@ final class PowNumber
 			$result = SmartNumber::of(
 				BigRational::nd(
 					$leftFraction->getNumerator()->power($right->getNumber()->toInt()),
-					$leftFraction->getDenominator()->power($right->getNumber()->toInt())
-				)
+					$leftFraction->getDenominator()->power($right->getNumber()->toInt()),
+				),
 			);
 		} else {
 			if ($rightNumber->isNegative() === true) {
 				$rightFraction = BigRational::nd(
 					$rightFraction->getDenominator(),
-					$rightFraction->getNumerator()
+					$rightFraction->getNumerator(),
 				);
 			}
 
@@ -57,8 +57,8 @@ final class PowNumber
 					$leftFraction->getNumerator()->power($rightFraction->getNumerator()->toInt())->toInt()**
 						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat(),
 					$leftFraction->getDenominator()->power($rightFraction->getNumerator()->toInt())->toInt()**
-						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat()
-				)
+						BigDecimal::one()->dividedBy($rightFraction->getDenominator(), $query->getDecimals(), RoundingMode::HALF_UP)->toFloat(),
+				),
 			);
 		}
 
@@ -76,7 +76,7 @@ final class PowNumber
 					'x' => $leftNumber->toHumanString(),
 					'y' => $rightNumber->toHumanString(),
 					'result' => (string) $newNumber->getNumber(),
-				])
+				]),
 			);
 	}
 
@@ -95,10 +95,10 @@ final class PowNumber
 		return (string) MathLatexToolkit::create(
 			MathLatexToolkit::pow(
 				$left->toHumanString(),
-				$right->toHumanString()
+				$right->toHumanString(),
 			)->equals((string) $result),
 			'\(',
-			'\)'
+			'\)',
 		);
 	}
 }
