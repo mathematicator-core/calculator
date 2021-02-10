@@ -112,7 +112,7 @@ class Calculator
 			$tokens = $this->tokenizer->tokenize(
 				$this->queryNormalizer->normalize($query->getQuery()),
 			);
-		} catch (Exception $e) {
+		} catch (\Throwable $e) {
 			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);
 		}
 

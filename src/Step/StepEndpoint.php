@@ -33,13 +33,13 @@ final class StepEndpoint
 		}
 
 		try {
-			$data = \json_decode($data, JSON_THROW_ON_ERROR);
+			$data = \json_decode($data, flags: JSON_THROW_ON_ERROR);
 			$arrayHash = new ArrayHash;
 			foreach ($data as $k => $v) {
 				$arrayHash->{$k} = $v;
 			}
 			$steps = $callback->actionDefault($arrayHash);
-		} catch (TerminateException $e) {
+		} catch (TerminateException) {
 			$steps[] = StepFactory::addStep('Could not find a step-by-step solution for "' . $type . '".');
 		}
 
