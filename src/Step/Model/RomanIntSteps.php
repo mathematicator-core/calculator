@@ -15,7 +15,7 @@ final class RomanIntSteps
 {
 
 	/** @var int[] */
-	private static $romanNumber = [
+	private static array $romanNumber = [
 		'm' => 1000000,
 		'd' => 500000,
 		'c' => 100000,
@@ -38,7 +38,7 @@ final class RomanIntSteps
 	];
 
 	/** @var int[] */
-	private static $translateTable = [
+	private static array $translateTable = [
 		'I' => 1,
 		'V' => 5,
 		'X' => 10,
@@ -49,7 +49,7 @@ final class RomanIntSteps
 	];
 
 	/** @var string[] */
-	private static $translateTableCzechHelp = [
+	private static array $translateTableCzechHelp = [
 		'I' => 'Ivan',
 		'V' => 'Vedl',
 		'X' => 'Xenii',
@@ -60,7 +60,7 @@ final class RomanIntSteps
 	];
 
 	/** @var string[] */
-	private static $translateTableInverse = [
+	private static array $translateTableInverse = [
 		1 => 'I',
 		5 => 'V',
 		10 => 'X',
@@ -142,10 +142,9 @@ final class RomanIntSteps
 
 
 	/**
-	 * @param BigInteger|int|string $input
 	 * @return Step[]
 	 */
-	public function getIntToRomanSteps($input): array
+	public function getIntToRomanSteps(BigInteger|int|string $input): array
 	{
 		$int = BigInteger::of($input);
 

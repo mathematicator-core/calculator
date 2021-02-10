@@ -16,7 +16,7 @@ class NumberHelper
 {
 
 	/** @var int[] */
-	private static $romanNumber = [
+	private static array $romanNumber = [
 		'm' => 1000000,
 		'd' => 500000,
 		'c' => 100000,
@@ -38,11 +38,9 @@ class NumberHelper
 		'I' => 1,
 	];
 
-	/** @var LinkGenerator */
-	private $linkGenerator;
+	private LinkGenerator $linkGenerator;
 
-	/** @var Cache */
-	private $cache;
+	private Cache $cache;
 
 
 	public function __construct(LinkGenerator $linkGenerator, IStorage $storage)

@@ -20,11 +20,9 @@ use Mathematicator\Tokenizer\Token\PiToken;
 final class SinFunction implements IFunction
 {
 	/**
-	 * @param NumberToken|IToken $token
-	 * @return FunctionResult
 	 * @throws NumberException
 	 */
-	public function process(IToken $token): FunctionResult
+	public function process(NumberToken|IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
 			throw new \InvalidArgumentException;

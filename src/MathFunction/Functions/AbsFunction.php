@@ -13,11 +13,7 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 
 final class AbsFunction implements IFunction
 {
-	/**
-	 * @param NumberToken|IToken $token
-	 * @return FunctionResult
-	 */
-	public function process(IToken $token): FunctionResult
+	public function process(NumberToken|IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
 			throw new \InvalidArgumentException;

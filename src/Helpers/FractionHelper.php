@@ -28,7 +28,6 @@ final class FractionHelper
 	public static function stringToSimpleFraction(string $input): Fraction
 	{
 		$fraction = new Fraction;
-
 		switch (\count($explode = explode('/', $input))) {
 			case 1:
 				$fraction->setNumerator($input);
@@ -48,9 +47,8 @@ final class FractionHelper
 
 	/**
 	 * @param bool $simplify Remove denominator if it is unnecessary
-	 * @return string
 	 */
-	public static function fractionToLatex(Fraction $fraction, $simplify = false): string
+	public static function fractionToLatex(Fraction $fraction, bool $simplify = false): string
 	{
 		$numerator = $fraction->getNumerator();
 		$denominator = $fraction->getDenominatorNotNull();

@@ -17,19 +17,14 @@ use Mathematicator\Tokenizer\Token\IToken;
 use Mathematicator\Tokenizer\Token\NumberToken;
 use Mathematicator\Tokenizer\Token\SubToken;
 use Mathematicator\Tokenizer\Tokenizer;
-use Nette\Tokenizer\Exception;
 
 class Calculator
 {
+	private Tokenizer $tokenizer;
 
-	/** @var Tokenizer */
-	private $tokenizer;
+	private TokensCalculator $tokensCalculator;
 
-	/** @var TokensCalculator */
-	private $tokensCalculator;
-
-	/** @var QueryNormalizer */
-	private $queryNormalizer;
+	private QueryNormalizer $queryNormalizer;
 
 
 	public function __construct(
@@ -45,9 +40,6 @@ class Calculator
 
 	/**
 	 * @param IToken[] $tokens
-	 * @param Query $query
-	 * @param int $basicTtl
-	 * @return CalculatorResult
 	 * @throws MathematicatorException
 	 */
 	public function calculate(array $tokens, Query $query, int $basicTtl = 3): CalculatorResult
@@ -112,8 +104,6 @@ class Calculator
 	/**
 	 * Human input and token output.
 	 *
-	 * @param Query $query
-	 * @return CalculatorResult
 	 * @throws MathematicatorException
 	 */
 	public function calculateString(Query $query): CalculatorResult
@@ -134,7 +124,6 @@ class Calculator
 
 
 	/**
-	 * @param Query $query
 	 * @return IToken[]
 	 * @throws MathematicatorException
 	 */
@@ -144,7 +133,7 @@ class Calculator
 			$tokens = $this->tokenizer->tokenize(
 				$this->queryNormalizer->normalize($query->getQuery())
 			);
-		} catch (Exception $e) {
+		} catch (\Throwable $e) {
 			throw new MathematicatorException($e->getMessage(), $e->getCode(), $e);
 		}
 
@@ -154,7 +143,6 @@ class Calculator
 
 	/**
 	 * @param IToken[] $tokens
-	 * @return string
 	 */
 	private function tokensSerialize(array $tokens = null): string
 	{

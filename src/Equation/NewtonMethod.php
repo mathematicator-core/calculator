@@ -9,12 +9,10 @@ use Mathematicator\Engine\Exception\MathematicatorException;
 
 final class NewtonMethod
 {
-
-	/** @var int */
-	private $steps = 0;
+	private int $steps = 0;
 
 	/** @var float[] */
-	private $intervalBuffer = [];
+	private array $intervalBuffer = [];
 
 
 	/**
@@ -97,7 +95,6 @@ final class NewtonMethod
 
 	/**
 	 * @param float[] $items
-	 * @return string
 	 */
 	private function renderInterval(array $items): string
 	{

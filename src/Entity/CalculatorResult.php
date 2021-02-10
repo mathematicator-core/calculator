@@ -7,7 +7,6 @@ namespace Mathematicator\Calculator\Entity;
 
 use Mathematicator\Engine\Step\Step;
 use Mathematicator\Tokenizer\Token\IToken;
-use Nette\SmartObject;
 
 /**
  * @property IToken[] $tokens
@@ -16,16 +15,14 @@ use Nette\SmartObject;
  */
 class CalculatorResult
 {
-	use SmartObject;
+	/** @var IToken[] */
+	private array $tokens;
 
 	/** @var IToken[] */
-	private $tokens;
-
-	/** @var IToken[] */
-	private $resultTokens = [];
+	private array $resultTokens = [];
 
 	/** @var Step[] */
-	private $steps = [];
+	private array $steps = [];
 
 
 	/**

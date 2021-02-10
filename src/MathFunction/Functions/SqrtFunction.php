@@ -19,11 +19,9 @@ use Mathematicator\Tokenizer\Token\NumberToken;
 class SqrtFunction implements IFunction
 {
 	/**
-	 * @param NumberToken|IToken $token
-	 * @return FunctionResult
 	 * @throws MathErrorException|NumberException
 	 */
-	public function process(IToken $token): FunctionResult
+	public function process(NumberToken|IToken $token): FunctionResult
 	{
 		if (!($token instanceof NumberToken)) {
 			throw new \InvalidArgumentException;

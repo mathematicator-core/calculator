@@ -15,7 +15,7 @@ final class FunctionManager
 {
 
 	/** @var string[][] */
-	private static $functions = [
+	private static array $functions = [
 		'sqrt' => [
 			SqrtFunction::class,
 		],
@@ -27,11 +27,9 @@ final class FunctionManager
 		],
 	];
 
-	/** @var ContainerInterface */
-	private $container;
+	private ContainerInterface $container;
 
-	/** @var IFunction */
-	private $callback;
+	private IFunction $callback;
 
 
 	public function __construct(ContainerInterface $container)

@@ -28,12 +28,9 @@ use Mathematicator\Tokenizer\Tokens;
 
 final class TokensCalculator
 {
+	private BaseOperation $baseOperation;
 
-	/** @var BaseOperation */
-	private $baseOperation;
-
-	/** @var FunctionManager */
-	private $functionManager;
+	private FunctionManager $functionManager;
 
 
 	public function __construct(BaseOperation $baseOperation, FunctionManager $functionManager)
@@ -45,8 +42,6 @@ final class TokensCalculator
 
 	/**
 	 * @param IToken[] $tokens
-	 * @param Query $query
-	 * @return TokensCalculatorResult
 	 * @throws MathematicatorException
 	 */
 	public function process(array $tokens, Query $query): TokensCalculatorResult
@@ -57,9 +52,6 @@ final class TokensCalculator
 
 	/**
 	 * @param IToken[] $tokens
-	 * @param Query $query
-	 * @param int $ttl
-	 * @return TokensCalculatorResult
 	 * @throws MathematicatorException
 	 */
 	private function iterator(array $tokens, Query $query, int $ttl = 1024): TokensCalculatorResult
@@ -191,12 +183,9 @@ final class TokensCalculator
 
 
 	/**
-	 * @param TokenIterator $iterator
-	 * @param Query $query
-	 * @return IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
 	 * @throws UndefinedOperationException|MathematicatorException|NumberException
 	 */
-	private function solveNumberToken(TokenIterator $iterator, Query $query)
+	private function solveNumberToken(TokenIterator $iterator, Query $query): IToken|Operation\NumberOperationResult|InfinityToken|VariableToken|null
 	{
 		$leftNumber = $iterator->getToken();
 		$rightNumber = $iterator->getNextToken(2);
@@ -294,12 +283,9 @@ final class TokensCalculator
 
 
 	/**
-	 * @param TokenIterator $iterator
-	 * @param IToken|OperatorToken|null $operator
-	 * @return Operation\NumberOperationResult|InfinityToken|null
 	 * @throws UndefinedOperationException
 	 */
-	private function solveInfinityToken(TokenIterator $iterator, ?IToken $operator)
+	private function solveInfinityToken(TokenIterator $iterator, IToken|OperatorToken|null $operator): Operation\NumberOperationResult|InfinityToken|null
 	{
 		if (($leftNumber = $iterator->getToken()) !== null && ($rightNumber = $iterator->getNextToken(2)) !== null
 			&& ($leftNumber instanceof InfinityToken || $rightNumber instanceof InfinityToken)

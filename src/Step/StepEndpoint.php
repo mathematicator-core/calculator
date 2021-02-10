@@ -13,9 +13,7 @@ use Nette\Utils\ArrayHash;
 
 final class StepEndpoint
 {
-
-	/** @var Container */
-	private $container;
+	private Container $container;
 
 
 	public function __construct(Container $container)
@@ -35,7 +33,7 @@ final class StepEndpoint
 		}
 
 		try {
-			$data = \json_decode($data);
+			$data = \json_decode($data, JSON_THROW_ON_ERROR);
 			$arrayHash = new ArrayHash;
 			foreach ($data as $k => $v) {
 				$arrayHash->{$k} = $v;

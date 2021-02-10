@@ -9,9 +9,7 @@ use Mathematicator\Engine\Exception\MathematicatorException;
 
 final class FunctionDoesNotExistsException extends MathematicatorException
 {
-
-	/** @var string */
-	private $function;
+	private string $function;
 
 
 	public function __construct(string $message = '', int $code = 0, \Throwable $previous = null, string $function = '')

@@ -7,7 +7,6 @@ namespace Mathematicator\Calculator\MathFunction;
 
 use Mathematicator\Engine\Step\Step;
 use Mathematicator\Tokenizer\Token\IToken;
-use Nette\SmartObject;
 
 /**
  * @property IToken|IToken[] $input
@@ -16,22 +15,19 @@ use Nette\SmartObject;
  */
 class FunctionResult
 {
-	use SmartObject;
+	/** @var IToken|IToken[] */
+	private IToken|array $input;
 
 	/** @var IToken|IToken[] */
-	private $input;
+	private IToken|array $output;
 
-	/** @var IToken|IToken[] */
-	private $output;
-
-	/** @var Step|null */
-	private $step;
+	private ?Step $step = null;
 
 
 	/**
 	 * @return IToken|IToken[]
 	 */
-	public function getInput()
+	public function getInput(): IToken|array
 	{
 		return $this->input;
 	}
@@ -39,9 +35,8 @@ class FunctionResult
 
 	/**
 	 * @param IToken|IToken[] $input
-	 * @return FunctionResult
 	 */
-	public function setInput($input): self
+	public function setInput(IToken|array $input): self
 	{
 		$this->input = $input;
 
@@ -52,7 +47,7 @@ class FunctionResult
 	/**
 	 * @return IToken|IToken[]
 	 */
-	public function getOutput()
+	public function getOutput(): IToken|array
 	{
 		return $this->output;
 	}
@@ -60,9 +55,8 @@ class FunctionResult
 
 	/**
 	 * @param IToken|IToken[] $output
-	 * @return FunctionResult
 	 */
-	public function setOutput($output): self
+	public function setOutput(IToken|array $output): self
 	{
 		$this->output = $output;
 

@@ -7,7 +7,6 @@ namespace Mathematicator\Calculator;
 
 use Mathematicator\Tokenizer\Token\BaseToken;
 use Mathematicator\Tokenizer\Token\IToken;
-use Nette\SmartObject;
 use RuntimeException;
 
 /**
@@ -19,22 +18,16 @@ use RuntimeException;
  */
 class TokensCalculatorResult
 {
-	use SmartObject;
-
 	/** @var BaseToken[] */
-	private $result;
+	private array $result;
 
-	/** @var string|null */
-	private $stepTitle;
+	private ?string $stepTitle = null;
 
-	/** @var string|null */
-	private $stepDescription;
+	private ?string $stepDescription = null;
 
-	/** @var bool */
-	private $wasModified = false;
+	private bool $wasModified = false;
 
-	/** @var string|null */
-	private $ajaxEndpoint;
+	private ?string $ajaxEndpoint = null;
 
 
 	/**
@@ -48,7 +41,6 @@ class TokensCalculatorResult
 
 	/**
 	 * @param IToken[] $result
-	 * @return TokensCalculatorResult
 	 */
 	public function setResult(array $result): self
 	{
@@ -72,11 +64,7 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @param string|null $stepTitle
-	 * @return TokensCalculatorResult
-	 */
-	public function setStepTitle(string $stepTitle = null): self
+	public function setStepTitle(?string $stepTitle = null): self
 	{
 		$this->stepTitle = $stepTitle;
 
@@ -90,10 +78,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @param string|null $stepDescription
-	 * @return TokensCalculatorResult
-	 */
 	public function setStepDescription(string $stepDescription = null): self
 	{
 		$this->stepDescription = $stepDescription;
@@ -108,10 +92,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @param bool $wasModified
-	 * @return TokensCalculatorResult
-	 */
 	public function setWasModified(bool $wasModified): self
 	{
 		$this->wasModified = $wasModified;
@@ -126,10 +106,6 @@ class TokensCalculatorResult
 	}
 
 
-	/**
-	 * @param string|null $ajaxEndpoint
-	 * @return TokensCalculatorResult
-	 */
 	public function setAjaxEndpoint(string $ajaxEndpoint = null): self
 	{
 		$this->ajaxEndpoint = $ajaxEndpoint;
