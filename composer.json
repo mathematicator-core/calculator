@@ -37,7 +37,7 @@
 		"jetbrains/phpstorm-attributes": "^1.0",
 		"brainmaestro/composer-git-hooks": "dev-master",
 		"nette/bootstrap": "^3.0",
-		"nette/tester": "~2.3.2 || ~2.4.0"
+		"nette/tester": "~2.3.2 || ~2.4.0 || ~2.5.0"
 	},
 	"suggest": {
 		"nette/caching": "(^3.0) To use package in Nette Framework",
